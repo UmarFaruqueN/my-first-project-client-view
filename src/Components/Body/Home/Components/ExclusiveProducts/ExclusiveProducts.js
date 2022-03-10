@@ -26,7 +26,7 @@ const ExclusiveProducts = () => {
                     height: "100%",
                     marginTop: "22px",
                     borderRadius: "16px",
-                    backgroundColor: "#CACDD81F",
+                   // backgroundColor: "#F5F7FF",
                 }}
             >
                 <Box
