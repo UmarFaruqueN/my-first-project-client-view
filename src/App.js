@@ -9,17 +9,17 @@ import User from "./Pages/User";
 import Product from "./Pages/Product";
 
 function App() {
-    return (
-        <ThemeProvider theme={customTheme}>
-            <div className="App">
-                <Routes>
-                    <Route exact path="/user" exact element={<User />} />
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/product" element={<Product />} />
-                </Routes>
-            </div>
-        </ThemeProvider>
-    );
+     return (
+          <ThemeProvider theme={customTheme}>
+               <div className="App">
+                    <Routes>
+                         <Route exact path="/user" element={<User />} />
+                         <Route exact path="/" element={<Home />} />
+                         <Route exact path="/product" element={<Product />} />
+                    </Routes>
+               </div>
+          </ThemeProvider>
+     );
 }
 
 export default App;

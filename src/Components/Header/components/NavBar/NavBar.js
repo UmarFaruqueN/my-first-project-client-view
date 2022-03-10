@@ -72,7 +72,7 @@ const NavBar = () => {
                             }}
                         >
                             <Typography component="span" color="text.disabled">
-                                Visit our showroom in Amala Building, Palarivattom,kochi
+                                Visit our showroom in Amala Building, Palarivattom, Kochi
                                 <Link color="primary" sx={{ cursor: "pointer", ml: 1 }}>
                                     Contact Us
                                 </Link>

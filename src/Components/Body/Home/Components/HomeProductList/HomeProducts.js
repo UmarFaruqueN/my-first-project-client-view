@@ -6,6 +6,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } f
 import hdd from "../../../../../asset/dummy/hdd.png";
 import testImage from "../../../../../asset/dummy/nvr.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import { useSelector } from "react-redux";
 
 const tempData = [
     {
@@ -46,6 +47,14 @@ const tempData = [
 ];
 
 const HomeProducts = (props) => {
+    const tempData =useSelector((state)=>state.products.value)
+
+    const Submit=(obj)=>{
+
+        console.log(obj);
+    }
+
+
     return (
         <>
             <Box
@@ -83,6 +92,7 @@ const HomeProducts = (props) => {
 
             <Box sx={{ width: "100%", marginTop: "22px" }}>
                 <Grid container wrap="nowrap" sx={{ overflow: "auto" }}>
+                    
                     <Grid item>
                         <Box sx={{ flexGrow: 1 }}>
                             <img src={hdd} width="192px" height="360px"></img>{" "}
@@ -92,29 +102,29 @@ const HomeProducts = (props) => {
                     {tempData.map((obj) => (
                         <Grid item>
                             <Card sx={{ width: "192px", height: "360px", borderRadius: "0" }}>
-                                <CardMedia component="img" alt="camera" height="150" width="150" image={testImage} />
+                                <CardMedia component="img" alt="camera" height="150" width="150" src={obj.Image1} />
 
                                 <CardContent>
                                     <Typography gutterBottom variant="h4" component="div">
-                                        {obj.productName}
+                                        {obj.ProductName}
                                     </Typography>
                                     <Typography variant="body1" color="text" component="div" marginTop="1px">
-                                        {obj.description}
+                                        {obj.Description}
                                     </Typography>
                                     <Typography variant="h5" color="text.disabled" component="div" marginTop="1px">
                                         {" "}
-                                        <del>₹ {obj.price}</del>
+                                        <del>₹ {obj.SellingPrice}</del>
                                     </Typography>
 
                                     <Typography variant="h3" marginTop="1px" component="div">
-                                        ₹ {obj.price}
+                                        ₹ {obj.LandingCost}
                                     </Typography>
 
                                     <CardActions
                                         gutterBottom
                                         sx={{ display: "flex", marginTop: "1px", justifyContent: "center" }}
                                     >
-                                        <Button size="small" variant="outlined" color="secondary">
+                                        <Button size="small" variant="outlined" color="secondary" onClick={Submit(obj)}>
                                             {" "}
                                             <AddShoppingCartOutlinedIcon />
                                             Add to cart

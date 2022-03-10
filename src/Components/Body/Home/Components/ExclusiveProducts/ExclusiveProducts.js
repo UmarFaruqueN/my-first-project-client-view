@@ -5,68 +5,15 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Box } from "@mui/system";
 import testImage from "../../../../../asset/dummy/hdcam.png";
+import { useSelector } from "react-redux";
 
 
-const tempData = [
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "600",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "5000",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "1000",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "500",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "500",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "500",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "500",
-    },
-    {
-        productName: "HHIKVISION TURBO HD CAMERA",
-        description: "2 MP Flex-036AU 15.6 MULTITOUCH All-In-On...",
-        category: "network device",
-        subCategory: "camera",
-        price: "500",
-    },
-];
+
 
 const ExclusiveProducts = () => {
+    const tempData = useSelector((state)=>state.products.value)
+
+
     const ref = useRef(null);
     const scroll = (scrollOffset) => {
         ref.current.scrollLeft += scrollOffset;
@@ -118,22 +65,22 @@ const ExclusiveProducts = () => {
                         {tempData.map((obj) => (
                             <Grid item>
                             <Card sx={{ width: "200px", height: "350px" }}>
-                                <CardMedia component="img" alt="camera" height="150" width="150" image={testImage} />
+                                <CardMedia component="img" alt="camera" height="150" width="150" image={obj.Image1} />
 
                                 <CardContent>
                                     <Typography gutterBottom variant="h4" component="div">
-                                        {obj.productName}
+                                        {obj.ProductName}
                                     </Typography>
                                     <Typography variant="body1" color="text" component="div" marginTop="1px">
-                                        {obj.description}
+                                        {obj.Description}
                                     </Typography>
                                     <Typography variant="h5" color="text.disabled" component="div" marginTop="1px">
                                         {" "}
-                                        <del>₹ {obj.price}</del>
+                                        <del>₹ {obj.SellingPrice}</del>
                                     </Typography>
 
                                     <Typography variant="h3" marginTop="1px" component="div">
-                                        ₹ {obj.price}
+                                        ₹ {obj.LandingCost}
                                     </Typography>
 
                                     <CardActions
