@@ -19,4 +19,4 @@ export const deleteUser='http://localhost:4000/deleteUser'
 export const addUserPost='http://localhost:4000/addUserPost'
 
 
-export const getProduct = "http://localhost:4000/product/get";
+export const getProduct = "http://localhost:4000/product/getAll";

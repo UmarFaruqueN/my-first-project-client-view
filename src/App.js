@@ -16,6 +16,14 @@ function App() {
                          <Route exact path="/user" element={<User />} />
                          <Route exact path="/" element={<Home />} />
                          <Route exact path="/product" element={<Product />} />
+                         <Route
+                              path="*"
+                              element={
+                                   <main style={{ padding: "1rem" }}>
+                                        <p>There's nothing here!</p>
+                                   </main>
+                              }
+                         />
                     </Routes>
                </div>
           </ThemeProvider>
