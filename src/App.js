@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "@mui/material";
 import { customTheme } from "./utlis/Theme";
 import { Routes, Route } from "react-router-dom"
-import {Home,Product,User,AboutUs,ContactUs,OrdersAndReturns,PrivacyPolicy,Terms,Header,Footer} from "./Pages"
+import {Home,Product,Camera,Dvr,AnalogAccessories, IpCamera,Nvr,NetworkAccessories,User,AboutUs,ContactUs,OrdersAndReturns,PrivacyPolicy,Terms,Header,Footer} from "./Pages"
 
 
 
@@ -15,6 +15,12 @@ function App() {
                          <Route exact path="/user" element={<User />} />
                          <Route exact path="/" element={<Home />} />
                          <Route exact path="/product" element={<Product />} />
+                         <Route exact path="/camera" element={<Camera />} />
+                         <Route exact path="/dvr" element={<Dvr />} />
+                         <Route exact path="/analogAccessories" element={<AnalogAccessories />} />
+                         <Route exact path="/ipCamera" element={<IpCamera />} />
+                         <Route exact path="/nvr" element={<Nvr />} />
+                         <Route exact path="/networkAccessories" element={<NetworkAccessories />} />
                          <Route exact path="/aboutUs" element={<AboutUs />} />
                          <Route exact path="/contactUs" element={<ContactUs />} />
                          <Route exact path="/ordersAndReturns" element={<OrdersAndReturns />} />
