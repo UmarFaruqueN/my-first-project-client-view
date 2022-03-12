@@ -8,10 +8,24 @@ const BottomBar = () => {
      return (
           <Grid sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} container>
                <Grid item>
-                    <IconButton size="large" edge="start" sx={{ color: "#acacac" }}>
+                    <IconButton
+                         size="large"
+                         edge="start"
+                         sx={{ color: "#acacac" }}
+                         onClick={() => {
+                              window.open("https://www.facebook.com/zetetikoz");
+                         }}
+                    >
                          <FacebookIcon />
                     </IconButton>
-                    <IconButton size="large" edge="start" sx={{ color: "#acacac" }}>
+                    <IconButton
+                         size="large"
+                         edge="start"
+                         sx={{ color: "#acacac" }}
+                         onClick={() => {
+                              window.open("https://www.instagram.com/zetetikoz/");
+                         }}
+                    >
                          <InstagramIcon />
                     </IconButton>
                </Grid>

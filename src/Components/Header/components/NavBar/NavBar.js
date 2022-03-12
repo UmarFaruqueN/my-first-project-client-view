@@ -12,8 +12,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import UserButton from "./components/UserButton";
 import LoginButton from "../LoginButton/LoginButton";
+import {useNavigate} from "react-router-dom"
 
 const NavBar = () => {
+
+    const navigate = useNavigate()
     // login state management
     const user = useSelector((state) => state.login_state.value);
 
@@ -73,7 +76,7 @@ const NavBar = () => {
                         >
                             <Typography component="span" color="text.disabled">
                                 Visit our showroom in Amala Building, Palarivattom, Kochi
-                                <Link color="primary" sx={{ cursor: "pointer", ml: 1 }}>
+                                <Link onClick={()=>{navigate('/contactUs')}} color="primary" sx={{ cursor: "pointer", ml: 1 }}>
                                     Contact Us
                                 </Link>
                             </Typography>
@@ -90,12 +93,13 @@ const NavBar = () => {
                             <Typography component="span" color="primary" sx={{ mr: 1 }}>
                                 Call Us: +91-7012463321
                             </Typography>
-                            <IconButton size="large" edge="start" color="primary">
-                                <FacebookIcon />
+                            <IconButton onClick={()=>{window.open("https://www.facebook.com/zetetikoz")}} size="large" edge="start" color="primary">
+                                <FacebookIcon  />
                             </IconButton>
                             <IconButton size="large" edge="start" color="primary">
-                                <InstagramIcon />
+                                <InstagramIcon onClick={()=>{window.open("https://www.instagram.com/zetetikoz/")}} />
                             </IconButton>
+                            
                         </Box>
 
                         <Box sx={{ flexGrow: 1 }} />
@@ -107,7 +111,7 @@ const NavBar = () => {
                 <AppBar position="static" color="primary">
                     <Container maxWidth="xl">
                         <Toolbar>
-                            <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, alignItems: "center" }}>
+                            <Box onClick={()=>{navigate('/')}} sx={{ mr: 2, display: { xs: "none", md: "flex" }, alignItems: "center" , cursor:"pointer"}}>
                                 <DashboardCustomizeIcon sx={{ fontSize: 31, color: "text.hint", pr: 1 }} />
                                 <Typography variant="h2" fontWeight="700" noWrap color="text.hint" component="div">
                                     ZETETIKOZ
@@ -176,13 +180,8 @@ const NavBar = () => {
                                 </Menu>
                                 <Button
                                     sx={{ color: "text.primary" }}
-                                    id="basic-menu"
-                                    anchorEl={anchorEl}
-                                    open={open}
-                                    onClose={handleClose}
-                                    MenuListProps={{
-                                        "aria-labelledby": "basic-button",
-                                    }}
+                                
+                                    onClick={()=>{navigate('/aboutUs')}}
                                 >
                                     {" "}
                                     About Us

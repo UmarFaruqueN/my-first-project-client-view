@@ -1,21 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ThemeProvider } from "@mui/material";
-import Home from "./Pages/Home";
 import { customTheme } from "./utlis/Theme";
-import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom"
+import {Home,Product,User,AboutUs,ContactUs,OrdersAndReturns,PrivacyPolicy,Terms,Header,Footer} from "./Pages"
 
-import User from "./Pages/User";
-import Product from "./Pages/Product";
+
 
 function App() {
      return (
           <ThemeProvider theme={customTheme}>
                <div className="App">
+<Header/>
                     <Routes>
                          <Route exact path="/user" element={<User />} />
                          <Route exact path="/" element={<Home />} />
                          <Route exact path="/product" element={<Product />} />
+                         <Route exact path="/aboutUs" element={<AboutUs />} />
+                         <Route exact path="/contactUs" element={<ContactUs />} />
+                         <Route exact path="/ordersAndReturns" element={<OrdersAndReturns />} />
+                         <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
+                         <Route exact path="/terms" element={<Terms />} />
+
                          <Route
                               path="*"
                               element={
@@ -24,7 +29,9 @@ function App() {
                                    </main>
                               }
                          />
+                         
                     </Routes>
+                    <Footer/>
                </div>
           </ThemeProvider>
      );
