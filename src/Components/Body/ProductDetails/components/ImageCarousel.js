@@ -27,15 +27,7 @@ const ImageCarousel = () => {
                     alignItems: "center",
                }}
           >
-               <Box>
-                    <Carousel showThumbs={false} showArrows={true} infiniteLoop={true}>
-                         {images.map((obj) => (
-                              <div>
-                                   <img className={classes.image} src={obj} alt="image1" />
-                              </div>
-                         ))}
-                    </Carousel>
-               </Box>
+               
           </Box>
      );
 };

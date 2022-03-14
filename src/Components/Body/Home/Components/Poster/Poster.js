@@ -1,40 +1,17 @@
 import React from "react";
 import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import banner from "../../../../../asset/Banner.png";
-import { makeStyles } from "@mui/styles";
-import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 
-const useStyles = makeStyles({
-    image: {
-        width: "100%",
-        height: "210px",
-        borderRadius: "16px",
-        marginTop: "-38px",
-    },
-});
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import Banner from "../Banner/Banner";
+
+
 
 const Poster = () => {
-    const classes = useStyles();
+    
     return (
         <>
-            <Box sx={{ height: "210px", width: "100%",top:"10%"}}>
-                <IconButton sx={{ top: "37%" }}>
-                    <ArrowBackIosNewIcon color="primary" backgroundColor="primary.light" />{" "}
-                </IconButton>
-                <img className={classes.image} src={banner} />
-                <IconButton
-                    sx={{
-                        bottom: "64%",
-                        left: "97%",
-                    }}
-                >
-                    {" "}
-                    <ArrowForwardIosIcon color="primary" backgroundColor="primary.light" />{" "}
-                </IconButton>
-            </Box>
+          <Banner/>
             <Box
                 sx={{
                     flexGrow: 1,
@@ -43,7 +20,7 @@ const Poster = () => {
                     height: "60px",
                     width: "100%",
                     backgroundColor: "secondary.light",
-                    marginTop: "22px",
+                    marginTop: "60px",
                     borderRadius: "20px",
                 }}
             >
