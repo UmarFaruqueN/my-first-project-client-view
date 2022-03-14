@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Address = () => {
+     const navigate = useNavigate();
      return (
           <Grid pb={7} container>
                <Grid item xs={7}>
@@ -11,35 +13,49 @@ const Address = () => {
                          </Typography>
                     </Grid>{" "}
                     <Grid item pt={2} sx={{ display: "flex", flexDirection: "column" }}>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/aboutUs')}
+                              pb={0.5}
+                              variant="h5"
+                              
+                              underline="hover"
+                              sx={{ cursor: "pointer" }}
+                         >
                               {" "}
                               About Us
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link 
+                         onClick={() => navigate('/privacyPolicy')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Privacy Policy
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                          pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Search
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/terms')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Terms
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/ordersAndReturns')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Orders And Returns
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/contactUs')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Contact Us
                          </Link>
-                         <Link pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/internetProtocolDevices')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Internet Protocol Devices
                          </Link>
-                         <Link variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         <Link
+                         onClick={() => navigate('/turboHDDevices')} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               Turbo HD Devices
                          </Link>
                     </Grid>

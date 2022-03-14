@@ -1,18 +1,31 @@
-import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import Poster from "../../Body/Home/Components/Poster/Poster";
-import BlueButton from "../../Common/BlueButton";
-import OrangeButton from "../../Common/OrangeButton";
+import { Box, Container, Grid, } from "@mui/material";
+
+import ProductHeading from "./components/ProductHeading";
+import ImageCarousel from "./components/ImageCarousel";
+import ProductDetail from "./components/ProductDetail";
+import cutingEdge from "../../../asset/dummy/cutingEdge.png"
+import colorVU from "../../../asset/dummy/colorVU.png"
 
 const ProductDetails = () => {
-    return (
-        <>
-            <Box sx={{ backgroundColor: "yellow", height: "50px", width: "100%", paddingTop: "100px" }}>
-                <BlueButton title="Add To Cart" />
-                <OrangeButton title="Buy Now" />
-            </Box>
-        </>
-    );
+     return (
+          <>
+               <ProductHeading />
+
+               <Box sx={{ backgroundColor: "secondary.light", height: "100%", width: "100%" }}>
+                    <Container>
+                         <Grid container>
+                              <Grid item md={6}>
+                                   <ImageCarousel />
+                              </Grid>
+                              <ProductDetail/>
+                         </Grid>
+                    </Container>
+                    <img width={"100%"} height={"auto"} src={cutingEdge} alt="" />
+                    <img width={"100%"} height={"auto"} src={colorVU} alt="" />
+               </Box>
+          </>
+     );
 };
 
 export default ProductDetails;

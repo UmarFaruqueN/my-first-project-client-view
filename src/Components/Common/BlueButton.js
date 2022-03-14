@@ -9,7 +9,7 @@ const BlueButton=(props)=> {
 
   return (
       <>
-      <Button onClick={props.onClickFun}  variant="contained" color="secondary">{props.title}</Button>
+      <Button  sx={{marginLeft:"10px"}} variant="contained" color="secondary">{props.title}</Button>
       </>
     
   )

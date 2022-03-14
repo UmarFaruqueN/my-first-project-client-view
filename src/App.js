@@ -1,23 +1,42 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material";
 import { customTheme } from "./utlis/Theme";
-import { Routes, Route } from "react-router-dom"
-import {Home,Product,Camera,Dvr,AnalogAccessories, IpCamera,Nvr,NetworkAccessories,User,AboutUs,ContactUs,OrdersAndReturns,PrivacyPolicy,Terms,Header,Footer} from "./Pages"
-
-
+import { Routes, Route } from "react-router-dom";
+import {
+     Home,
+     Product,
+     TurboHDDevices,
+     Camera,
+     Dvr,
+     AnalogAccessories,
+     InternetProtocolDevices,
+     IpCamera,
+     Nvr,
+     NetworkAccessories,
+     User,
+     AboutUs,
+     ContactUs,
+     OrdersAndReturns,
+     PrivacyPolicy,
+     Terms,
+     Header,
+     Footer,
+} from "./Pages";
 
 function App() {
      return (
           <ThemeProvider theme={customTheme}>
                <div className="App">
-<Header/>
+                    <Header />
                     <Routes>
                          <Route exact path="/user" element={<User />} />
                          <Route exact path="/" element={<Home />} />
                          <Route exact path="/product" element={<Product />} />
+                         <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
                          <Route exact path="/camera" element={<Camera />} />
                          <Route exact path="/dvr" element={<Dvr />} />
                          <Route exact path="/analogAccessories" element={<AnalogAccessories />} />
+                         <Route exact path="/internetProtocolDevices" element={<InternetProtocolDevices />} />
                          <Route exact path="/ipCamera" element={<IpCamera />} />
                          <Route exact path="/nvr" element={<Nvr />} />
                          <Route exact path="/networkAccessories" element={<NetworkAccessories />} />
@@ -35,9 +54,8 @@ function App() {
                                    </main>
                               }
                          />
-                         
                     </Routes>
-                    <Footer/>
+                    <Footer />
                </div>
           </ThemeProvider>
      );

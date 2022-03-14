@@ -151,9 +151,9 @@ const NavBar = () => {
                                         "aria-labelledby": "basic-button",
                                     }}
                                 >
-                                    <MenuItem onClick={handleClose}>IP Camera</MenuItem>
-                                    <MenuItem onClick={handleClose}>NVR</MenuItem>
-                                    <MenuItem onClick={handleClose}>Accessories</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/ipCamera')}>IP Camera</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/nvr')}>NVR</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/networkAccessories')}>Accessories</MenuItem>
                                 </Menu>{" "}
                                 <Button
                                     sx={{ color: "text.primary" }}
@@ -174,9 +174,9 @@ const NavBar = () => {
                                         "aria-labelledby": "basic-button",
                                     }}
                                 >
-                                    <MenuItem onClick={handleClose}>Turbo HD Camera</MenuItem>
-                                    <MenuItem onClick={handleClose}>DVR</MenuItem>
-                                    <MenuItem onClick={handleClose}>Accessories</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/camera')}>Turbo HD Camera</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/dvr')}>DVR</MenuItem>
+                                    <MenuItem onClick={()=>navigate('/analogAccessories')}>Accessories</MenuItem>
                                 </Menu>
                                 <Button
                                     sx={{ color: "text.primary" }}
