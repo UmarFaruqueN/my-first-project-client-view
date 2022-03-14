@@ -174,7 +174,7 @@ const NavBar = () => {
                                         "aria-labelledby": "basic-button",
                                     }}
                                 >
-                                    <MenuItem onClick={()=>navigate('/camera')}>Turbo HD Camera</MenuItem>
+                                    <MenuItem onClick={()=>{setAnchorEl(null); navigate('/camera')} }>Turbo HD Camera</MenuItem>
                                     <MenuItem onClick={()=>navigate('/dvr')}>DVR</MenuItem>
                                     <MenuItem onClick={()=>navigate('/analogAccessories')}>Accessories</MenuItem>
                                 </Menu>
