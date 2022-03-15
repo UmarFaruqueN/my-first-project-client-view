@@ -17,7 +17,8 @@ const HomeProducts = (props) => {
      const user = useSelector((state) => state.user_state.value);
 
      const Submit = (obj) => {
-          const data = { ...obj, user };
+          const count = 1;
+          const data = { ...obj, user,count };
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
                Swal.fire({
