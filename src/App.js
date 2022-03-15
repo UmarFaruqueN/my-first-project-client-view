@@ -31,7 +31,7 @@ function App() {
                     <Routes>
                          <Route exact path="/user" element={<User />} />
                          <Route exact path="/" element={<Home />} />
-                         <Route exact path="/product" element={<Product />} />
+                         <Route exact path="/product/:_id" element={<Product />} />
                          <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
                          <Route exact path="/camera" element={<Camera />} />
                          <Route exact path="/dvr" element={<Dvr />} />

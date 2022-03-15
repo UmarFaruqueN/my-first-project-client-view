@@ -1,10 +1,11 @@
-import React from "react";
+import React ,{useState} from "react";
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import ButtonConfig from "./ButtonConfig";
 import ProductIncrement from "./ProductIncrement";
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
+     const [count, setCount] =useState(1);
      return (
           <>
                <Grid item md={6}>
@@ -27,28 +28,26 @@ const ProductDetail = () => {
                               <Grid ml={10} container>
                                    <Grid item xs={12}>
                                         <Grid pb={2} item>
-                                             <Typography variant="h2"> Ip Camera</Typography>
+                                             <Typography variant="h2"> {props.data[0]?.ProductName}</Typography>
                                         </Grid>
                                         <Grid pb={1} item>
-                                             <Typography variant="h3"> Model Number</Typography>
+                                             <Typography variant="h3"> {props.data[0]?.ModelNumber}</Typography>
                                         </Grid>
                                         <Grid pb={1} item>
                                              <Typography noWrap={false} variant="body">
-                                                  {" "}
-                                                  Disclkadnfskbkdbvkj djbvkjkjv ljhvjsdjvskj kjbsdkvbbsv jbvksbv jkbsdkvb
-                                                  kjbkdvb sksvb{" "}
+                                                  {props.data[0]?.Description}
                                              </Typography>
                                         </Grid>
                                         <Grid>
                                              <Typography color="error" variant="h4">
-                                                  <del color="error">Price ₹ 1000 </del>
+                                                  <del color="error"> {props.data[0]?.SellingPrice} </del>
                                              </Typography>
                                         </Grid>
                                    </Grid>
                               </Grid>
 
-                              <ProductIncrement />
-                              <ButtonConfig />
+                              <ProductIncrement    rement data={props.data} count={count} setCount={setCount} />
+                              <ButtonConfig data={props.data} count ={count} />
                          </Box>
                     </Box>
                </Grid>

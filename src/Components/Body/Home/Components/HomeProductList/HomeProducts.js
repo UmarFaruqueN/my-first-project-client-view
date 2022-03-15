@@ -9,15 +9,17 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { addToCart } from "../../../../../utlis/Constants";
+import { useNavigate } from "react-router-dom";
 
 const HomeProducts = (props) => {
+     const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
      const user = useSelector((state) => state.user_state.value);
 
      const Submit = (obj) => {
-           const data ={...obj,user}
+          const data = { ...obj, user };
           console.log(data);
-          axios.post(addToCart,data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+          axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
                Swal.fire({
                     position: "bottom-end",
                     icon: "success",
@@ -80,10 +82,20 @@ const HomeProducts = (props) => {
                                              height="150"
                                              width="150"
                                              src={obj.Image1}
+                                             onClick={() => {
+                                                  navigate("/product/" + obj._id);
+                                             }}
+                                             sx={{ cursor: "pointer" }}
                                         />
 
                                         <CardContent>
-                                             <Typography gutterBottom variant="h4" component="div">
+                                             <Typography
+                                                  onClick={() => console.log("clicked")}
+                                                  sx={{ cursor: "pointer" }}
+                                                  gutterBottom
+                                                  variant="h4"
+                                                  component="div"
+                                             >
                                                   {obj.ProductName}
                                              </Typography>
                                              <Typography variant="body1" color="text" component="div" marginTop="1px">

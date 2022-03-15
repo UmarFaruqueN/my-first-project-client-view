@@ -2,7 +2,7 @@ import { Container, Divider, Grid ,Typography} from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-const ProductHeading = () => {
+const ProductHeading = (props) => {
      return (
           <Box sx={{ height: "100%", width: "100%", paddingTop: "100px" }}>
         
@@ -11,7 +11,7 @@ const ProductHeading = () => {
                     <Grid container>
                          <Grid item md={12}>
                               {" "}
-                              <Typography variant="h2"> Product Details</Typography>
+                              <Typography variant="h2">{props?.title}</Typography>
                          </Grid>
                     </Grid>
                </Container>
