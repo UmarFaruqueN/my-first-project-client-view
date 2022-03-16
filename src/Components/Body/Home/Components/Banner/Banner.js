@@ -26,8 +26,8 @@ const Banner = () => {
                <Box>
                     <Carousel animationHandler={"fade"} showStatus={false} autoPlay={true} showThumbs={false} showArrows={true} infiniteLoop={true}>
                          {images.map((obj) => (
-                              <div>
-                                   <img className={classes.image} src={obj} alt="image1" />
+                              <div key={obj.length}>
+                                   <img  className={classes.image} src={obj} alt="image1" />
                               </div>
                          ))}
                     </Carousel>

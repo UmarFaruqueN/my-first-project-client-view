@@ -2,6 +2,7 @@
 
 export { default as Home } from "./Home";
 export { default as Product } from "./Product";
+export { default as Cart } from "./Cart";
 export { default as TurboHDDevices } from "./TurboHDDevices";
 export { default as Camera } from "./Camera";
 export { default as Dvr } from "./Dvr";

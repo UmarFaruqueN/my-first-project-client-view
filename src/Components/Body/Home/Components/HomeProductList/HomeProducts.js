@@ -70,12 +70,12 @@ const HomeProducts = (props) => {
                     <Grid container columnSpacing={2} wrap="nowrap" sx={{ overflow: "auto" }}>
                          <Grid item>
                               <Box sx={{ flexGrow: 1 }}>
-                                   <img src={hdd} width="192px" height="360px"></img>{" "}
+                                   <img src={hdd} width="192px" height="360px" alt="productImage"/>{" "}
                               </Box>
                          </Grid>
 
                          {tempData.map((obj) => (
-                              <Grid item>
+                              <Grid  key={obj._id} item>
                                    <Card sx={{ width: "192px", height: "360px", borderRadius: "0" }}>
                                         <CardMedia
                                              component="img"
@@ -93,7 +93,6 @@ const HomeProducts = (props) => {
                                              <Typography
                                                   onClick={() => console.log("clicked")}
                                                   sx={{ cursor: "pointer" }}
-                                                  gutterBottom
                                                   variant="h4"
                                                   component="div"
                                              >
@@ -117,7 +116,6 @@ const HomeProducts = (props) => {
                                              </Typography>
 
                                              <CardActions
-                                                  gutterBottom
                                                   sx={{ display: "flex", marginTop: "1px", justifyContent: "center" }}
                                              >
                                                   <Button

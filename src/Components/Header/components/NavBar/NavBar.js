@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { AppBar, Avatar, Container, Tooltip, Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
+import { AppBar, Container,Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
@@ -108,12 +108,15 @@ const NavBar = () => {
                                    >
                                         <FacebookIcon />
                                    </IconButton>
-                                   <IconButton size="large" edge="start" color="primary">
-                                        <InstagramIcon
-                                             onClick={() => {
-                                                  window.open("https://www.instagram.com/zetetikoz/");
-                                             }}
-                                        />
+                                   <IconButton
+                                        onClick={() => {
+                                             window.open("https://www.instagram.com/zetetikoz/");
+                                        }}
+                                        size="large"
+                                        edge="start"
+                                        color="primary"
+                                   >
+                                        <InstagramIcon />
                                    </IconButton>
                               </Box>
 
@@ -238,7 +241,11 @@ const NavBar = () => {
                                         <IconButton>
                                              <SearchOutlinedIcon sx={{ color: "text.primary", fontSize: "25", ml: "2" }} />
                                         </IconButton>
-                                        <IconButton>
+                                        <IconButton
+                                             onClick={() => {
+                                                  navigate("/cart");
+                                             }}
+                                        >
                                              <Badge badgeContent={2} color={"secondary"}>
                                                   <ShoppingCartOutlinedIcon sx={{ color: "text.primary", ml: "2" }} />
                                              </Badge>
