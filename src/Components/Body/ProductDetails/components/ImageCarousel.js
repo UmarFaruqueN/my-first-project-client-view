@@ -25,7 +25,7 @@ const ImageCarousel = (props) => {
                <Box>
                     <Carousel showThumbs={false} showArrows={true} infiniteLoop={true}>
                          {props.images?.map((obj) => (
-                              <div>
+                              <div key={props.images.index}>
                                    <img key={props.images.index} className={classes.image} src={obj} alt="image1" />
                               </div>
                          ))}

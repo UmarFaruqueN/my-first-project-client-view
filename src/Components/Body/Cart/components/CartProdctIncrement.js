@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useState} from "react";
 import { Grid, Typography, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const ProductIncrement = (props) => {
+const CartProdctIncrement = (props) => {
+
+    const [count, setCount]=useState(props.data.counts)
+    console.log(props.data);
      const Increment = () => {
-          props.setCount(props.count + 1);
-         
+        setCount(count + 1);
      };
 
      const Decrement = () => {
-          if (props.count > 1) {
-               props.setCount(props.count - 1);
-              
+          if (count > 1) {
+               setCount(count - 1);
           }
      };
      return (
           <>
-                   <Grid item>
+               <Grid item>
                     <Box
                          sx={{
                               width: "3.1rem",
@@ -59,4 +60,4 @@ const ProductIncrement = (props) => {
      );
 };
 
-export default ProductIncrement;
+export default CartProdctIncrement;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { AppBar, Container,Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
+import { AppBar, Container, Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
@@ -18,6 +18,7 @@ const NavBar = () => {
      const navigate = useNavigate();
      // login state management
      const user = useSelector((state) => state.login_state.value);
+     const userid = useSelector((state) => state.user_state.value);
 
      const [anchorEl, setAnchorEl] = useState(null);
      const [anchorElNav, setAnchorElNav] = useState(null);
