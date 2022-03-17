@@ -6,6 +6,7 @@ export const cartSlice= createSlice({
 
         setCart:(state,action)=>{
             state.value=action.payload.cart
+            
         }
     }
 })

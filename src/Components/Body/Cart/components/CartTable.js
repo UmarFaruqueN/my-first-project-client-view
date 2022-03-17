@@ -19,17 +19,17 @@ const CartTable = () => {
     const dispatch = useDispatch()
      const user = useSelector((state) => state.user_state.value);
      const cart = useSelector((state) => state.cart.value);
-     console.log(cart);
+ 
     
     
 
      useEffect(() => {
           axios.post(getCart, {user:user}, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-                   console.log(response.data.cartData+"mnumanm data");
-                 
+                    .then((response) => {
+                    dispatch(setCart({cart:response.data.cartData}))
+                 console.log(response.data.cartData);
                })
-               .catch();
+               .catch(); 
      
     }, []);
 
@@ -56,7 +56,7 @@ const CartTable = () => {
                                    <TableCell align="right">{obj.SellingPrice}</TableCell>
 
                                    <TableCell align="center">
-                                        <CartProdctIncrement data={obj}/>
+                                        <CartProdctIncrement cartData={obj}/>
                                    </TableCell>
 
                                    <TableCell align="right"></TableCell>

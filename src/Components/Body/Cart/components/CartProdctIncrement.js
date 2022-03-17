@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const CartProdctIncrement = (props) => {
 
-    const [count, setCount]=useState(props.data.counts)
+    const [count, setCount]=useState(0)
     console.log(props.data);
      const Increment = () => {
         setCount(count + 1);
