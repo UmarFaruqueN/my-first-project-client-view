@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
-import { incCart, decCart } from "../../../../utlis/Constants";
+import { incCart, decCart, getCart } from "../../../../utlis/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../../../Redux/cart/cart";
 
 const CartProdctIncrement = (props) => {
+     const user = useSelector((state) => state.user_state.value);
+     const dispatch = useDispatch();
      const [count, setCount] = useState(props.cartData.counts);
      console.log(props.cartData);
      const cartData = props.cartData;
@@ -15,9 +19,14 @@ const CartProdctIncrement = (props) => {
           setCount(count + 1);
           let data = cartData;
           console.log(data + "ourdata");
-          axios.post(incCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
-               console.log(response.data);
-          });
+          axios.post(incCart, data, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+                    console.log(cartData);
+               })
+               .catch((error) => {
+                    console.log(error);
+               });
      };
 
      const Decrement = () => {
@@ -25,9 +34,13 @@ const CartProdctIncrement = (props) => {
                setCount(count - 1);
                let data = cartData;
                console.log(data + "ourdata");
-               axios.post(decCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
-                    console.log(response.data);
-               });
+               axios.post(decCart, data, { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                         dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+                    })
+                    .catch((error) => {
+                         console.log(error);
+                    });
           }
      };
      return (
