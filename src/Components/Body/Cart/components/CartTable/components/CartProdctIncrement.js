@@ -4,9 +4,9 @@ import { Box } from "@mui/system";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
-import { incCart, decCart, getCart } from "../../../../utlis/Constants";
+import { incCart, decCart, getCart } from "../../../../../../utlis/Constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../../../../Redux/cart/cart";
+import { setCart } from "../../../../../../Redux/cart/cart";
 
 const CartProdctIncrement = (props) => {
      const user = useSelector((state) => state.user_state.value);
