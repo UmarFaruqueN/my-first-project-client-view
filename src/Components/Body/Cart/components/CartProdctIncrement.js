@@ -1,20 +1,33 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Grid, Typography, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import axios from "axios";
+import { incCart, decCart } from "../../../../utlis/Constants";
 
 const CartProdctIncrement = (props) => {
+     const [count, setCount] = useState(props.cartData.counts);
+     console.log(props.cartData);
+     const cartData = props.cartData;
 
-    const [count, setCount]=useState(0)
-    console.log(props.data);
      const Increment = () => {
-        setCount(count + 1);
+          setCount(count + 1);
+          let data = cartData;
+          console.log(data + "ourdata");
+          axios.post(incCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+               console.log(response.data);
+          });
      };
 
      const Decrement = () => {
           if (count > 1) {
                setCount(count - 1);
+               let data = cartData;
+               console.log(data + "ourdata");
+               axios.post(decCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+                    console.log(response.data);
+               });
           }
      };
      return (
@@ -32,7 +45,7 @@ const CartProdctIncrement = (props) => {
                          }}
                     >
                          <Box>
-                              <Typography variant="h4">{props.count}</Typography>
+                              <Typography variant="h4">{count}</Typography>
                          </Box>
                          <Box sx={{ display: "flex", flexDirection: "column" }}>
                               <IconButton onClick={Increment}>

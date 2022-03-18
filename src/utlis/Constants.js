@@ -5,6 +5,7 @@ export const verifyPost='http://localhost:4000/otp'
 export const addToCart='http://localhost:4000/addToCart'
 export const getCart='http://localhost:4000/getCart'
 export const incCart='http://localhost:4000/incCart'
+export const decCart='http://localhost:4000/decCart'
 
 
 
