@@ -1,9 +1,85 @@
-import { Checkbox, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import { Container, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import Banner from "../Home/Components/Banner/Banner";
+import hdcam from "../../../asset/dummy/hdcam.png";
+import Swal from "sweetalert2";
 
-const ProductListing = () => {
+import axios from "axios";
+import { addToCart, getSub } from "../../../utlis/Constants";
+import { useSelector } from "react-redux";
+
+import Stock from "./components/Stock";
+import Buttons from "./components/Buttons";
+import ProductDetail from "./components/ProductDetail";
+import FilterAndSort from "./components/FilterAndSort";
+
+const ProductListing = (props) => {
+     const user = useSelector((state) => state.user_state.value);
+     const allProducts = useSelector((state) => state.products.value);
+     const allSubCat = useSelector((state) => state.subCategory.value);
+     const [filterData, setFilterData] = useState("");
+     console.log(allSubCat);
+     const [data, setData] = useState([]);
+     const [subCat, setSubCat] = useState();
+     const [sortData, setSortData] = useState("");
+     console.log(subCat);
+
+     const Filter = (filterSubCat) => {
+          setData(allProducts.filter((product) => product.SubCategory.indexOf(filterSubCat) >= 0));
+          setFilterData(filterSubCat);
+     };
+
+     const ClearFilter = () => {
+          setData(allProducts.filter((product) => product.SubCategory.indexOf("") >= 0));
+          setFilterData("");
+     };
+
+     const Sort = (sortBy) => {
+          setData(
+               data
+                    .slice()
+                    .sort((a, b) =>
+                         sortBy === "lowest"
+                              ? a.SellingPrice < b.SellingPrice
+                                   ? 1
+                                   : -1
+                              : sortBy === "highest"
+                              ? a.SellingPrice > b.SellingPrice
+                                   ? 1
+                                   : -1
+                              : a._id < b._id
+                              ? 1
+                              : -1
+                    )
+          );
+
+          setSortData(sortBy);
+     };
+
+     useEffect(() => {
+          //setSubCat(allSubCat.filter((subcategories) => subcategories.category.indexOf(props.category) >= 0))
+          setData(allProducts.filter((product) => product.Category.indexOf(props.Category) >= 0));
+     }, []);
+
+     const handleChange = () => {};
+     const jaba = 0;
+
+     const Submit = (obj) => {
+          const count = 1;
+          const data = { ...obj, user, count };
+          console.log(data);
+          axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+               Swal.fire({
+                    position: "bottom-end",
+                    icon: "success",
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: "15rem",
+               });
+          });
+     };
      return (
           <>
                <Container>
@@ -13,25 +89,41 @@ const ProductListing = () => {
                     </Box>
 
                     <Grid container>
-                         <Grid item  sm={3}>
-                           <Box height={"300px"} backgroundColor={"secondary.light"}>
-                             <Grid item > <Typography variant="h3">Filter</Typography></Grid>
-                             <Grid item>
-                            <Typography>Category </Typography>
-                             </Grid>
-                             <Grid item>
-                               <Checkbox color="secondary"  inpu/>
-                               <Checkbox color="secondary" />
-                             </Grid>
-
-                             
-
-                           </Box>
+                         <Grid item sm={3}>
+                              <FilterAndSort Sort={Sort} ClearFilter={ClearFilter} Filter={Filter} subCat={props.subCa} />
                          </Grid>
-                         <Grid Item sm={9}></Grid>
-                         <Box height={"300px"} backgroundColor={"yellow"}>
 
-                           </Box>
+                         <Grid Item pl={2} sm={9}>
+                              <Grid pt={1} pb={2} sx={{ display: "flex", justifyContent: "space-between" }}>
+                                   <Grid>
+                                        {" "}
+                                        <Typography variant="h4"> ({data.length}) Products</Typography>
+                                   </Grid>
+                                   <Grid>
+                                        {" "}
+                                        <Typography variant="h4">
+                                             {" "}
+                                             Filtered by {filterData ? filterData : "none"}
+                                        </Typography>
+                                   </Grid>
+                                   <Grid>
+                                        {" "}
+                                        <Typography variant="h4"> Sort by {sortData ? sortData : "Popularity"}</Typography>
+                                   </Grid>
+                              </Grid>
+                              {data?.map((obj) => (
+                                   <Grid container pb={3}>
+                                        <Grid item backgroundColor="whitesmoke" pl={2} md={4}>
+                                             <img height="250px" width="250px" src={obj.Image1} />
+                                        </Grid>
+                                        <Grid item backgroundColor="secondary.light" md={6}>
+                                             <ProductDetail details={obj} />
+                                             <Buttons />
+                                        </Grid>
+                                        <Stock />
+                                   </Grid>
+                              ))}
+                         </Grid>
                     </Grid>
                </Container>
           </>

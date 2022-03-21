@@ -1,9 +1,10 @@
 import React from "react";
-import { Grid, IconButton } from "@mui/material";
-import { BlueButton, OrangeButton } from "../../../Common";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Grid, IconButton, Button } from "@mui/material";
+import { OrangeButton } from "../../../Common";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
 import { addToCart } from "../../../../utlis/Constants";
 import axios from "axios";
@@ -13,9 +14,7 @@ const ButtonConfig = (props) => {
      const count = props.count;
      const data = { ...props.data, user, count };
 
-     const AddToCart=()=>{
-
-          
+     const AddToCart = () => {
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
                Swal.fire({
@@ -28,23 +27,39 @@ const ButtonConfig = (props) => {
                });
           });
      };
-     
+
      return (
           <>
                <Grid pl={3} container spacing={2}>
                     <Grid item>
                          {" "}
-                         <IconButton onClick={AddToCart}>
-                         <BlueButton  title={"Add to Cart"} />
+                         <IconButton>
+                              <Button
+                                   size="medium"
+                                   variant="outlined"
+                                   color="secondary"
+                                   onClick={addToCart}
+                               
+                              >
+                                   {" "}
+                                   <AddShoppingCartOutlinedIcon />
+                                   Add to cart
+                              </Button>
                          </IconButton>
                     </Grid>
                     <Grid item>
                          {" "}
-                         <OrangeButton title={"Buy Now"} />
+                         <IconButton>
+                              <OrangeButton title={"Buy Now"} />
+                         </IconButton>
                     </Grid>
                     <Grid item>
-                         {" "}
-                         <FavoriteBorderIcon sx={{ fontSize: "40px", color: "primary.dark" }} />
+                         <Grid item>
+                              <IconButton color="error">
+                                   {" "}
+                                   <FavoriteIcon sx={{ fontSize: "40px" }} />
+                              </IconButton>
+                         </Grid>
                     </Grid>
                </Grid>
           </>

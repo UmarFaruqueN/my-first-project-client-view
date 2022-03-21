@@ -5,9 +5,31 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { addToCart } from "../../../../../utlis/Constants";
 
 const ExclusiveProducts = () => {
+     const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
+     const user = useSelector((state) => state.user_state.value);
+
+     const Submit = (obj) => {
+          const count = 1;
+          const data = { ...obj, user, count };
+          console.log(data);
+          axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+               Swal.fire({
+                    position: "bottom-end",
+                    icon: "success",
+                    title: response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: "15rem",
+               });
+          });
+     };
 
      const ref = useRef(null);
      const scroll = (scrollOffset) => {
@@ -47,7 +69,7 @@ const ExclusiveProducts = () => {
                     </Box>
 
                     <Box sx={{ display: "flex" }}>
-                         <Box sx={{ width: "4%", height: "380px", display: "flex" }}>
+                         <Box sx={{ width: "4%", height: "380px", display: "flex", cursor: "pointer" }}>
                               <IconButton onClick={() => scroll(-20)}>
                                    {" "}
                                    <ArrowBackIosNewIcon />
@@ -60,6 +82,10 @@ const ExclusiveProducts = () => {
                                         <Grid key={obj._id} item>
                                              <Card sx={{ width: "200px", height: "350px" }}>
                                                   <CardMedia
+                                                       onClick={() => {
+                                                            navigate("/product/" + obj._id);
+                                                       }}
+                                                       sx={{ cursor: "pointer", backgroundColor: "whitesmoke" }}
                                                        component="img"
                                                        alt="camera"
                                                        height="150"
@@ -68,8 +94,15 @@ const ExclusiveProducts = () => {
                                                   />
 
                                                   <CardContent>
-                                                       <Typography variant="h4" component="div">
-                                                            {obj.ProductName}
+                                                       <Typography
+                                                            sx={{ cursor: "pointer" }}
+                                                            onClick={() => {
+                                                                 navigate("/product/" + obj._id);
+                                                            }}
+                                                            variant="h4"
+                                                            component="div"
+                                                       >
+                                                            {obj.ModelNumber}
                                                        </Typography>
                                                        <Typography
                                                             variant="body1"
@@ -100,7 +133,14 @@ const ExclusiveProducts = () => {
                                                                  justifyContent: "center",
                                                             }}
                                                        >
-                                                            <Button size="small" variant="outlined" color="secondary">
+                                                            <Button
+                                                                 onClick={() => {
+                                                                      Submit(obj);
+                                                                 }}
+                                                                 size="small"
+                                                                 variant="outlined"
+                                                                 color="secondary"
+                                                            >
                                                                  {" "}
                                                                  <AddShoppingCartOutlinedIcon />
                                                                  Add to cart

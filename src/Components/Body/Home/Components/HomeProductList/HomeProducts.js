@@ -18,7 +18,7 @@ const HomeProducts = (props) => {
 
      const Submit = (obj) => {
           const count = 1;
-          const data = { ...obj, user,count };
+          const data = { ...obj, user, count };
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
                Swal.fire({
@@ -70,12 +70,12 @@ const HomeProducts = (props) => {
                     <Grid container columnSpacing={2} wrap="nowrap" sx={{ overflow: "auto" }}>
                          <Grid item>
                               <Box sx={{ flexGrow: 1 }}>
-                                   <img src={hdd} width="192px" height="360px" alt="productImage"/>{" "}
+                                   <img src={hdd} width="192px" height="360px" alt="productImage" />{" "}
                               </Box>
                          </Grid>
 
                          {tempData.map((obj) => (
-                              <Grid  key={obj._id} item>
+                              <Grid key={obj._id} item>
                                    <Card sx={{ width: "192px", height: "360px", borderRadius: "0" }}>
                                         <CardMedia
                                              component="img"
@@ -91,7 +91,9 @@ const HomeProducts = (props) => {
 
                                         <CardContent>
                                              <Typography
-                                                  onClick={() => console.log("clicked")}
+                                                  onClick={() => {
+                                                       navigate("/product/" + obj._id);
+                                                  }}
                                                   sx={{ cursor: "pointer" }}
                                                   variant="h4"
                                                   component="div"

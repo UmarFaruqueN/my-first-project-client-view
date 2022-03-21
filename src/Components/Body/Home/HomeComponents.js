@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getProduct } from "../../../utlis/Constants";
 import { setProducts } from "../../../Redux/products/products";
+import { setSubCategory } from "../../../Redux/subCategory/subCategory";
 
 const HomeComponents = () => {
      const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const HomeComponents = () => {
                     console.log("success");
                     console.log(response.data.allProduct);
                     dispatch(setProducts({ products: response.data.allProduct }));
+                    dispatch(setSubCategory({subCategory:response.data.allSubCategory}))
                })
                .catch((error) => {
                     console.log(error);

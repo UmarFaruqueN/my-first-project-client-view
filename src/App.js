@@ -37,7 +37,6 @@ function App() {
                          <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
                          <Route exact path="/camera" element={<Camera />} />
                          <Route exact path="/dvr" element={<Dvr />} />
-                         <Route exact path="/analogAccessories" element={<AnalogAccessories />} />
                          <Route exact path="/internetProtocolDevices" element={<InternetProtocolDevices />} />
                          <Route exact path="/ipCamera" element={<IpCamera />} />
                          <Route exact path="/nvr" element={<Nvr />} />
