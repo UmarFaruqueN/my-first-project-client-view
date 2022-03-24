@@ -2,20 +2,21 @@ import { Container, Grid, Typography ,IconButton} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import Banner from "../Home/Components/Banner/Banner";
-import hdcam from "../../../asset/dummy/hdcam.png";
 import Swal from "sweetalert2";
 
 import axios from "axios";
 import { addToCart, getSub } from "../../../utlis/Constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Stock from "./components/Stock";
 import Buttons from "./components/Buttons";
 import ProductDetail from "./components/ProductDetail";
 import FilterAndSort from "./components/FilterAndSort";
 import { useNavigate } from "react-router-dom";
+import { setCart } from "../../../Redux/cart/cart";
 
 const ProductListing = (props) => {
+     const dispatch = useDispatch()
      const navigate = useNavigate()
      const user = useSelector((state) => state.user_state.value);
      const allProducts = useSelector((state) => state.products.value);
@@ -71,6 +72,7 @@ const ProductListing = (props) => {
           const data = { ...obj, user, count };
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+              dispatch( setCart({cart:response.data.cartData}))
                Swal.fire({
                     position: "bottom-end",
                     icon: "success",
@@ -80,6 +82,9 @@ const ProductListing = (props) => {
                     width: "15rem",
                });
           });
+
+
+          const Wishlist =()=>{}
      };
      return (
           <>

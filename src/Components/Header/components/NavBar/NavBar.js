@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Container, Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -14,13 +12,19 @@ import UserButton from "./components/UserButton";
 import LoginButton from "../LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import TurboMenu from "./components/TurboMenu";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import NetworkMenu from "./components/NetworkMenu";
+import axios from "axios";
+
+import { getCartCount } from "../../../../utlis/Constants";
+import { setCart } from "../../../../Redux/cart/cart";
 
 const NavBar = () => {
+     const dispatch = useDispatch();
      const navigate = useNavigate();
      // login state management
      const user = useSelector((state) => state.login_state.value);
-     const userid = useSelector((state) => state.user_state.value);
+     const cart = useSelector((state) => state.cart.value);
 
      const [anchorEl, setAnchorEl] = useState(null);
      const open = Boolean(anchorEl);
@@ -32,6 +36,15 @@ const NavBar = () => {
           setAnchorEl(null);
      };
 
+     useEffect(() => {
+          axios.post(getCartCount, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+               })
+               .catch((error) => {
+                    console.log(error);
+               });
+     }, []);
      // avatar functions
 
      return (
@@ -182,10 +195,25 @@ const NavBar = () => {
                                                   navigate("/cart");
                                              }}
                                         >
-                                             <Badge badgeContent={2} color={"secondary"}>
+                                             {cart.length ? (
+                                                  <Badge badgeContent={"*"} color={"secondary"}>
+                                                       <ShoppingCartOutlinedIcon sx={{ color: "text.primary", ml: "2" }} />
+                                                  </Badge>
+                                             ) : (
                                                   <ShoppingCartOutlinedIcon sx={{ color: "text.primary", ml: "2" }} />
-                                             </Badge>
+                                             )}
                                         </IconButton>
+                                        <Box>
+                                             <IconButton
+                                                  onClick={() => {
+                                                       navigate("/wishlist");
+                                                  }}
+                                                  color="error"
+                                             >
+                                                  {" "}
+                                                  <FavoriteIcon sx={{ fontSize: "20px" }} />
+                                             </IconButton>
+                                        </Box>
 
                                         {user ? <UserButton /> : <LoginButton />}
                                    </Box>

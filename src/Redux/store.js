@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import loginFormReducer from "./loginForm/loginForm"
 import loginReducer from "./login/login"
 import userReducer from "./user/user"
 import productsReducer from "./products/products";
@@ -9,6 +10,7 @@ import bannersReducer from "./banners/banners";
 
 
 export default configureStore({reducer:{
+    loginForm:loginFormReducer,
     login_state:loginReducer,
     user_state:userReducer,
     subCategory: subCategoryReducer,

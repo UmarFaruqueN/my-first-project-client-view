@@ -4,13 +4,16 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Box } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+
+import { setCart } from "../../../../../Redux/cart/cart";
 import { addToCart } from "../../../../../utlis/Constants";
 
 const ExclusiveProducts = () => {
+     const dispatch = useDispatch()
      const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
      const user = useSelector((state) => state.user_state.value);
@@ -20,6 +23,7 @@ const ExclusiveProducts = () => {
           const data = { ...obj, user, count };
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+               dispatch( setCart({cart:response.data.cartData}))
                Swal.fire({
                     position: "bottom-end",
                     icon: "success",

@@ -8,6 +8,7 @@ import {
      Cart,
      TurboHDDevices,
      InternetProtocolDevices,
+     Wishlist,
      User,
      AboutUs,
      ContactUs,
@@ -30,11 +31,15 @@ function App() {
                          <Route exact path="/cart" element={<Cart />} />
                          <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
                          <Route exact path="/internetProtocolDevices" element={<InternetProtocolDevices />} />
+                         <Route exact path="/wishlist" element={<Wishlist />} />
+
+
                          <Route exact path="/aboutUs" element={<AboutUs />} />
                          <Route exact path="/contactUs" element={<ContactUs />} />
                          <Route exact path="/ordersAndReturns" element={<OrdersAndReturns />} />
                          <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
                          <Route exact path="/terms" element={<Terms />} />
+                    
 
                          <Route
                               path="*"

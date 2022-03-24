@@ -10,6 +10,7 @@ import { setProducts } from "../../../Redux/products/products";
 import { setSubCategory } from "../../../Redux/subCategory/subCategory";
 import { setBanners } from "../../../Redux/banners/banners";
 import { useNavigate } from "react-router-dom";
+import { setCart } from "../../../Redux/cart/cart";
 
 const HomeComponents = () => {
      const navigate = useNavigate();
@@ -24,6 +25,7 @@ const HomeComponents = () => {
                     dispatch(setProducts({ products: response.data.allProduct }));
                     dispatch(setSubCategory({ subCategory: response.data.allSubCategory }));
                     dispatch(setBanners({ banners: response.data.allBanner }));
+
                })
                .catch((error) => {
                     console.log(error);

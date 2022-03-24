@@ -45,7 +45,7 @@ const TurboMenu = () => {
                     <MenuItem
                          onClick={() => {
                               setAnchorEl(null);
-                              navigate("/camera");
+                              navigate("/turboHDDevices");
                          }}
                     >
                          Turbo HD Camera
@@ -53,7 +53,7 @@ const TurboMenu = () => {
                     <MenuItem
                          onClick={() => {
                               setAnchorEl(null);
-                              navigate("/dvr");
+                              navigate("/turboHDDevices");
                          }}
                     >
                          DVR

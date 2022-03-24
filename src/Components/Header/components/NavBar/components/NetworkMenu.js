@@ -42,8 +42,22 @@ const NetworkMenu = () => {
                          "aria-labelledby": "basic-button",
                     }}
                >
-                    <MenuItem onClick={() => navigate("/ipCamera")}>IP Camera</MenuItem>
-                    <MenuItem onClick={() => navigate("/nvr")}>NVR</MenuItem>
+                    <MenuItem
+                         onClick={() => {
+                              setAnchorEl(null);
+                              navigate("/internetProtocolDevices");
+                         }}
+                    >
+                         IP Camera
+                    </MenuItem>
+                    <MenuItem
+                         onClick={() => {
+                              setAnchorEl(null);
+                              navigate("/internetProtocolDevices");
+                         }}
+                    >
+                         NVR
+                    </MenuItem>
                </Menu>{" "}
           </>
      );

@@ -1,7 +1,10 @@
 import React from "react";
+import LoginAndSignUp from "../Components/LoginAndSignUp/LoginAndSignUp";
 
 const User = () => {
-     return <></>;
+     return <>
+     <LoginAndSignUp/>
+     </>;
 };
 
 export default User;

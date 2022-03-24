@@ -2,14 +2,16 @@ import React from "react";
 import { Grid, IconButton, Button } from "@mui/material";
 import { OrangeButton } from "../../../Common";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
+import { setCart } from "../../../../Redux/cart/cart";
 import { addToCart } from "../../../../utlis/Constants";
 import axios from "axios";
 
 const ButtonConfig = (props) => {
+     const dispatch =useDispatch()
      const user = useSelector((state) => state.user_state.value);
      const count = props.count;
      const data = { ...props.data, user, count };
@@ -17,6 +19,7 @@ const ButtonConfig = (props) => {
      const AddToCart = () => {
           console.log(data);
           axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
+               dispatch( setCart({cart:response.data.cartData}))
                Swal.fire({
                     position: "bottom-end",
                     icon: "success",
