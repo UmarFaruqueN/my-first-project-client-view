@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/system";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import BlueButton from "../../../../Common/BlueButton";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import hdd from "../../../../../asset/dummy/hdd.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { useSelector } from "react-redux";
@@ -59,7 +59,9 @@ const HomeProducts = (props) => {
                     </Box>
                     <Box sx={{ flexGrow: 8 }} />
                     <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                         <IconButton onClick={props.nav}>
                          <BlueButton title={"Show More"} />
+                         </IconButton>
                     </Box>
                     <Box sx={{ flexGrow: 1 }} />
                </Box>

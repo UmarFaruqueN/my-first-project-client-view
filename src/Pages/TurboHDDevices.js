@@ -1,8 +1,9 @@
 import React from 'react'
-
+import ProductListing from '../Components/Body/ProductListing/ProductListing'
+const subCa=  [{subCategory:"Turbo HD Camera"},{subCategory:"DVR"} ]
 const TurboHDDevices=()=> {
   return (
-    <div>TurboHDDevices</div>
+    <ProductListing subCa={subCa} Category={"Analogue Devices"}/>
   )
 }
 

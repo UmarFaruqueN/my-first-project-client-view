@@ -13,6 +13,8 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import UserButton from "./components/UserButton";
 import LoginButton from "../LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
+import TurboMenu from "./components/TurboMenu";
+import NetworkMenu from "./components/NetworkMenu";
 
 const NavBar = () => {
      const navigate = useNavigate();
@@ -21,8 +23,6 @@ const NavBar = () => {
      const userid = useSelector((state) => state.user_state.value);
 
      const [anchorEl, setAnchorEl] = useState(null);
-     const [anchorElNav, setAnchorElNav] = useState(null);
-     const [anchorElUser, setAnchorElUser] = useState(null);
      const open = Boolean(anchorEl);
 
      const handleClick = (event) => {
@@ -33,17 +33,6 @@ const NavBar = () => {
      };
 
      // avatar functions
-
-     const handleCloseNavMenu = () => {
-          setAnchorElNav(null);
-     };
-
-     const handleCloseUserMenu = () => {
-          setAnchorElUser(null);
-     };
-     const handleOpenUserMenu = (event) => {
-          setAnchorElUser(event.currentTarget);
-     };
 
      return (
           <>
@@ -161,63 +150,9 @@ const NavBar = () => {
                                    </Box>
 
                                    <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, alignItems: "center" }}>
-                                        <Button
-                                             sx={{ color: "text.primary" }}
-                                             id="network-button"
-                                             aria-controls={open ? "network-menu" : undefined}
-                                             aria-haspopup="true"
-                                             aria-expanded={open ? "true" : undefined}
-                                             onClick={handleClick}
-                                        >
-                                             Network Devices
-                                        </Button>
-                                        <Menu
-                                             id="network-menu"
-                                             anchorEl={anchorEl}
-                                             open={open}
-                                             onClose={handleClose}
-                                             MenuListProps={{
-                                                  "aria-labelledby": "basic-button",
-                                             }}
-                                        >
-                                             <MenuItem onClick={() => navigate("/ipCamera")}>IP Camera</MenuItem>
-                                             <MenuItem onClick={() => navigate("/nvr")}>NVR</MenuItem>
-                                             <MenuItem onClick={() => navigate("/networkAccessories")}>
-                                                  Accessories
-                                             </MenuItem>
-                                        </Menu>{" "}
-                                        <Button
-                                             sx={{ color: "text.primary" }}
-                                             id="hd-button"
-                                             aria-controls={open ? "hd-menu" : undefined}
-                                             aria-haspopup="true"
-                                             aria-expanded={open ? "true" : undefined}
-                                             onClick={handleClick}
-                                        >
-                                             Turbo HD Devices
-                                        </Button>
-                                        <Menu
-                                             id="hd-menu"
-                                             anchorEl={anchorEl}
-                                             open={open}
-                                             onClose={handleClose}
-                                             MenuListProps={{
-                                                  "aria-labelledby": "basic-button",
-                                             }}
-                                        >
-                                             <MenuItem
-                                                  onClick={() => {
-                                                       setAnchorEl(null);
-                                                       navigate("/camera");
-                                                  }}
-                                             >
-                                                  Turbo HD Camera
-                                             </MenuItem>
-                                             <MenuItem onClick={() => navigate("/dvr")}>DVR</MenuItem>
-                                             <MenuItem onClick={() => navigate("/analogAccessories")}>
-                                                  Accessories
-                                             </MenuItem>
-                                        </Menu>
+                                        {" "}
+                                        <TurboMenu />
+                                        <NetworkMenu />
                                         <Button
                                              sx={{ color: "text.primary" }}
                                              onClick={() => {

@@ -8,8 +8,11 @@ import axios from "axios";
 import { getProduct } from "../../../utlis/Constants";
 import { setProducts } from "../../../Redux/products/products";
 import { setSubCategory } from "../../../Redux/subCategory/subCategory";
+import { setBanners } from "../../../Redux/banners/banners";
+import { useNavigate } from "react-router-dom";
 
 const HomeComponents = () => {
+     const navigate = useNavigate();
      const dispatch = useDispatch();
 
      useEffect(() => {
@@ -17,23 +20,33 @@ const HomeComponents = () => {
                .then((response) => {
                     console.log("success");
                     console.log(response.data.allProduct);
+                    console.log(response.data.allBanner);
                     dispatch(setProducts({ products: response.data.allProduct }));
-                    dispatch(setSubCategory({subCategory:response.data.allSubCategory}))
+                    dispatch(setSubCategory({ subCategory: response.data.allSubCategory }));
+                    dispatch(setBanners({ banners: response.data.allBanner }));
                })
                .catch((error) => {
                     console.log(error);
                });
      }, []);
 
+     const Turbo = () => {
+          navigate("/turboHDDevices");
+     };
+
+     const Network = () => {
+          navigate("/internetProtocolDevices");
+     };
+
      return (
           <>
                <Container sx={{ paddingTop: "100px" }}>
                     <Poster />
                     <ExclusiveProducts />
-                    <HomeProducts title={"NVR"} />
-                    <HomeProducts title={"NVR"} />
-                    <HomeProducts title={"NVR"} />
-                    <HomeProducts title={"NVR"} />
+                    <HomeProducts nav={Turbo} title={"Turbo HD Camera"} />
+                    <HomeProducts nav={Turbo} title={"DVR"} />
+                    <HomeProducts nav={Network} title={"IP Camera"} />
+                    <HomeProducts nav={Network} title={"NVR"} />
                </Container>
           </>
      );

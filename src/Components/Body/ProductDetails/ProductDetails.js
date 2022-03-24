@@ -6,10 +6,11 @@ import ImageCarousel from "./components/ImageCarousel";
 import ProductDetail from "./components/ProductDetail";
 import cutingEdge from "../../../asset/dummy/cutingEdge.png";
 import colorVU from "../../../asset/dummy/colorVU.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ProductDetails = () => {
+     const navigate = useNavigate()
      const data = useSelector((state) => state.products.value);
      const { _id } = useParams();
      const productData = data.filter((obj) => {
@@ -17,6 +18,12 @@ const ProductDetails = () => {
      });
      console.log(_id);
      console.log(productData);
+
+     const bannerData = useSelector((state)=>state.banners.value)
+     const productBanner = bannerData.filter((obj)=>{
+          return obj.for=="SubCategory"
+     })
+
 
      return (
           <>
@@ -38,8 +45,9 @@ const ProductDetails = () => {
                               <ProductDetail data={productData} />
                          </Grid>
                     </Container>
-                    <img width={"100%"} height={"auto"} src={cutingEdge} alt="" />
-                    <img width={"100%"} height={"auto"} src={colorVU} alt="" />
+                    {productBanner?.map((obj)=>
+                    <img width={"100%"} height={"auto"} src={obj.banner} alt="" />
+                    )}
                </Box>
           </>
      );

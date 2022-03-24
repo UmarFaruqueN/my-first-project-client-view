@@ -7,13 +7,7 @@ import {
      Product,
      Cart,
      TurboHDDevices,
-     Camera,
-     Dvr,
-     AnalogAccessories,
      InternetProtocolDevices,
-     IpCamera,
-     Nvr,
-     NetworkAccessories,
      User,
      AboutUs,
      ContactUs,
@@ -35,12 +29,7 @@ function App() {
                          <Route exact path="/product/:_id" element={<Product />} />
                          <Route exact path="/cart" element={<Cart />} />
                          <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
-                         <Route exact path="/camera" element={<Camera />} />
-                         <Route exact path="/dvr" element={<Dvr />} />
                          <Route exact path="/internetProtocolDevices" element={<InternetProtocolDevices />} />
-                         <Route exact path="/ipCamera" element={<IpCamera />} />
-                         <Route exact path="/nvr" element={<Nvr />} />
-                         <Route exact path="/networkAccessories" element={<NetworkAccessories />} />
                          <Route exact path="/aboutUs" element={<AboutUs />} />
                          <Route exact path="/contactUs" element={<ContactUs />} />
                          <Route exact path="/ordersAndReturns" element={<OrdersAndReturns />} />

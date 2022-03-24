@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
 
 const images = [
      "https://picsum.photos/id/100/367/267",
@@ -10,6 +11,8 @@ const images = [
      "https://picsum.photos/id/1/367/267",
      "https://picsum.photos/id/1011/367/267",
 ];
+
+
 
 const useStyles = makeStyles({
      image: {
@@ -20,14 +23,21 @@ const useStyles = makeStyles({
      },
 });
 const Banner = () => {
+
+     const data = useSelector((state)=>state.banners.value)
+     const homeBanner = data.filter((obj)=>{
+          return obj.for=="Home"
+     })
+
+    
      const classes = useStyles();
      return (
           <Box sx={{  height: "210px", width: "100%", top: "10%" }}>
                <Box>
                     <Carousel animationHandler={"fade"} showStatus={false} autoPlay={true} showThumbs={false} showArrows={true} infiniteLoop={true}>
-                         {images.map((obj) => (
+                         {homeBanner?.map((obj) => (
                               <div key={obj.length}>
-                                   <img  className={classes.image} src={obj} alt="image1" />
+                                   <img  className={classes.image} src={obj.banner} alt="image1" />
                               </div>
                          ))}
                     </Carousel>

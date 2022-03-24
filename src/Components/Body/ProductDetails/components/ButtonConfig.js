@@ -38,7 +38,7 @@ const ButtonConfig = (props) => {
                                    size="medium"
                                    variant="outlined"
                                    color="secondary"
-                                   onClick={addToCart}
+                                   onClick={AddToCart}
                                
                               >
                                    {" "}

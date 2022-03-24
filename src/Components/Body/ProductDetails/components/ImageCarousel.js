@@ -20,9 +20,10 @@ const ImageCarousel = (props) => {
                     height: "500px",
                     display: "flex",
                     alignItems: "center",
+                    
                }}
           >
-               <Box>
+               <Box sx={{backgroundColor:"whitesmoke"}}>
                     <Carousel showThumbs={false} showArrows={true} infiniteLoop={true}>
                          {props.images?.map((obj) => (
                               <div key={props.images.index}>

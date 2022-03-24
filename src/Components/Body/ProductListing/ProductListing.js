@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography ,IconButton} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import Banner from "../Home/Components/Banner/Banner";
@@ -13,8 +13,10 @@ import Stock from "./components/Stock";
 import Buttons from "./components/Buttons";
 import ProductDetail from "./components/ProductDetail";
 import FilterAndSort from "./components/FilterAndSort";
+import { useNavigate } from "react-router-dom";
 
 const ProductListing = (props) => {
+     const navigate = useNavigate()
      const user = useSelector((state) => state.user_state.value);
      const allProducts = useSelector((state) => state.products.value);
      const allSubCat = useSelector((state) => state.subCategory.value);
@@ -62,8 +64,7 @@ const ProductListing = (props) => {
           setData(allProducts.filter((product) => product.Category.indexOf(props.Category) >= 0));
      }, []);
 
-     const handleChange = () => {};
-     const jaba = 0;
+    
 
      const Submit = (obj) => {
           const count = 1;
@@ -114,13 +115,17 @@ const ProductListing = (props) => {
                               {data?.map((obj) => (
                                    <Grid container pb={3}>
                                         <Grid item backgroundColor="whitesmoke" pl={2} md={4}>
+                                             <IconButton  onClick={() => {
+                                                  navigate("/product/" + obj._id);
+                                             }}>
                                              <img height="250px" width="250px" src={obj.Image1} />
+                                             </IconButton>
                                         </Grid>
                                         <Grid item backgroundColor="secondary.light" md={6}>
                                              <ProductDetail details={obj} />
-                                             <Buttons />
+                                             <Buttons AddTocart={Submit} />
                                         </Grid>
-                                        <Stock />
+                                        <Stock stock={obj.Stock} />
                                    </Grid>
                               ))}
                          </Grid>
