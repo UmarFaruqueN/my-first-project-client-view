@@ -15,8 +15,8 @@ const LoginAndSignUp = () => {
 
      const [option, setOption] = useState(false);
      const [login, setLogin] = useState(false);
-     const [otp, setOtp] = useState(false);
-     const [signup, setSignup] = useState(true);
+     const [otp, setOtp] = useState(true);
+     const [signup, setSignup] = useState(false);
      const CloseForm = () => {
           dispatch(setLoginForm({ loginForm: false }));
      };
@@ -82,7 +82,7 @@ const LoginAndSignUp = () => {
                               </Grid>
                               {option ? <Option Login={Login} OTP={OTP} /> : ""}
                               {login ? <LoginForm /> : ""}
-                              {otp ? <OtpForm /> : ""}
+                              {otp ? <OtpForm SignUpCancel={SignUpCancel} /> : ""}
 
                               {signup ? (
                                    <SignUpForm SignUpCancel={SignUpCancel} />

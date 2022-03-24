@@ -1,32 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-     TextField,
-     Dialog,
-     DialogActions,
-     DialogContent,
-     InputAdornment,
-     DialogTitle,
-     DialogContentText,
-     IconButton,
-     OutlinedInput,
-     FormControl,
-     InputLabel,
-     Button,
-} from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Grid, TextField, DialogTitle, DialogContentText, Button, Container } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-import SignupButton from "../SignupButton/SignupButton";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { loginPost, verifyPost } from "../../../";
-import { change_login_state } from "../../../../Redux/login/login";
-import { change_user_state } from "../../../../Redux/user/user";
+import { loginPost, verifyPost } from "../../../utlis/Constants";
+import { change_login_state } from "../../../Redux/login/login";
+import { change_user_state } from "../../../Redux/user/user";
+import { setUserData } from "../../../Redux/userData/userData";
+import { setLoginForm } from "../../../Redux/loginForm/loginForm";
 
-const OtpForm = () => {
+const OtpForm = (props) => {
      const user = localStorage.getItem("token");
      const dispatch = useDispatch();
      const navigate = useNavigate();
@@ -63,14 +49,6 @@ const OtpForm = () => {
                .catch((err) => {
                     console.log("eroor");
                     console.log(err.response.data.message);
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "success",
-                         title: err.response.data.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         width: "15rem",
-                    });
 
                     if (!err.response.data.userStatus) {
                          setOpen(false);
@@ -96,58 +74,41 @@ const OtpForm = () => {
                          timer: 1500,
                          width: "15rem",
                     });
+                    dispatch(setUserData({ userData: response.data.user }));
                     dispatch(change_login_state({ login_state: true }));
                     dispatch(change_user_state({ user_state: response.data.userId }));
                     localStorage.setItem("token", response.data.token);
+                    dispatch(setLoginForm({ loginForm: false }));
                     setOpen(false);
                     navigate("/");
                })
                .catch((err) => {
                     console.log("eroor");
                     console.log(err.response.data.message);
-                    Swal.fire({
-                         position: "bottom-end",
-                         icon: "success",
-                         title: err.response.data.message,
-                         showConfirmButton: false,
-                         timer: 1500,
-                         width: "15rem",
-                    });
                });
      });
 
-     const Submit = () => {
-          setOpen(false);
-          setShowSignup(false);
-          setSendOtp(true);
-     };
      //form validation ends here
-
-     const handleClickOpen = () => {
-          setOpen(true);
-     };
 
      let closeImg = { cursor: "pointer", float: "right", marginTop: "5px", width: "20px" };
 
      return (
-          <div>
-               <Button onClick={handleClickOpen} color="secondary">
-                    Login
-               </Button>
-
-               <Dialog open={open} onClose={Submit}>
+          <>
+               <Container>
                     <DialogTitle>
                          Enter Mobile Number For Login{" "}
                          <img
-                              onClick={Submit}
+                              onClick={props.SignUpCancel}
                               src="https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png"
                               style={closeImg}
+                              alt="imaage"
                          />
                     </DialogTitle>
-                    <DialogContent color="secondary">
+                    <Grid>
                          <DialogContentText color="secondary">Number</DialogContentText>
 
                          <TextField
+                              fullWidth
                               color="secondary"
                               size="small"
                               variant="outlined"
@@ -166,67 +127,68 @@ const OtpForm = () => {
                               })}
                          />
                          <DialogContentText color="error">{errors.phone?.message}</DialogContentText>
+                    </Grid>
+                    {showSignup ? (
+                         <DialogContentText color="error">
+                              Number Is Not Registered With Account, Check The Number Or Create Account{" "}
+                         </DialogContentText>
+                    ) : (
+                         ""
+                    )}
 
-                         {showSignup ? (
-                              <DialogContentText color="secondary">
-                                   Number Is Not Registered With Account, Check The Number Or Create Account{" "}
-                              </DialogContentText>
-                         ) : (
-                              ""
-                         )}
+                    {showOtp ? <DialogContentText color="secondary">Enter OTP</DialogContentText> : ""}
 
-                         {showOtp ? <DialogContentText color="secondary">Enter OTP</DialogContentText> : ""}
+                    {showOtp ? (
+                         <TextField
+                              color="secondary"
+                              size="small"
+                              variant="outlined"
+                              className="form-control"
+                              type="number"
+                              {...register("otp", {
+                                   required: " OTP Required",
+                                   maxLength: {
+                                        value: 4,
+                                        message: "Only 4Numbers allowed",
+                                   },
+                                   minLength: {
+                                        value: 4,
+                                        message: "4  Required",
+                                   },
+                              })}
+                         />
+                    ) : (
+                         ""
+                    )}
 
-                         {showOtp ? (
-                              <TextField
-                                   color="secondary"
-                                   size="small"
-                                   variant="outlined"
-                                   className="form-control"
-                                   type="number"
-                                   {...register("otp", {
-                                        required: " OTP Required",
-                                        maxLength: {
-                                             value: 4,
-                                             message: "Only 4Numbers allowed",
-                                        },
-                                        minLength: {
-                                             value: 4,
-                                             message: "4  Required",
-                                        },
-                                   })}
-                              />
-                         ) : (
-                              ""
-                         )}
-                    </DialogContent>
-                    <DialogActions>
-                         {showSignup ? <SignupButton /> : ""}
-                         {showSignup ? (
+                    {showSignup ? (
+                         <Grid sx={{ display: "fllex", justifyContent: "space-around" }}>
                               <Button color="secondary" onClick={SendOTP}>
                                    Resend OTP
                               </Button>
-                         ) : (
-                              ""
-                         )}
+                         </Grid>
+                    ) : (
+                         ""
+                    )}
 
-                         {showOtp ? (
-                              <Button color="secondary" onClick={VerifyOTP}>
-                                   Confirm
-                              </Button>
-                         ) : (
-                              ""
-                         )}
-                         {sendOtp ? (
+                    {showOtp ? (
+                         <Button color="secondary" onClick={VerifyOTP}>
+                              Confirm
+                         </Button>
+                    ) : (
+                         ""
+                    )}
+                    {sendOtp ? (
+                         <Grid sx={{ display: "flex", justifyContent: "space-around" }}>
                               <Button color="secondary" onClick={SendOTP}>
                                    Send OTP
                               </Button>
-                         ) : (
-                              ""
-                         )}
-                    </DialogActions>
-               </Dialog>
-          </div>
+                         </Grid>
+                    ) : (
+                         ""
+                    )}
+               </Container>
+          </>
      );
 };
 
