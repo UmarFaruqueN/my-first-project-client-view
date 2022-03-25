@@ -16,7 +16,7 @@ import NetworkMenu from "./components/NetworkMenu";
 import axios from "axios";
 
 import { getCartCount } from "../../../../utlis/Constants";
-import { setCart } from "../../../../Redux/cart/cart";
+import { setCart, setLoginForm } from "../../../../Redux";
 import LoginAndSignUp from "../../../LoginAndSignUp/LoginAndSignUp";
 
 const NavBar = () => {
@@ -192,7 +192,11 @@ const NavBar = () => {
                                         </IconButton>
                                         <IconButton
                                              onClick={() => {
-                                                  navigate("/cart");
+                                                  {
+                                                       user
+                                                            ? navigate("/cart")
+                                                            : dispatch(setLoginForm({ loginForm: true }));
+                                                  }
                                              }}
                                         >
                                              {cart.length ? (
@@ -206,7 +210,11 @@ const NavBar = () => {
                                         <Box>
                                              <IconButton
                                                   onClick={() => {
-                                                       navigate("/wishlist");
+                                                       {
+                                                            user
+                                                                 ? navigate("/wishlist")
+                                                                 : dispatch(setLoginForm({ loginForm: true }));
+                                                       }
                                                   }}
                                                   color="error"
                                              >
@@ -215,8 +223,7 @@ const NavBar = () => {
                                              </IconButton>
                                         </Box>
 
-                                        {user ? <UserButton /> : <LoginAndSignUp/>}
-                                        
+                                        {user ? <UserButton /> : <LoginAndSignUp />}
                                    </Box>
                               </Toolbar>
                          </Container>

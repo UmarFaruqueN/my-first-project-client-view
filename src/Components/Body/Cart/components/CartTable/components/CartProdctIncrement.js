@@ -7,22 +7,21 @@ import axios from "axios";
 import { incCart, decCart, getCart } from "../../../../../../utlis/Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../../../../../Redux/cart/cart";
+import { setUserData } from "../../../../../../Redux";
 
 const CartProdctIncrement = (props) => {
-     const user = useSelector((state) => state.user_state.value);
      const dispatch = useDispatch();
-     const [count, setCount] = useState(props.cartData.counts);
+     const [count, setCount] = useState(props.cartData.count);
      console.log(props.cartData);
-     const cartData = props.cartData;
+     const data = props.cartData;
 
      const Increment = () => {
           setCount(count + 1);
-          let data = cartData;
           console.log(data + "ourdata");
           axios.post(incCart, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
-                    console.log(cartData);
+                    dispatch(setCart({ cart: response.data.cartData }));
+                    dispatch(setUserData({ userData: response.data.cartData }));
                })
                .catch((error) => {
                     console.log(error);
@@ -32,11 +31,11 @@ const CartProdctIncrement = (props) => {
      const Decrement = () => {
           if (count > 1) {
                setCount(count - 1);
-               let data = cartData;
                console.log(data + "ourdata");
                axios.post(decCart, data, { headers: { "Content-Type": "application/json" } })
                     .then((response) => {
-                         dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+                         dispatch(setCart({ cart: response.data.cartData }));
+                         dispatch(setUserData({ userData: response.data.cartData }));
                     })
                     .catch((error) => {
                          console.log(error);

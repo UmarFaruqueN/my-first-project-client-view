@@ -39,7 +39,7 @@ const FilterAndSort = (props) => {
                                    props.Sort("lowest");
                               }}
                          >
-                              <Typography variant="h4"> Lowest to High </Typography>
+                              <Typography variant="h4">  Highest to low </Typography>
                          </IconButton>
                     </Grid>
                     <Grid item pt={1}>
@@ -48,7 +48,7 @@ const FilterAndSort = (props) => {
                                    props.Sort("highest");
                               }}
                          >
-                              <Typography variant="h4"> Highest to low</Typography>
+                              <Typography variant="h4"> Lowest to High</Typography>
                          </IconButton>
                     </Grid>
                     <Grid item>

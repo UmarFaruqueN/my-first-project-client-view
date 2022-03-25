@@ -18,7 +18,7 @@ const Buttons = (props) => {
                                    variant="outlined"
                                    color="secondary"
                                    onClick={() => {
-                                        props.AddTocart(props.productId);
+                                        props.AddTocart(props.data);
                                    }}
                               >
                                    {" "}
@@ -41,7 +41,7 @@ const Buttons = (props) => {
                     <Grid item>
                          <IconButton
                               onClick={() => {
-                                   props.WishList(props.productId);
+                                   props.Wishlist(props.data);
                               }}
                               color="error"
                          >

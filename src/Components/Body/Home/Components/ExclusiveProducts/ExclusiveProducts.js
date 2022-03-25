@@ -4,35 +4,55 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Box } from "@mui/system";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import { setCart } from "../../../../../Redux/cart/cart";
+import { setLoginForm } from "../../../../../Redux/loginForm/loginForm";
+import {setUserData} from "../../../../../Redux/userData/userData"
 import { addToCart } from "../../../../../utlis/Constants";
 
 const ExclusiveProducts = () => {
-     const dispatch = useDispatch()
+     const dispatch = useDispatch();
      const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
      const user = useSelector((state) => state.user_state.value);
 
      const Submit = (obj) => {
-          const count = 1;
-          const data = { ...obj, user, count };
-          console.log(data);
-          axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
-               dispatch( setCart({cart:response.data.cartData}))
-               Swal.fire({
-                    position: "bottom-end",
-                    icon: "success",
-                    title: response.data.message,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    width: "15rem",
-               });
-          });
+          if (user) {
+               const count = 1;
+               const data = { ...obj, user, count };
+               console.log(data);
+               axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                         dispatch(setCart({ cart: response.data.cartData }));
+                         dispatch(setUserData({ userData: response.data.userData }));
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    })
+                    .catch((err) => {
+                         console.log(err);
+                         console.log(err.response.data.message);
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: err.response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    });
+          } else {
+               dispatch(setLoginForm({loginForm:true}));
+          }
      };
 
      const ref = useRef(null);

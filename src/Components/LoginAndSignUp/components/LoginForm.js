@@ -19,10 +19,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 import { userLoginPost } from "../../../utlis/Constants";
-import { change_login_state } from "../../../Redux/login/login";
-import { change_user_state } from "../../../Redux/user/user";
-import { setUserData } from "../../../Redux/userData/userData";
-import { setLoginForm } from "../../../Redux/loginForm/loginForm";
+import { setCart, setLoginForm, setUserData, change_user_state, change_login_state } from "../../../Redux";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
@@ -61,10 +58,7 @@ const LoginForm = (props) => {
                .then((response) => {
                     console.log(response);
                     setSu(response.data.message);
-                    setTimeout(() => {
-                         props.SignUpCancel();
-                    }, 1500);
-
+                         props.SignUpCancel()
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -78,6 +72,7 @@ const LoginForm = (props) => {
                     dispatch(change_user_state({ user_state: response.data.userId }));
                     localStorage.setItem("token", response.data.token);
                     dispatch(setLoginForm({ loginForm: false }));
+                    dispatch(setCart({ cart: response.data.user.cartProducts }));
 
                     navigate("/");
                })

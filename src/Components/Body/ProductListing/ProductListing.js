@@ -1,11 +1,11 @@
-import { Container, Grid, Typography ,IconButton} from "@mui/material";
+import { Container, Grid, Typography, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import Banner from "../Home/Components/Banner/Banner";
 import Swal from "sweetalert2";
 
 import axios from "axios";
-import { addToCart, getSub } from "../../../utlis/Constants";
+import { addToCart, addWishlist, getSub } from "../../../utlis/Constants";
 import { useDispatch, useSelector } from "react-redux";
 
 import Stock from "./components/Stock";
@@ -13,11 +13,11 @@ import Buttons from "./components/Buttons";
 import ProductDetail from "./components/ProductDetail";
 import FilterAndSort from "./components/FilterAndSort";
 import { useNavigate } from "react-router-dom";
-import { setCart } from "../../../Redux/cart/cart";
+import { setUserData, setWishlist, setLoginForm, setCart } from "../../../Redux";
 
 const ProductListing = (props) => {
-     const dispatch = useDispatch()
-     const navigate = useNavigate()
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
      const user = useSelector((state) => state.user_state.value);
      const allProducts = useSelector((state) => state.products.value);
      const allSubCat = useSelector((state) => state.subCategory.value);
@@ -65,27 +65,75 @@ const ProductListing = (props) => {
           setData(allProducts.filter((product) => product.Category.indexOf(props.Category) >= 0));
      }, []);
 
-    
-
      const Submit = (obj) => {
-          const count = 1;
-          const data = { ...obj, user, count };
-          console.log(data);
-          axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } }).then((response) => {
-              dispatch( setCart({cart:response.data.cartData}))
-               Swal.fire({
-                    position: "bottom-end",
-                    icon: "success",
-                    title: response.data.message,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    width: "15rem",
-               });
-          });
-
-
-          const Wishlist =()=>{}
+          if (user) {
+               const count = 1;
+               const data = { ...obj, user, count };
+               console.log(data);
+               axios.post(addToCart, data, { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                         dispatch(setCart({ cart: response.data.cartData }));
+                         dispatch(setUserData({ userData: response.data.userData }));
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    })
+                    .catch((err) => {
+                         console.log(err);
+                         console.log(err.response.data.message);
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: err.response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    });
+          } else {
+               dispatch(setLoginForm({ loginForm: true }));
+          }
      };
+
+     const Wishlist = (obj) => {
+          const data = { ...obj, user,};
+          if (user) {
+               console.log(data);
+               axios.post(addWishlist, data, { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                         dispatch(setWishlist({ wishlist: response.data.wishlistData }));
+                         dispatch(setUserData({ userData: response.data.userData }));
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    })
+                    .catch((err) => {
+                         console.log(err);
+                         console.log(err.response.data.message);
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "error",
+                              title: err.response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              width: "15rem",
+                         });
+                    });
+          } else {
+               dispatch(setLoginForm({ loginForm: true }));
+          }
+     };
+
      return (
           <>
                <Container>
@@ -120,15 +168,17 @@ const ProductListing = (props) => {
                               {data?.map((obj) => (
                                    <Grid container pb={3}>
                                         <Grid item backgroundColor="whitesmoke" pl={2} md={4}>
-                                             <IconButton  onClick={() => {
-                                                  navigate("/product/" + obj._id);
-                                             }}>
-                                             <img height="250px" width="250px" src={obj.Image1} />
+                                             <IconButton
+                                                  onClick={() => {
+                                                       navigate("/product/" + obj._id);
+                                                  }}
+                                             >
+                                                  <img height="250px" width="250px" src={obj.Image1} />
                                              </IconButton>
                                         </Grid>
                                         <Grid item backgroundColor="secondary.light" md={6}>
                                              <ProductDetail details={obj} />
-                                             <Buttons AddTocart={Submit} />
+                                             <Buttons Wishlist={Wishlist}  data={obj} AddTocart={Submit} />
                                         </Grid>
                                         <Stock stock={obj.Stock} />
                                    </Grid>

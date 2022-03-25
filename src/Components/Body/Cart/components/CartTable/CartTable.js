@@ -1,52 +1,63 @@
-import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import ProductIncrement from "../../../ProductDetails/components/ProductIncrement";
+import React from "react";
+import {
+     Table,
+     TableBody,
+     TableCell,
+     TableContainer,
+     TableHead,
+     TableRow,
+     Paper,
+     IconButton,
+     Typography,
+     Divider,
+} from "@mui/material";
 import axios from "axios";
-import { getCart, deleCart } from "../../../../../utlis/Constants";
+import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import CartProdctIncrement from "./components/CartProdctIncrement";
 import CartImage from "./components/CartImage";
-import { IconButton, Typography } from "@mui/material";
-import { setCart } from "../../../../../Redux/cart/cart";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Grid } from "@mui/material";
+import { setCart, setUserData } from "../../../../../Redux";
+import { deleCart } from "../../../../../utlis/Constants";
+
 const CartTable = () => {
      const dispatch = useDispatch();
-     const user = useSelector((state) => state.user_state.value);
      const cartData = useSelector((state) => state.cart.value);
-
-     useEffect(() => {
-          axios.post(getCart, { user: user }, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
-                    console.log(cartData);
-               })
-               .catch((error) => {
-                    console.log(error);
-               });
-     }, []);
 
      const Delete = (data) => {
           console.log(data);
           axios.post(deleCart, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+                    dispatch(setCart({ cart: response.data.cartData }));
+                    dispatch(setUserData({ userData: response.data.userData }));
                     console.log(cartData);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         title: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    });
                })
-               .catch((error) => {
-                    console.log(error);
+               .catch((err) => {
+                    console.log(err);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         title: err.response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    });
                });
      };
 
      return (
+          <>
+          {cartData.length>0?
           <TableContainer component={Paper}>
-               
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                          <TableRow>
@@ -59,7 +70,6 @@ const CartTable = () => {
                          </TableRow>
                     </TableHead>
                     <TableBody>
-
                          {cartData?.map((obj) => (
                               <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                    <TableCell component="th" scope="obj">
@@ -72,10 +82,10 @@ const CartTable = () => {
                                    <TableCell align="right">{obj.SellingPrice}</TableCell>
 
                                    <TableCell align="center">
-                                        <CartProdctIncrement s cartData={obj} />
+                                        <CartProdctIncrement cartData={obj} />
                                    </TableCell>
 
-                                   <TableCell align="right">{obj.SellingPrice * obj.counts} </TableCell>
+                                   <TableCell align="right">{obj.SellingPrice * obj.count} </TableCell>
                                    <TableCell align="right">
                                         <IconButton
                                              color="error"
@@ -89,8 +99,9 @@ const CartTable = () => {
                               </TableRow>
                          ))}
                     </TableBody>
-          </Table>
-          </TableContainer>
+               </Table>
+          </TableContainer>:(<Typography variant="h2"> <Divider/>No Products In Cart</Typography>)} 
+          </>
      );
 };
 

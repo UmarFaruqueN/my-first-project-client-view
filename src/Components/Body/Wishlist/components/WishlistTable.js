@@ -1,5 +1,5 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
+import  React,{useEffect} from "react";
+import {Table , IconButton,Typography} from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -7,6 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableRowsRounded } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import CartImage from "../../Cart/components/CartTable/components/CartImage"
+import DeleteIcon from "@mui/icons-material/Delete";
+import {getWishlist,deleWishlist} from "../../../../utlis/Constants"
+import { setWishlist,setUserData } from "../../../../Redux";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function createData(name, calories, fat, carbs, protein) {
      return { name, calories, fat, carbs, protein };
@@ -15,31 +22,49 @@ function createData(name, calories, fat, carbs, protein) {
 
 const WishlistTable = () => {
 
+     const dispatch = useDispatch();
+     const user = useSelector((state) => state.userData.value);
 
-     //   useEffect(() => {
-     //           axios.post(getCart, { user: user }, { headers: { "Content-Type": "application/json" } })
-     //                .then((response) => {
-     //                     dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
-     //                     console.log(cartData);
-     //                })
-     //                .catch((error) => {
-     //                     console.log(error);
-     //                });
-     //      }, []);
+     const wishlist = useSelector((state)=>state.wishlist.value)
+     console.log(wishlist+"wislist");
 
-     //      const Delete = (data) => {
-     //           console.log(data);
-     //           axios.post(deleCart, data, { headers: { "Content-Type": "application/json" } })
-     //                .then((response) => {
-     //                     dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
-     //                     console.log(cartData);
-     //                })
-     //                .catch((error) => {
-     //                     console.log(error);
-     //                });
-     //      };
+       useEffect(() => {
+
+              axios.post(getWishlist, user , { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                          dispatch(setWishlist({ wishlist: response.data.wishlistData }));
+                          dispatch(setUserData({ userData: response.data.userData }));    
+                    })
+                    .catch((error) => {
+                         console.log(error);
+                    });
+      }, []);
+
+         const Delete = (obj) => {
+              const productId =obj;
+               const data ={...user,productId}
+               console.log(data);
+               axios.post(deleWishlist, data, { headers: { "Content-Type": "application/json" } })
+                     .then((response) => {
+                         dispatch(setWishlist({ wishlist: response.data.wishlistData }));
+                         dispatch(setUserData({ userData: response.data.userData })); 
+                         Swal.fire({
+                              position: "bottom-end",
+                              icon: "success",
+                              title: response.data.message,
+                              showConfirmButton: false,
+                              timer: 1500,
+                              height: "5rem",
+                              width: "15rem",
+                         });
+                     })
+                .catch((error) => {
+                          console.log(error);
+                    });
+           };
 
 
+     
      return (
           <TableContainer component={Paper}>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -47,15 +72,15 @@ const WishlistTable = () => {
                          <TableRow>
                               <TableCell>Item</TableCell>
                               <TableCell align="right"></TableCell>
-                              <TableCell align="right">Price</TableCell>
-                              <TableCell align="center">Quantity</TableCell>
-                              <TableCell align="right">Subtotal</TableCell>
-                              <TableCell align="right"></TableCell>
+                              <TableCell align="center">Price</TableCell>
+                              <TableCell align="left">SubCategory</TableCell>
+                              <TableCell align="left">Type</TableCell>
+                              <TableCell align="left"></TableCell>
                          </TableRow>
                     </TableHead>
                     <TableBody>
                       
-                              {/* <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                              {wishlist?.map((obj)=>( <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                    <TableCell component="th" scope="obj">
                                         <CartImage image={obj.Image1} />
                                    </TableCell>
@@ -63,25 +88,21 @@ const WishlistTable = () => {
                                         {" "}
                                         <Typography variant="body2">{obj.Description}</Typography>{" "}
                                    </TableCell>
-                                   <TableCell align="right">{obj.SellingPrice}</TableCell>
-
-                                   <TableCell align="center">
-                                        <CartProdctIncrement s cartData={obj} />
-                                   </TableCell>
-
-                                   <TableCell align="right">{obj.SellingPrice * obj.counts} </TableCell>
-                                   <TableCell align="right">
+                                   <TableCell align="center">{obj.SellingPrice}</TableCell>
+                                   <TableCell align="left">{obj.SubCategory}</TableCell>
+                                   <TableCell align="left">{obj.Type}</TableCell>
+                                   <TableCell align="left">
                                         <IconButton
                                              color="error"
                                              onClick={() => {
-                                                  Delete(obj);
+                                                  Delete(obj._id);
                                              }}
                                         >
                                              <DeleteIcon />
                                         </IconButton>{" "}
                                    </TableCell>
-                              </TableRow> */}
-                       
+                              </TableRow> 
+                               ) )}
                     </TableBody>
                </Table>
           </TableContainer>

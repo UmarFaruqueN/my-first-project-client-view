@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const loginFormSlice= createSlice({
-    name:"loginForm",initialState:{value:true},
+    name:"loginForm",initialState:{value:false},
     
     reducers:{
 
