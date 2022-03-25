@@ -9,7 +9,6 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import UserButton from "./components/UserButton";
-import LoginButton from "../LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import TurboMenu from "./components/TurboMenu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -18,6 +17,7 @@ import axios from "axios";
 
 import { getCartCount } from "../../../../utlis/Constants";
 import { setCart } from "../../../../Redux/cart/cart";
+import LoginAndSignUp from "../../../LoginAndSignUp/LoginAndSignUp";
 
 const NavBar = () => {
      const dispatch = useDispatch();
@@ -215,7 +215,8 @@ const NavBar = () => {
                                              </IconButton>
                                         </Box>
 
-                                        {user ? <UserButton /> : <LoginButton />}
+                                        {user ? <UserButton /> : <LoginAndSignUp/>}
+                                        
                                    </Box>
                               </Toolbar>
                          </Container>

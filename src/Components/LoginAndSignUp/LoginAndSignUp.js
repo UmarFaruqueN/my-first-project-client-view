@@ -14,8 +14,8 @@ const LoginAndSignUp = () => {
      const open = useSelector((state) => state.loginForm.value);
 
      const [option, setOption] = useState(false);
-     const [login, setLogin] = useState(false);
-     const [otp, setOtp] = useState(true);
+     const [login, setLogin] = useState(true);
+     const [otp, setOtp] = useState(false);
      const [signup, setSignup] = useState(false);
      const CloseForm = () => {
           dispatch(setLoginForm({ loginForm: false }));
@@ -49,9 +49,17 @@ const LoginAndSignUp = () => {
           setOption(true);
      };
 
+     const handleClickOpen = () => {
+          setLogin(false);
+          setOtp(false);
+          setSignup(false);
+          setOption(true);
+          dispatch(setLoginForm({ loginForm: true }));
+     };
+
      return (
           <>
-               <Button> Login </Button>
+               <Button onClick={handleClickOpen} color="secondary"> Login </Button>
                <Dialog maxWidth="md" open={open} onClose={CloseForm}>
                     <Grid container height="450px" width="700px">
                          <Grid
@@ -81,7 +89,7 @@ const LoginAndSignUp = () => {
                                    </IconButton>
                               </Grid>
                               {option ? <Option Login={Login} OTP={OTP} /> : ""}
-                              {login ? <LoginForm /> : ""}
+                              {login ? <LoginForm  SignUpCancel={SignUpCancel} /> : ""}
                               {otp ? <OtpForm SignUpCancel={SignUpCancel} /> : ""}
 
                               {signup ? (

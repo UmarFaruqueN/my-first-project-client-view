@@ -2,6 +2,7 @@ export const baseUrl ='http://localhost:4000';
 export const signupPost='http://localhost:4000/userSignup'
 export const loginPost='http://localhost:4000/mobile'
 export const verifyPost='http://localhost:4000/otp'
+export const userLoginPost='http://localhost:4000/login'
 export const addToCart='http://localhost:4000/addToCart'
 export const getCart='http://localhost:4000/getCart'
 export const getCartCount='http://localhost:4000/getCartCount'

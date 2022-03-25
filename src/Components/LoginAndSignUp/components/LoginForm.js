@@ -1,9 +1,155 @@
-import React from 'react'
+import React, { useState } from "react";
+import {
+     TextField,
+     InputAdornment,
+     Typography,
+     IconButton,
+     OutlinedInput,
+     FormControl,
+     Button,
+     Grid,
+} from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const LoginForm=()=> {
-  return (
-    <div>Login</div>
-  )
-}
+import { userLoginPost } from "../../../utlis/Constants";
+import { change_login_state } from "../../../Redux/login/login";
+import { change_user_state } from "../../../Redux/user/user";
+import { setUserData } from "../../../Redux/userData/userData";
+import { setLoginForm } from "../../../Redux/loginForm/loginForm";
+import { useNavigate } from "react-router-dom";
 
-export default LoginForm
+const LoginForm = (props) => {
+     const dispatch = useDispatch();
+     const navigate = useNavigate();
+     const [er, setEr] = useState(null);
+     const [su, setSu] = useState(null);
+     //form validation
+
+     const [showPassword, setShowPassword] = useState(false);
+
+     const formSchema = Yup.object().shape({
+          email: Yup.string().required("Email Required").email("Enter a valid email"),
+          password: Yup.string()
+               .required("Password  Required")
+               .min(4, "Password length should be at least 4 characters")
+               .max(12, "Password cannot exceed more than 12 characters"),
+     });
+
+     const {
+          register,
+          formState: { errors },
+          handleSubmit,
+     } = useForm({
+          mode: "onTouched",
+          resolver: yupResolver(formSchema),
+          defaultValues: {
+               active: true,
+          },
+     });
+
+     const Submit = handleSubmit((data) => {
+          setEr(null);
+          console.log(data);
+          axios.post(userLoginPost, data, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    console.log(response);
+                    setSu(response.data.message);
+                    setTimeout(() => {
+                         props.SignUpCancel();
+                    }, 1500);
+
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "success",
+                         title: response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    });
+                    dispatch(setUserData({ userData: response.data.user }));
+                    dispatch(change_login_state({ login_state: true }));
+                    dispatch(change_user_state({ user_state: response.data.userId }));
+                    localStorage.setItem("token", response.data.token);
+                    dispatch(setLoginForm({ loginForm: false }));
+
+                    navigate("/");
+               })
+               .catch((err) => {
+                    console.log(err.response.data.message);
+                    setEr(err.response.data.message);
+               });
+     });
+     //form validation ends here
+     const button_state = useSelector((state) => state.login_state.value);
+
+     return (
+          <>
+               <Grid container sx={{ display: "flex", flexDirection: "column", pl: 5, pr: 5 }}>
+                    <Typography variant="h4" color="error">
+                         {er}
+                    </Typography>
+                    <Typography variant="h3" color="success">
+                         {su}
+                    </Typography>
+
+                    <Typography color="secondary">Email</Typography>
+
+                    <TextField
+                         color="secondary"
+                         size="small"
+                         variant="outlined"
+                         className="form-control"
+                         {...register("email", {
+                              required: "Email id Required",
+                              pattern: {
+                                   value: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]$/,
+                                   message: "Enter a valid email adress",
+                              },
+                         })}
+                    />
+                    <Typography color="error">{errors.email?.message}</Typography>
+
+                    <Typography color="secondary">Password</Typography>
+
+                    <FormControl variant="outlined" size="small" className="form-control">
+                         <OutlinedInput
+                              color="secondary"
+                              type={showPassword ? "text" : "password"}
+                              {...register("password")}
+                              endAdornment={
+                                   <InputAdornment>
+                                        <IconButton
+                                             edge="end"
+                                             onClick={() => {
+                                                  setShowPassword(!showPassword);
+                                             }}
+                                        >
+                                             {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </IconButton>
+                                   </InputAdornment>
+                              }
+                         />
+                    </FormControl>
+                    <Typography color="error">{errors.password?.message}</Typography>
+
+                    <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+                         <Button onClick={props.SignUpCancel} color="secondary">
+                              Cancel
+                         </Button>
+                         <Button color="secondary" onClick={Submit}>
+                              Submit
+                         </Button>
+                    </Grid>
+               </Grid>
+          </>
+     );
+};
+
+export default LoginForm;
