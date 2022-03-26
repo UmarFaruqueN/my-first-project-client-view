@@ -9,10 +9,13 @@ export const getCartCount = "http://localhost:4000/getCartCount";
 export const incCart = "http://localhost:4000/incCart";
 export const decCart = "http://localhost:4000/decCart";
 export const deleCart = "http://localhost:4000/deleCart";
+export const totalCart = "http://localhost:4000/totalCart";
 export const getSub = "http://localhost:4000/subCategory/get";
 export const addWishlist = "http://localhost:4000/addWishlist";
 export const getWishlist = "http://localhost:4000/getWishlist";
 export const deleWishlist = "http://localhost:4000/deleWishlist";
+
+export const addAddress = "http://localhost:4000/addAddress";
 
 
 

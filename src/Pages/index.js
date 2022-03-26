@@ -12,6 +12,7 @@ export { default as OrdersAndReturns } from "./OrdersAndReturns";
 export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as Terms } from "./Terms";
 export {default as Wishlist} from "./Wishlist"
+export {default as CheckOut} from "./Checkout"
 
 //components
 export { Footer } from "../Components";

@@ -1,14 +1,12 @@
-import { Container, Grid, Typography, IconButton, } from "@mui/material";
+import { Container, Grid, Typography, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import CartTable from "./components/CartTable/CartTable";
-import CheckOutInCart from "./components/CheckOutInCart";
-
+import CheckOutInCart from "./components/CartTable/CheckOutInCart";
 
 const CartPage = () => {
-    
      return (
           <>
                <Box pt={13}>
@@ -29,7 +27,7 @@ const CartPage = () => {
                                    <Grid item md={8}>
                                         <CartTable />
                                    </Grid>
-                                   <CheckOutInCart/>
+                                   <CheckOutInCart />
                               </Grid>
                          </Grid>
                     </Container>

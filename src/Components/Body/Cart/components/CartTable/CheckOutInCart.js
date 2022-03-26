@@ -1,9 +1,11 @@
 import React from "react";
 import { Grid, Typography, Button, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom";
 
 
 const CheckOutInCart = () => {
+     const navigate = useNavigate()
      const {
           register,
           formState: { errors },
@@ -144,8 +146,8 @@ const CheckOutInCart = () => {
                          </Grid>
                     </Grid>
                     <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 3 }}>
-                         <Button variant="contained" color="secondary">
-                              Proceed Checkout
+                         <Button  onClick={()=>{navigate("/checkOut")}} variant="contained" color="secondary">
+                             Place Order
                          </Button>
                     </Grid>
                </Grid>

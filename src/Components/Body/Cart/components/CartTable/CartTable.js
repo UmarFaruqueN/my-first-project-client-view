@@ -65,7 +65,7 @@ const CartTable = () => {
                               <TableCell align="right"></TableCell>
                               <TableCell align="right">Price</TableCell>
                               <TableCell align="center">Quantity</TableCell>
-                              <TableCell align="right">Subtotal</TableCell>
+                              <TableCell align="right">Total</TableCell>
                               <TableCell align="right"></TableCell>
                          </TableRow>
                     </TableHead>

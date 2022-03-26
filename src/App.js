@@ -17,6 +17,7 @@ import {
      Terms,
      Header,
      Footer,
+     CheckOut
 } from "./Pages";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
                          <Route exact path="/turboHDDevices" element={<TurboHDDevices />} />
                          <Route exact path="/internetProtocolDevices" element={<InternetProtocolDevices />} />
                          <Route exact path="/wishlist" element={<Wishlist />} />
-
+                         <Route exact path="/checkOut" element={<CheckOut />} />
 
                          <Route exact path="/aboutUs" element={<AboutUs />} />
                          <Route exact path="/contactUs" element={<ContactUs />} />
