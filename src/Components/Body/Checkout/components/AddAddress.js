@@ -53,6 +53,7 @@ function AddAddress(props) {
                          timer: 1500,
                          width: "15rem",
                     });
+                   props.addedAddress()
                })
                .catch((err) => {
                     console.log(err.response.data.message);
@@ -141,7 +142,7 @@ function AddAddress(props) {
                     <Typography color="error">{errors.state?.message}</Typography>
 
                     <Grid item sx={{ display: "flex", justifyContent: "center", justifyContent: "space-around", pt: 2 }}>
-                         <Button onClick={props.SignUpCancel} variant="contained" color="error">
+                         <Button onClick={props.addedAddress} variant="contained" color="error">
                               Cancel
                          </Button>
                          <Button color="secondary" variant="contained" onClick={Submit}>
@@ -149,6 +150,7 @@ function AddAddress(props) {
                          </Button>
                     </Grid>
                </Grid>
+               <Grid sx={{pb:2}}></Grid>
           </>
      );
 }

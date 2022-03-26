@@ -1,6 +1,7 @@
 import { Container, Divider, Grid, Radio, Typography, Button } from "@mui/material";
 import { Box, display } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import AddAddress from "./components/AddAddress";
 import Address from "./components/Address";
 import Buttons from "./components/Buttons";
@@ -9,6 +10,57 @@ import PlaceOrder from "./components/PlaceOrder";
 import TitleBar from "./components/TitleBar";
 
 const CheckOutPage = () => {
+     const userData = useSelector((state) => state.userData.value);
+     const [add, setAdd] = useState(false);
+     const [showAdd , setShowAdd]=useState(true);
+     const [select,setSelect]=useState(false);
+     const [order,setOrder]=useState(false);
+     const [address, setAddress] = useState({
+          _id: "",
+          name: "",
+          phone: "",
+          address: [
+               {
+                    address: "",
+                    street: "",
+                    city: "",
+                    pin: "",
+                    distric: "",
+                    state: "",
+                    date: "",
+               },
+          ],
+     });
+
+     const addAddress = () => {
+          setAdd(true);
+          setShowAdd(false)
+          setSelect(false)
+          setOrder(false)
+     };
+
+     const addedAddress = () => {
+          setAdd(false);
+          setShowAdd(true)
+     };
+
+     const selectAddress =()=>{
+          setSelect(true)
+          setShowAdd(false)
+          setOrder(false)
+
+     }
+
+     const changeAddress = ()=>{
+          setAdd(false);
+          setShowAdd(true)
+          setSelect(false)
+          setOrder(false)
+
+     }
+
+     const confirmAddress = ()=>{
+          setOrder(true)}
      return (
           <>
                <Box pt={13}>
@@ -16,18 +68,23 @@ const CheckOutPage = () => {
                          <Grid container pt={3} spacing={5}>
                               <Grid md={7} item>
                                    <Grid item>
-                                        {/* <TitleBar number={"01"} title={"DELIVARY ADDRESS"} btn={true} />
-
+                                        {add ? <AddAddress addedAddress={addedAddress} /> : ""}
+                                        <TitleBar
+                                             number={"01"}
+                                             title={"DELIVERY ADDRESS"}
+                                             btn={true}
+                                             addAddress={addAddress}
+                                        />
+                                      {showAdd?  <Address selectAddress={selectAddress} setAddress={setAddress} userData={userData} />:""}
+                                      {select?  (<><Address userData={address} /> <Buttons confirmAddress={confirmAddress} changeAddress={changeAddress}/></>):""}
                                         
-                                        <Buttons />
-                                        <PlaceOrder /> */}
-<Address />
-                                      <AddAddress/>
+
+                                       {order? <PlaceOrder />:""}
                                    </Grid>
                               </Grid>
 
-                              <Grid   md={4} item>
-                                  <Details/>
+                              <Grid md={4} item>
+                                   <Details />
                               </Grid>
                          </Grid>
                     </Container>

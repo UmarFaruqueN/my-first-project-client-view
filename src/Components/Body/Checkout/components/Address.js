@@ -1,76 +1,111 @@
-import React from "react";
-import { Grid, Typography, Radio ,Divider} from "@mui/material";
+import React, { useState } from "react";
+import { Grid, Typography, Radio, Divider, Select } from "@mui/material";
 
-const Address = () => {
+const Address = (props) => {
+     const SelectAddress = (obj) => {
+          props.setAddress({
+               _id: props.userData._id,
+               name: props.userData.name,
+               phone: props.userData.phone,
+               address: [
+                    {
+                         address: obj.address,
+                         street: obj.street,
+                         city: obj.city,
+                         pin: obj.pin,
+                         distric: obj.distric,
+                         state: obj.state,
+                         date: obj.date,
+                    },
+               ],
+          });
+
+          props.selectAddress()
+     };
+
      return (
           <>
-               <Grid sx={{ display: "flex", flexDirection: "row", alignItems: "center" }} width="100%" height="80px">
-                    <Grid item>
-                         {" "}
-                         <Radio sx={{ color: "#0156ff" }} color="secondary" />
-                    </Grid>
-                    <Grid item>
-                         <Grid item sx={{ display: "flex", flexDirection: "row" }}>
-                              {" "}
-                              <Grid item>
-                                   <Typography fontWeight="400" variant="h4" pl={3}>
-                                        {" "}
-                                        UmaR Faruque
-                                   </Typography>{" "}
-                              </Grid>
+               {props.userData.address?.map((obj) => (
+                    <>
+                         <Grid
+                              sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+                              width="100%"
+                              height="80px"
+                         >
                               <Grid item>
                                    {" "}
-                                   <Typography pl={3} fontWeight="400" variant="h4">
+                                   <Radio
+                                        onChange={() => {
+                                             SelectAddress(obj);
+                                        }}
+                                        sx={{ color: "#0156ff" }}
+                                        color="secondary"
+                                   />
+                              </Grid>
+                              <Grid item>
+                                   <Grid item sx={{ display: "flex", flexDirection: "row" }}>
                                         {" "}
-                                        70124633221
-                                   </Typography>{" "}
-                              </Grid>{" "}
+                                        <Grid item>
+                                             <Typography fontWeight="400" variant="h4" pl={3}>
+                                                  {" "}
+                                                  {props.userData.name} -
+                                             </Typography>{" "}
+                                        </Grid>
+                                        <Grid item>
+                                             {" "}
+                                             <Typography pl={3} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {props.userData.phone}
+                                             </Typography>{" "}
+                                        </Grid>{" "}
+                                   </Grid>
+                                   <Grid item sx={{ display: "flex", flexDirection: "row" }}>
+                                        <Grid item>
+                                             <Typography pl={3} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.address},
+                                             </Typography>{" "}
+                                        </Grid>
+                                        <Grid item>
+                                             <Typography pl={1} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.street},
+                                             </Typography>{" "}
+                                        </Grid>
+
+                                        <Grid item>
+                                             <Typography pl={1} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.city},
+                                             </Typography>{" "}
+                                        </Grid>
+
+                                        <Grid item>
+                                             <Typography pl={1} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.pin},
+                                             </Typography>{" "}
+                                        </Grid>
+
+                                        <Grid item>
+                                             <Typography pl={1} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.distric},
+                                             </Typography>{" "}
+                                        </Grid>
+
+                                        <Grid item>
+                                             <Typography pl={1} fontWeight="400" variant="h4">
+                                                  {" "}
+                                                  {obj.state}.
+                                             </Typography>{" "}
+                                        </Grid>
+                                   </Grid>
+                              </Grid>
                          </Grid>
-                         <Grid item sx={{ display: "flex", flexDirection: "row" }}>
-                              <Grid item>
-                                   <Typography pl={3} fontWeight="400" variant="h4">
-                                        {" "}
-                                        Adress
-                                   </Typography>{" "}
-                              </Grid>
-                              <Grid item>
-                                   <Typography pl={1} fontWeight="400" variant="h4">
-                                        {" "}
-                                        street
-                                   </Typography>{" "}
-                              </Grid>
-
-                              <Grid item>
-                                   <Typography pl={1} fontWeight="400" variant="h4">
-                                        {" "}
-                                        city
-                                   </Typography>{" "}
-                              </Grid>
-
-                              <Grid item>
-                                   <Typography pl={1} fontWeight="400" variant="h4">
-                                        {" "}
-                                        pin
-                                   </Typography>{" "}
-                              </Grid>
-
-                              <Grid item>
-                                   <Typography pl={1} fontWeight="400" variant="h4">
-                                        {" "}
-                                        distric
-                                   </Typography>{" "}
-                              </Grid>
-
-                              <Grid item>
-                                   <Typography pl={1} fontWeight="400" variant="h4">
-                                        {" "}
-                                        state
-                                   </Typography>{" "}
-                              </Grid>
-                         </Grid>
-                    </Grid>
-               </Grid>
-               <Divider />
+                         <Divider />
+                    </>
+               ))}
           </>
      );
 };

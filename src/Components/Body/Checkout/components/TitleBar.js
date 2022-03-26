@@ -8,7 +8,7 @@ const TitleBar=(props) =>{
     <Grid
     width="100%"
     height="50px"
-    sx={{ backgroundColor: "#0156ff", display: "flex", alignItems: "center" , justifyContent:"space-between"}}
+    sx={{ backgroundColor: "#0156ff", display: "flex", alignItems: "center" , justifyContent:"space-between" }}
 >
   <Grid item sx={{display:"flex",}}>
     <Typography pl={2} color="primary" variant="h3">
@@ -20,7 +20,7 @@ const TitleBar=(props) =>{
          {props.title}{" "}
     </Typography>
     </Grid>
-    <Grid item> <IconButton color='primary'>{props.btn?<AddIcon/>:""} </IconButton></Grid>
+    <Grid item> <IconButton onClick={props.addAddress} color='primary'>{props.btn?<AddIcon/>:""} </IconButton></Grid>
 </Grid>
 <Divider />
 </>
