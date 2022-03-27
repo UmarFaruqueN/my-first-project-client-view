@@ -1,18 +1,28 @@
 import React from "react";
 import { Grid, Typography, Button, TextField } from "@mui/material";
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCheckout } from "../../../../../Redux/checkout/checkout";
 
 
 const CheckOutInCart = (props) => {
+     const dispatch = useDispatch()
      const  shipping= 100;
      const discount=500;
      const navigate = useNavigate()
-     const {
-          register,
-          formState: { errors },
-          handleSubmit,
-     } = useForm();
+   
+ const Checkout  = ()=>{
+     dispatch(setCheckout({checkout:{
+          products:props.cartData,
+          subtotal:props.total,
+          shipping:shipping,
+          discount:discount,
+          total:(props.total+shipping)-discount,
+          address:[],    
+     }}))
+     navigate("/checkOut")
+ }
      return (
           <>
                <Grid
@@ -96,7 +106,7 @@ const CheckOutInCart = (props) => {
                          </Grid>
                     </Grid>
                     <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 3 }}>
-                         <Button  onClick={()=>{navigate("/checkOut")}} variant="contained" color="secondary">
+                         <Button  onClick={Checkout} variant="contained" color="secondary">
                              Check Out
                          </Button>
                     </Grid>

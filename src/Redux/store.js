@@ -6,6 +6,7 @@ import userReducer from "./user/user";
 import productsReducer from "./products/products";
 import subCategoryReducer from "./subCategory/subCategory";
 import cartReducer from "./cart/cart";
+import checkoutReducer from "./checkout/checkout"
 import wishlistReducer from "./wishlist/wishlist";
 import bannersReducer from "./banners/banners";
 
@@ -19,6 +20,7 @@ export default configureStore({
           subCategory: subCategoryReducer,
           products: productsReducer,
           cart: cartReducer,
+          checkout:checkoutReducer,
           wishlist: wishlistReducer,
           banners: bannersReducer,
      },

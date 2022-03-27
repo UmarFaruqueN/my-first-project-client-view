@@ -76,7 +76,7 @@ const CheckOutPage = () => {
                                              addAddress={addAddress}
                                         />
                                       {showAdd?  <Address selectAddress={selectAddress} setAddress={setAddress} userData={userData} />:""}
-                                      {select?  (<><Address checked={true} userData={address} /> <Buttons confirmAddress={confirmAddress} changeAddress={changeAddress}/></>):""}
+                                      {select?  (<><Address checked={true} userData={address} /> <Buttons confirmAddress={confirmAddress} changeAddress={changeAddress} userData={address}/></>):""}
                                         
 
                                        {order? <PlaceOrder />:""}

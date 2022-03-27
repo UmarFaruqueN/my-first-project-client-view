@@ -1,9 +1,12 @@
 import React from "react";
 import { Grid, Typography, } from "@mui/material";
+import { useSelector } from "react-redux";
 
 
 
 const Details = () => {
+     const checkout = useSelector((state)=>state.checkout.value)
+     console.log(checkout);
 
   
      return (
@@ -39,7 +42,7 @@ const Details = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                   ₹{checkout.subtotal} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -55,7 +58,7 @@ const Details = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                   ₹{checkout.shipping} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -72,7 +75,7 @@ const Details = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                  - ₹{checkout.discount} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -88,7 +91,7 @@ const Details = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                   ₹{checkout.total}/-
                               </Typography>
                          </Grid>
                     </Grid>

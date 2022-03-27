@@ -47,7 +47,7 @@ const CartPage = () => {
                                    </Grid>
 
                                    <Grid item md={4}>
-                                   <CheckOutInCart total={total}/>
+                                   <CheckOutInCart total={total} cartData={cartData}/>
                                    </Grid>
                               </Grid>
                          </Grid>
