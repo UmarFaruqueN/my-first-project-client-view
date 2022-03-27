@@ -17,11 +17,13 @@ const CartProdctIncrement = (props) => {
 
      const Increment = () => {
           setCount(count + 1);
+          
           console.log(data + "ourdata");
           axios.post(incCart, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     dispatch(setCart({ cart: response.data.cartData }));
                     dispatch(setUserData({ userData: response.data.cartData }));
+                    props.setCount(count+1)
                })
                .catch((error) => {
                     console.log(error);
@@ -31,11 +33,13 @@ const CartProdctIncrement = (props) => {
      const Decrement = () => {
           if (count > 1) {
                setCount(count - 1);
+               
                console.log(data + "ourdata");
                axios.post(decCart, data, { headers: { "Content-Type": "application/json" } })
                     .then((response) => {
                          dispatch(setCart({ cart: response.data.cartData }));
                          dispatch(setUserData({ userData: response.data.cartData }));
+                         props.setCount(count-1)
                     })
                     .catch((error) => {
                          console.log(error);

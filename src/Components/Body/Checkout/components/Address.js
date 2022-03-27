@@ -34,13 +34,16 @@ const Address = (props) => {
                          >
                               <Grid item>
                                    {" "}
-                                   <Radio
-                                        onChange={() => {
-                                             SelectAddress(obj);
-                                        }}
-                                        sx={{ color: "#0156ff" }}
-                                        color="secondary"
-                                   />
+
+                                 {props.checked?<Radio  color="secondary" checked={true}/>:  <Radio
+                                  
+                                  onChange={() => {
+                                       SelectAddress(obj);
+                                  }}
+                                  sx={{ color: "#0156ff" }}
+                                  color="secondary"
+                             />}  
+                                 
                               </Grid>
                               <Grid item>
                                    <Grid item sx={{ display: "flex", flexDirection: "row" }}>

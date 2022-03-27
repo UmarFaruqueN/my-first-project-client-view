@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 
 
-const CheckOutInCart = () => {
+const CheckOutInCart = (props) => {
+     const  shipping= 100;
+     const discount=500;
      const navigate = useNavigate()
      const {
           register,
@@ -15,7 +17,6 @@ const CheckOutInCart = () => {
           <>
                <Grid
                     item
-                    md={4}
                     sx={{
                          backgroundColor: "secondary.light",
                          pl: 3,
@@ -29,41 +30,6 @@ const CheckOutInCart = () => {
                          <Typography variant="h2"> Summary</Typography>
                     </Grid>
 
-                    <Grid item>
-                         <Typography variant="h3" pt={2} pb={1}>
-                              {" "}
-                              Enter Coupon Code
-                         </Typography>
-                    </Grid>
-                    <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                         <Grid item>
-                              <TextField
-                                   label="Coupon Code"
-                                   color="secondary"
-                                   size="small"
-                                   variant="outlined"
-                                   className="form-control"
-                                   type="number"
-                                   {...register("coupon", {
-                                        required: " Coupon Code Required",
-                                        maxLength: {
-                                             value: 10,
-                                             message: "Only 10 Numbers allowed",
-                                        },
-                                        minLength: {
-                                             value: 10,
-                                             message: " Numbers Required",
-                                        },
-                                   })}
-                              />
-                         </Grid>
-                         <Grid item>
-                              <Button variant="contained" color="success">
-                                   Submit
-                              </Button>
-                         </Grid>
-                         <Typography color="errors">{errors.phone?.message}</Typography>
-                    </Grid>
 
                     <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                          <Grid item>
@@ -77,7 +43,7 @@ const CheckOutInCart = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                   ₹{props.total} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -93,23 +59,7 @@ const CheckOutInCart = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
-                              </Typography>
-                         </Grid>
-                    </Grid>
-                    <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                         <Grid item>
-                              {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                   GST
-                              </Typography>
-                         </Grid>
-                         <Grid item>
-                              {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                   ₹00 /-{" "}
+                                   ₹{shipping} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -125,7 +75,7 @@ const CheckOutInCart = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                  - ₹{discount} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -141,13 +91,13 @@ const CheckOutInCart = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹00 /-
+                                   ₹{(props.total+shipping)-discount} /-
                               </Typography>
                          </Grid>
                     </Grid>
                     <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 3 }}>
                          <Button  onClick={()=>{navigate("/checkOut")}} variant="contained" color="secondary">
-                             Place Order
+                             Check Out
                          </Button>
                     </Grid>
                </Grid>
