@@ -33,8 +33,9 @@ const Address = (props) => {
                               sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
                               width="100%"
                               height="80px"
+                              key={obj._id}
                          >
-                              <Grid item>
+                              <Grid item >
                                    {" "}
                                    {props.checked ? (
                                         <Radio color="secondary" checked={true} />
@@ -109,7 +110,7 @@ const Address = (props) => {
                                    </Grid>
                               </Grid>
                          </Grid>
-                         <Divider />
+                         <Divider key={obj._id+2}/>
                     </>
                ))}
           </>

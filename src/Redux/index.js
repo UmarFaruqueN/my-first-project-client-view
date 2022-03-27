@@ -7,5 +7,7 @@ export {setSubCategory} from "./subCategory/subCategory"
 export {change_user_state} from "./user/user"
 export {setUserData} from "./userData/userData"
 export {setWishlist} from "./wishlist/wishlist"
+export {setCheckout} from "./checkout/checkout"
+export {setOrder} from "./order/order"
 
 

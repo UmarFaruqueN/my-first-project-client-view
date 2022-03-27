@@ -1,7 +1,8 @@
-import { Container, Divider, Grid, Radio, Typography, Button } from "@mui/material";
-import { Box, display } from "@mui/system";
+import { Container, Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+
 import AddAddress from "./components/AddAddress";
 import Address from "./components/Address";
 import Buttons from "./components/Buttons";
@@ -12,9 +13,9 @@ import TitleBar from "./components/TitleBar";
 const CheckOutPage = () => {
      const userData = useSelector((state) => state.userData.value);
      const [add, setAdd] = useState(false);
-     const [showAdd , setShowAdd]=useState(true);
-     const [select,setSelect]=useState(false);
-     const [order,setOrder]=useState(false);
+     const [showAdd, setShowAdd] = useState(true);
+     const [select, setSelect] = useState(false);
+     const [order, setOrder] = useState(false);
      const [address, setAddress] = useState({
           _id: "",
           name: "",
@@ -34,33 +35,33 @@ const CheckOutPage = () => {
 
      const addAddress = () => {
           setAdd(true);
-          setShowAdd(false)
-          setSelect(false)
-          setOrder(false)
+          setShowAdd(false);
+          setSelect(false);
+          setOrder(false);
      };
 
      const addedAddress = () => {
           setAdd(false);
-          setShowAdd(true)
+          setShowAdd(true);
      };
 
-     const selectAddress =()=>{
-          setSelect(true)
-          setShowAdd(false)
-          setOrder(false)
+     const selectAddress = () => {
+          setSelect(true);
+          setShowAdd(false);
+          setOrder(false);
+     };
 
-     }
-
-     const changeAddress = ()=>{
+     const changeAddress = () => {
           setAdd(false);
-          setShowAdd(true)
-          setSelect(false)
-          setOrder(false)
+          setShowAdd(true);
+          setSelect(false);
+          setOrder(false);
+     };
 
-     }
+     const confirmAddress = () => {
+          setOrder(true);
+     };
 
-     const confirmAddress = ()=>{
-          setOrder(true)}
      return (
           <>
                <Box pt={13}>
@@ -69,17 +70,39 @@ const CheckOutPage = () => {
                               <Grid md={7} item>
                                    <Grid item>
                                         {add ? <AddAddress addedAddress={addedAddress} /> : ""}
-                                        <TitleBar
-                                             number={"01"}
-                                             title={"DELIVERY ADDRESS"}
-                                             btn={true}
-                                             addAddress={addAddress}
-                                        />
-                                      {showAdd?  <Address selectAddress={selectAddress} setAddress={setAddress} userData={userData} />:""}
-                                      {select?  (<><Address checked={true} userData={address} /> <Buttons confirmAddress={confirmAddress} changeAddress={changeAddress} userData={address}/></>):""}
-                                        
+                                        {add ? (
+                                             ""
+                                        ) : (
+                                             <TitleBar
+                                                  number={"01"}
+                                                  title={"DELIVERY ADDRESS"}
+                                                  btn={true}
+                                                  addAddress={addAddress}
+                                             />
+                                        )}
+                                        {showAdd ? (
+                                             <Address
+                                                  selectAddress={selectAddress}
+                                                  setAddress={setAddress}
+                                                  userData={userData}
+                                             />
+                                        ) : (
+                                             ""
+                                        )}
+                                        {select ? (
+                                             <>
+                                                  <Address checked={true} userData={address} />{" "}
+                                                  <Buttons
+                                                       confirmAddress={confirmAddress}
+                                                       changeAddress={changeAddress}
+                                                       userData={address}
+                                                  />
+                                             </>
+                                        ) : (
+                                             ""
+                                        )}
 
-                                       {order? <PlaceOrder />:""}
+                                        {order ? <PlaceOrder userData={address} /> : ""}
                                    </Grid>
                               </Grid>
 

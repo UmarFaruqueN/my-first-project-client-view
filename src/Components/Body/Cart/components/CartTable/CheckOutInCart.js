@@ -19,7 +19,7 @@ const CheckOutInCart = (props) => {
           shipping:shipping,
           discount:discount,
           total:(props.total+shipping)-discount,
-          address:[],    
+          address:{},    
      }}))
      navigate("/checkOut")
  }

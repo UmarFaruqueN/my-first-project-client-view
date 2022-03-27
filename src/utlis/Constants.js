@@ -14,6 +14,7 @@ export const getSub = "http://localhost:4000/subCategory/get";
 export const addWishlist = "http://localhost:4000/addWishlist";
 export const getWishlist = "http://localhost:4000/getWishlist";
 export const deleWishlist = "http://localhost:4000/deleWishlist";
+export const addOrder = "http://localhost:4000/addOrder";
 
 export const addAddress = "http://localhost:4000/addAddress";
 

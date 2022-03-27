@@ -5,12 +5,6 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 
-const images = [
-     "https://picsum.photos/id/100/367/267",
-     "https://picsum.photos/id/1000/367/267",
-     "https://picsum.photos/id/1/367/267",
-     "https://picsum.photos/id/1011/367/267",
-];
 
 
 
@@ -26,7 +20,7 @@ const Banner = () => {
 
      const data = useSelector((state)=>state.banners.value)
      const homeBanner = data.filter((obj)=>{
-          return obj.for=="Home"
+          return obj.for==="Home"
      })
 
     
@@ -36,7 +30,7 @@ const Banner = () => {
                <Box>
                     <Carousel animationHandler={"fade"} showStatus={false} autoPlay={true} showThumbs={false} showArrows={true} infiniteLoop={true}>
                          {homeBanner?.map((obj) => (
-                              <div key={obj.length}>
+                              <div key={obj._id}>
                                    <img  className={classes.image} src={obj.banner} alt="image1" />
                               </div>
                          ))}
