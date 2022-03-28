@@ -23,6 +23,7 @@ const Newsletter = () => {
                <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6}>
                     <Grid item xs={6}>
                          <TextField
+                         sx={{backgroundColor:"#acacac"}}
                               size="small"
                               id="outlined-basic"
                               label="Email"

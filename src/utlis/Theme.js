@@ -93,7 +93,7 @@ export const customTheme =createTheme( {
       },
     },
     shape: {
-      borderRadius: 16,
+      borderRadius: 1,
     },
   });
 

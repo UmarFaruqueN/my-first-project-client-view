@@ -97,6 +97,7 @@ const LoginForm = (props) => {
                     <Typography color="secondary">Email</Typography>
 
                     <TextField
+                    sx={{borderRadius:0}}
                          color="secondary"
                          size="small"
                          variant="outlined"
