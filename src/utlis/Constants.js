@@ -15,6 +15,9 @@ export const addWishlist = "http://localhost:4000/addWishlist";
 export const getWishlist = "http://localhost:4000/getWishlist";
 export const deleWishlist = "http://localhost:4000/deleWishlist";
 export const addOrder = "http://localhost:4000/addOrder";
+export const getOrder = "http://localhost:4000/getOrder";
+export const cancelOrder = "http://localhost:4000/cancelOrder";
+
 
 export const addAddress = "http://localhost:4000/addAddress";
 

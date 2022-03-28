@@ -6,13 +6,14 @@ export { default as Cart } from "./Cart";
 export { default as TurboHDDevices } from "./TurboHDDevices";
 export { default as InternetProtocolDevices } from "./InternetProtocolDevices";
 export { default as User } from "./User";
+export { default as MyOrder } from "./MyOrder";
 export { default as AboutUs } from "./AboutUs";
 export { default as ContactUs } from "./ContactUs";
-export { default as OrdersAndReturns } from "./OrdersAndReturns"; 
+export { default as OrdersAndReturns } from "./OrdersAndReturns";
 export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as Terms } from "./Terms";
-export {default as Wishlist} from "./Wishlist"
-export {default as CheckOut} from "./Checkout"
+export { default as Wishlist } from "./Wishlist";
+export { default as CheckOut } from "./Checkout";
 
 //components
 export { Footer } from "../Components";

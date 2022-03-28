@@ -12,6 +12,7 @@ import TitleBar from "./components/TitleBar";
 
 const CheckOutPage = () => {
      const userData = useSelector((state) => state.userData.value);
+     const cartData = useSelector((state)=>state.cart.value)
      const [add, setAdd] = useState(false);
      const [showAdd, setShowAdd] = useState(true);
      const [select, setSelect] = useState(false);
@@ -102,7 +103,7 @@ const CheckOutPage = () => {
                                              ""
                                         )}
 
-                                        {order ? <PlaceOrder userData={address} /> : ""}
+                                        {order ? <PlaceOrder cartData={cartData} userData={address} /> : ""}
                                    </Grid>
                               </Grid>
 

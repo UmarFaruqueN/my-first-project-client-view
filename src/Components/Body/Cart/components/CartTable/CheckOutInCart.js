@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Typography, Button, TextField } from "@mui/material";
-import { set, useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCheckout } from "../../../../../Redux/checkout/checkout";
 
-
 const CheckOutInCart = (props) => {
-     const dispatch = useDispatch()
-     const  shipping= 100;
-     const discount=500;
-     const navigate = useNavigate()
-   
- const Checkout  = ()=>{
-     dispatch(setCheckout({checkout:{
-          products:props.cartData,
-          subtotal:props.total,
-          shipping:shipping,
-          discount:discount,
-          total:(props.total+shipping)-discount,
-          address:{},    
-     }}))
-     navigate("/checkOut")
- }
+     const [err, setErr] = useState("");
+     const dispatch = useDispatch();
+     const shipping = props.total === 0 ? 0 : 100;
+     const discount = props.total === 0 ? 0 : 500;
+     const navigate = useNavigate();
+
+     const Checkout = () => {
+          if (props.total === 0) {
+               setErr("Add Products To CheckOut");
+          } else {
+               dispatch(
+                    setCheckout({
+                         checkout: {
+                              products: props.cartData,
+                              subtotal: props.total,
+                              shipping: shipping,
+                              discount: discount,
+                              total: props.total + shipping - discount,
+                              address: {},
+                         },
+                    })
+               );
+               navigate("/checkOut");
+          }
+     };
      return (
           <>
                <Grid
@@ -39,7 +47,6 @@ const CheckOutInCart = (props) => {
                     <Grid item>
                          <Typography variant="h2"> Summary</Typography>
                     </Grid>
-
 
                     <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                          <Grid item>
@@ -85,7 +92,7 @@ const CheckOutInCart = (props) => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                  - ₹{discount} /-
+                                   - ₹{discount} /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -97,17 +104,17 @@ const CheckOutInCart = (props) => {
                                    Total
                               </Typography>
                          </Grid>
-                         <Grid item>
+                    </Grid>
+                    <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 1 }}>
+                         {" "}
+                         <Typography pt={2} color="error" variant="h4">
                               {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                   ₹{(props.total+shipping)-discount} /-
-                              </Typography>
-                         </Grid>
+                              {err}
+                         </Typography>
                     </Grid>
                     <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 3 }}>
-                         <Button  onClick={Checkout} variant="contained" color="secondary">
-                             Check Out
+                         <Button onClick={Checkout} variant="contained" color="secondary">
+                              Check Out
                          </Button>
                     </Grid>
                </Grid>

@@ -6,9 +6,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 import { addOrder } from "../../../../utlis/Constants";
-import { setOrder } from "../../../../Redux";
+import { setOrder, setCart, setCheckout } from "../../../../Redux";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = (props) => {
+     const navigate = useNavigate();
      const dispatch = useDispatch();
      const [loader, setLoader] = useState(false);
      const checkout = useSelector((state) => state.checkout.value);
@@ -20,6 +22,7 @@ const PlaceOrder = (props) => {
           axios.post(addOrder, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log(response.data.orderData);
+                    console.log();
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -30,6 +33,11 @@ const PlaceOrder = (props) => {
                     });
 
                     dispatch(setOrder({ order: response.data.orderData }));
+                    dispatch(setCart({ cart: [] }));
+                    dispatch(setCheckout({ checkout: {} }));
+                    setTimeout(() => {
+                         navigate("/myOrders");
+                    }, 2000);
                })
                .catch((error) => {
                     console.log(error.response.data.message);

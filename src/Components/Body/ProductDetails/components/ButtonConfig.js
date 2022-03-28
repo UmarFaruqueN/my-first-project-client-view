@@ -8,14 +8,17 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import axios from "axios";
 
 import { addToCart, addWishlist } from "../../../../utlis/Constants";
-import { setUserData, setWishlist, setLoginForm, setCart } from "../../../../Redux";
+import { setUserData, setWishlist, setLoginForm, setCart ,setCheckout} from "../../../../Redux";
+import { useNavigate } from "react-router-dom";
 
 const ButtonConfig = (props) => {
+     const navigate = useNavigate()
      const dispatch = useDispatch();
      const user=useSelector((state) => state.user_state.value);
      const count = props.count;
      const temp = props.data[0];
      const data = { ...temp, user, count };
+
 
      const AddToCart = () => {
           if (user) {
@@ -84,6 +87,25 @@ const ButtonConfig = (props) => {
           }
      };
 
+
+     const BuyNow =()=>{
+          dispatch(
+               setCheckout({
+                    checkout: {
+                         products: [data],
+                         subtotal: data.SellingPrice,
+                         shipping: 100,
+                         discount: 0,
+                         total: data.SellingPrice + 100 - 0,
+                         address: {},
+                    },
+               })
+          );
+          navigate("/checkOut");
+     }
+
+     
+
      return (
           <>
                <Grid pl={3} container spacing={2}>
@@ -99,7 +121,7 @@ const ButtonConfig = (props) => {
                     </Grid>
                     <Grid item>
                          {" "}
-                         <IconButton>
+                         <IconButton onClick={BuyNow} >
                               <OrangeButton title={"Buy Now"} />
                          </IconButton>
                     </Grid>

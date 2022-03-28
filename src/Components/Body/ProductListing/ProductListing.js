@@ -13,7 +13,7 @@ import Buttons from "./components/Buttons";
 import ProductDetail from "./components/ProductDetail";
 import FilterAndSort from "./components/FilterAndSort";
 import { useNavigate } from "react-router-dom";
-import { setUserData, setWishlist, setLoginForm, setCart } from "../../../Redux";
+import { setUserData, setWishlist, setLoginForm, setCart,setCheckout } from "../../../Redux";
 
 const ProductListing = (props) => {
      const dispatch = useDispatch();
@@ -134,6 +134,25 @@ const ProductListing = (props) => {
           }
      };
 
+
+     const BuyNow =(obj)=>{
+          const count = 1;
+               const data = { ...obj, user, count };
+          dispatch(
+               setCheckout({
+                    checkout: {
+                         products: [data],
+                         subtotal: data.SellingPrice,
+                         shipping: 100,
+                         discount: 0,
+                         total: data.SellingPrice + 100 - 0,
+                         address: {},
+                    },
+               })
+          );
+          navigate("/checkOut");
+     }
+
      return (
           <>
                <Container>
@@ -178,7 +197,7 @@ const ProductListing = (props) => {
                                         </Grid>
                                         <Grid item backgroundColor="secondary.light" md={6}>
                                              <ProductDetail details={obj} />
-                                             <Buttons Wishlist={Wishlist}  data={obj} AddTocart={Submit} />
+                                             <Buttons Wishlist={Wishlist}  data={obj} AddTocart={Submit} BuyNow={BuyNow} />
                                         </Grid>
                                         <Stock stock={obj.Stock} />
                                    </Grid>

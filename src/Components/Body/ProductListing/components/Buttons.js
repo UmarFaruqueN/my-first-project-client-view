@@ -32,7 +32,7 @@ const Buttons = (props) => {
                          {" "}
                          <IconButton
                               onClick={() => {
-                                   props.BuyNow(props.productId);
+                                   props.BuyNow(props.data);
                               }}
                          >
                               <OrangeButton title={"Buy Now"} />
