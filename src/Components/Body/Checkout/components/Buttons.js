@@ -1,24 +1,36 @@
-import React from "react";
-import { Button,Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Button, Grid } from "@mui/material";
 
 const Buttons = (props) => {
+     const [disabled, setDisabled] = useState(false);
+
+     const Delivery = () => {
+          props.confirmAddress();
+          setDisabled(true);
+     };
+
+     const ChangeAddress = () => {
+          props.changeAddress();
+          setDisabled(false);
+     };
      return (
-          <Grid item sx={{ p: 2, display: "flex", justifyContent: "space-between"  ,}}>
-               <Grid item>
-                    {" "}
-                    <Button onClick={
-                         props.changeAddress
-                    } color="secondary" variant="contained">
-                         Change Address
-                    </Button>
-               </Grid>
-               <Grid item>
-                    {" "}
-                    <Button onClick={props.confirmAddress} color="warning" variant="contained">
+          <Grid item sx={{ p: 2, display: "flex", justifyContent: "flex-end" }}>
+               {disabled ? (
+                    <Grid item>
                          {" "}
-                         Deliver Here
-                    </Button>
-               </Grid>
+                         <Button onClick={ChangeAddress} color="warning" variant="contained">
+                              Change Address
+                         </Button>
+                    </Grid>
+               ) : (
+                    <Grid item>
+                         {" "}
+                         <Button onClick={Delivery} color="secondary" variant="contained">
+                              {" "}
+                              Deliver Here
+                         </Button>
+                    </Grid>
+               )}
           </Grid>
      );
 };
