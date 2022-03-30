@@ -21,7 +21,10 @@ const PlaceOrder = (props) => {
      const address = props.userData;
 
      const Submit = () => {
-          const data = { ...checkout, address };
+          const orderDate = new Date().toLocaleString();
+          console.log(orderDate);
+          const data = { ...checkout, address, paymentType: "COD", orderTime: orderDate };
+          console.log();
           console.log(data);
           axios.post(addOrder, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -48,9 +51,17 @@ const PlaceOrder = (props) => {
                });
      };
 
-     const PayAndSubmit=()=>{
-          props.setViewAll(false)
-     }
+     const PayAndSubmit = () => {
+          if (payPal) {
+               props.setViewAll(false);
+               props.setViewPayPal(true);
+          }
+
+          if(razorpay){
+               props.setViewAll(false);
+               props.setViewRazorPay(true);
+          }
+     };
 
      const Cod = () => {
           setCod(true);
@@ -80,10 +91,10 @@ const PlaceOrder = (props) => {
      return (
           <>
                <TitleBar number={"02"} title={"PLACE ORDER"} />
-               <Grid sx={{ display: "flex", flexDirection: "column",pt:2,pb:2}} >
+               <Grid sx={{ display: "flex", flexDirection: "column", pt: 2, pb: 2 }}>
                     {view || payPal ? (
-                         <Grid item sx={{display:"flex" , alignItems:"center"}}>
-                              <Grid item >
+                         <Grid item sx={{ display: "flex", alignItems: "center" }}>
+                              <Grid item>
                                    {" "}
                                    {payPal ? (
                                         <Radio color="secondary" checked={true} />
@@ -94,16 +105,16 @@ const PlaceOrder = (props) => {
                               <Grid item>
                                    <Typography fontWeight="400" variant="h4" pl={3}>
                                         {" "}
-                                     Pay With   PayPal
+                                        Pay With PayPal
                                    </Typography>{" "}
                               </Grid>
-                              </Grid>
+                         </Grid>
                     ) : (
                          ""
                     )}
 
                     {view || razorpay ? (
-                         <Grid item sx={{display:"flex" , alignItems:"center"}}>
+                         <Grid item sx={{ display: "flex", alignItems: "center" }}>
                               <Grid item>
                                    {" "}
                                    {razorpay ? (
@@ -115,15 +126,15 @@ const PlaceOrder = (props) => {
                               <Grid item>
                                    <Typography fontWeight="400" variant="h4" pl={3}>
                                         {" "}
-                                        Pay With   Razorpay
+                                        Pay With Razorpay
                                    </Typography>{" "}
                               </Grid>
-                              </Grid>
+                         </Grid>
                     ) : (
                          ""
                     )}
                     {view || cod ? (
-                         <Grid item sx={{display:"flex" , alignItems:"center"}}>
+                         <Grid item sx={{ display: "flex", alignItems: "center" }}>
                               <Grid item>
                                    {" "}
                                    {cod ? (
@@ -138,7 +149,7 @@ const PlaceOrder = (props) => {
                                         Cash On Delivery
                                    </Typography>{" "}
                               </Grid>
-                              </Grid>
+                         </Grid>
                     ) : (
                          ""
                     )}
@@ -146,8 +157,8 @@ const PlaceOrder = (props) => {
                <Divider />
                <Grid item sx={{ display: "flex", justifyContent: "space-between" }} p={2}>
                     {cod || payPal || razorpay ? (
-                         <Button onClick={Cancel} color="error" variant="contained">
-                              Cancel
+                         <Button onClick={Cancel} color="warning" variant="contained">
+                              Change Payment Method
                          </Button>
                     ) : (
                          ""

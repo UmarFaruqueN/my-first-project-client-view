@@ -23,10 +23,11 @@ import {
 } from "./Pages";
 
 function App() {
+
      return (
           <ThemeProvider theme={customTheme}>
                <div className="App">
-                    <PayPalScriptProvider>
+                    <PayPalScriptProvider >
                     <Header />
                     <Routes>
                          <Route exact path="/user" element={<User />} />

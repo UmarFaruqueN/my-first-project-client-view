@@ -17,6 +17,8 @@ export const deleWishlist = "http://localhost:4000/deleWishlist";
 export const addOrder = "http://localhost:4000/addOrder";
 export const getOrder = "http://localhost:4000/getOrder";
 export const cancelOrder = "http://localhost:4000/cancelOrder";
+export const addOrderRazorpay = "http://localhost:4000/addOrderRazorpay";
+export const getRazorpayKey = "http://localhost:4000/getRazorpayKey";
 
 
 export const addAddress = "http://localhost:4000/addAddress";

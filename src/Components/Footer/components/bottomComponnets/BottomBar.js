@@ -31,7 +31,8 @@ const BottomBar = () => {
                </Grid>
 
                <Grid item>
-                    <img src={footerIcon} />
+                    <img src={footerIcon} alt="footer icons" />
+                    
                </Grid>
                <Grid item>
                     <Typography variant="h6" color="text.disabled">
