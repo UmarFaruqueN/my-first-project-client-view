@@ -1,18 +1,22 @@
-import { Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Title from "../User/Components/Title";
 
 import AddAddress from "./components/AddAddress";
 import Address from "./components/Address";
 import Buttons from "./components/Buttons";
 import Details from "./components/Details";
+import PayPal from "./components/PayPalButton";
 import PlaceOrder from "./components/PlaceOrder";
 import TitleBar from "./components/TitleBar";
 
 const CheckOutPage = () => {
      const userData = useSelector((state) => state.userData.value);
      const cartData = useSelector((state)=>state.cart.value)
+     const [viewAll ,setViewAll] = useState(true)
+     const [viewPayPal , setViewPayPal]= useState(true)
      const [add, setAdd] = useState(false);
      const [showAdd, setShowAdd] = useState(true);
      const [select, setSelect] = useState(false);
@@ -62,13 +66,20 @@ const CheckOutPage = () => {
      const confirmAddress = () => {
           setOrder(true);
      };
+     
+     const Cancel = ()=>{
+          setViewAll(true)
+     }
 
      return (
           <>
                <Box pt={13}>
                     <Container>
+                         <Title title={"CheckOut"}/>
                          <Grid container pt={3} spacing={5}>
+                              
                               <Grid md={7} item>
+                              {viewAll?      <>
                                    <Grid item>
                                         {add ? <AddAddress addedAddress={addedAddress} /> : ""}
                                         {add ? (
@@ -82,6 +93,7 @@ const CheckOutPage = () => {
                                              />
                                         )}
                                         {showAdd ? (
+                                             
                                              <Address
                                                   selectAddress={selectAddress}
                                                   setAddress={setAddress}
@@ -103,8 +115,12 @@ const CheckOutPage = () => {
                                              ""
                                         )}
 
-                                        {order ? <PlaceOrder cartData={cartData} userData={address} /> : ""}
+                                        {order ? <PlaceOrder cartData={cartData} userData={address} setViewAll={setViewAll} /> : ""}
                                    </Grid>
+                                   </>:<Button onClick={Cancel}color="error"> Cancel</Button>}
+{}
+
+
                               </Grid>
 
                               <Grid md={4} item>

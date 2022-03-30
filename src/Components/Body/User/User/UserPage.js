@@ -13,7 +13,14 @@ const UserPage = () => {
 
                          <Grid container spacing={4} pt={5}>
                               <LeftBox account={true} />
-                              <Grid item>5454</Grid>
+                              <Grid item>
+                                   
+         
+                                   
+
+
+
+                              </Grid>
                          </Grid>
                     </Container>
                </Box>

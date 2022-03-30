@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from "@mui/material";
 import { customTheme } from "./utlis/Theme";
 import { Routes, Route } from "react-router-dom";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import {
      Home,
      Product,
@@ -18,13 +19,14 @@ import {
      Terms,
      Header,
      Footer,
-     CheckOut
+     CheckOut,
 } from "./Pages";
 
 function App() {
      return (
           <ThemeProvider theme={customTheme}>
                <div className="App">
+                    <PayPalScriptProvider>
                     <Header />
                     <Routes>
                          <Route exact path="/user" element={<User />} />
@@ -43,7 +45,6 @@ function App() {
                          <Route exact path="/ordersAndReturns" element={<OrdersAndReturns />} />
                          <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
                          <Route exact path="/terms" element={<Terms />} />
-                    
 
                          <Route
                               path="*"
@@ -55,6 +56,7 @@ function App() {
                          />
                     </Routes>
                     <Footer />
+                    </PayPalScriptProvider>
                </div>
           </ThemeProvider>
      );
