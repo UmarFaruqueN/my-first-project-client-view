@@ -53,11 +53,13 @@ const MyOrderPage = () => {
                confirmButtonText: "Yes, Cancel!",
           }).then((result) => {
                if (result.isConfirmed) {
+                    const orderDate = new Date().toLocaleString();
+                    const obj = { ...data, orderDate };
                     console.log(data);
-                    axios.post(cancelOrder, data, { headers: { "Content-Type": "application/json" } })
+                    axios.post(cancelOrder, obj, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
                               setRend(1);
-                              dispatch(setOrder({ order: response.data.orderData }));
+                              dispatch(setOrder({ order: response.data.order }));
                               console.log(response.data.orderData);
                               Swal.fire({
                                    position: "bottom-end",
@@ -132,26 +134,27 @@ const MyOrderPage = () => {
                                                                            />
                                                                       </Grid>
                                                                       <Grid item>
-                                                                           <Typography variant="h4">
+                                                                           <Typography variant="h5">
                                                                                 {obj.ModelNumber}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
-                                                                           <Typography variant="h4">
+                                                                           <Typography variant="h5">
                                                                                 Nos-{obj.count}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
                                                                            {" "}
-                                                                           <Typography variant="h4">
+                                                                           <Typography variant="h5">
                                                                                 ₹ {obj.count * obj.SellingPrice}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
-                                                                           <Typography variant="h4">
+                                                                           <Typography variant="h5">
                                                                                 {" "}
                                                                                 {/* {order.deliveryStatus}{" "} */}
-                                                                                Not Delivered
+                                                                                {order.orderStatus} ON <br />
+                                                                                {order.statusTime}
                                                                            </Typography>
                                                                       </Grid>
                                                                  </Grid>
@@ -170,14 +173,16 @@ const MyOrderPage = () => {
                                                        </Grid>{" "}
                                                        <Grid item>
                                                             {" "}
+                                                            {order.orderStatus=="User Ordered"?
                                                             <Button
+                                                                 size="small"
                                                                  sx={{ borderRadius: "1px" }}
                                                                  variant="contained"
                                                                  color="error"
                                                                  onClick={() => Cancel(order)}
                                                             >
                                                                  Cancel
-                                                            </Button>
+                                                            </Button>:""}
                                                        </Grid>
                                                   </Grid>
                                              </Paper>

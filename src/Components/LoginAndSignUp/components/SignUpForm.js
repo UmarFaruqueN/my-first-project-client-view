@@ -81,8 +81,8 @@ const SignUpForm = (props) => {
                     <Typography variant="h4" color="error">
                          {er}
                     </Typography>
-                    <Typography variant="h3" color="success">
-                         {su}
+                    <Typography sx={{color:'rgba(76,228,83,0.89)'}} variant="h3" >
+                         {su} 
                     </Typography>
                     <Typography color="secondary">Name</Typography>
 
