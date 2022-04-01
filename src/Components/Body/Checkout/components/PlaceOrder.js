@@ -22,8 +22,11 @@ const PlaceOrder = (props) => {
 
      const Submit = () => {
           const orderDate = new Date().toLocaleString();
+          const orderDay=orderDate.getDate();
+          const orderMonth=orderDate.getMonth();
+
           console.log(orderDate);
-          const data = { ...checkout, address, paymentType: "COD", orderTime: orderDate };
+          const data = { ...checkout, address, paymentType: "COD", orderTime: orderDate,orderDay, orderMonth};
           console.log();
           console.log(data);
           axios.post(addOrder, data, { headers: { "Content-Type": "application/json" } })
