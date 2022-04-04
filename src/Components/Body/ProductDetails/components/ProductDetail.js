@@ -29,19 +29,19 @@ const ProductDetail = (props) => {
                               <Grid ml={10} container>
                                    <Grid item xs={12}>
                                         <Grid pb={2} item>
-                                             <Typography variant="h2"> {props.data[0]?.ProductName}</Typography>
+                                             <Typography variant="h2"> {props.data?.ProductName}</Typography>
                                         </Grid>
                                         <Grid pb={1} item>
-                                             <Typography variant="h3"> {props.data[0]?.ModelNumber}</Typography>
+                                             <Typography variant="h3"> {props.data?.ModelNumber}</Typography>
                                         </Grid>
                                         <Grid pb={1} item>
                                              <Typography noWrap={false} variant="body">
-                                                  {props.data[0]?.Description}
+                                                  {props.data?.Description}
                                              </Typography>
                                         </Grid>
                                         <Grid>
                                              <Typography color="error" variant="h4">
-                                                  <del color="error"> {props.data[0]?.SellingPrice * count + 1000} </del>
+                                                  <del color="error"> {props.data?.SellingPrice * count + 1000} </del>
                                              </Typography>
                                         </Grid>
                                    </Grid>
@@ -49,7 +49,7 @@ const ProductDetail = (props) => {
 
                               <Grid pl={5} spacing={4} container sx={{ alignItems: "center" }}>
                                    <Grid item md={5}>
-                                        <ProductPrice price={props.data[0]?.SellingPrice * count} />
+                                        <ProductPrice price={props.data?.SellingPrice * count} />
                                    </Grid>
                                    <Grid item md={7}>
                                         <ProductIncrement data={props.data} count={count} setCount={setCount} />

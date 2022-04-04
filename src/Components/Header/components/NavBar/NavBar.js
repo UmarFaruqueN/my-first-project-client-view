@@ -15,7 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import NetworkMenu from "./components/NetworkMenu";
 import axios from "axios";
 
-import { getCartCount } from "../../../../utlis/Constants";
+import { getUser } from "../../../../utlis/Constants";
 import { setCart, setLoginForm } from "../../../../Redux";
 import LoginAndSignUp from "../../../LoginAndSignUp/LoginAndSignUp";
 
@@ -24,8 +24,7 @@ const NavBar = () => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      // login state management
-     const user = useSelector((state) => state.login_state.value);
-     const cart = useSelector((state) => state.cart.value);
+     const user =localStorage.getItem("user")
 
      const [anchorEl, setAnchorEl] = useState(null);
      const open = Boolean(anchorEl);
@@ -39,16 +38,17 @@ const NavBar = () => {
 
      useEffect(() => {
           Token = localStorage.getItem("token");
-          axios.post(getCartCount, { user: user }, { headers: { "Content-Type": "application/json" } })
+          axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
+               
+                    dispatch(setCart({ cart: response.data.userData.cartProducts }));
                })
                .catch((error) => {
                     console.log(error);
                });
      }, []);
      // avatar functions
-
+     const cart = useSelector((state) => state.cart.value);
      return (
           <>
                <Box sx={{ flexGrow: 1 }} position="fixed" width="100%" zIndex="999">
@@ -201,7 +201,7 @@ const NavBar = () => {
                                                   }
                                              }}
                                         >
-                                             {cart.length ? (
+                                             {cart.length >0? (
                                                   <Badge badgeContent={"*"} color={"secondary"}>
                                                        <ShoppingCartOutlinedIcon sx={{ color: "text.primary", ml: "2" }} />
                                                   </Badge>

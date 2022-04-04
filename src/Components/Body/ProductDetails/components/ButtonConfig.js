@@ -8,17 +8,16 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import axios from "axios";
 
 import { addToCart, addWishlist } from "../../../../utlis/Constants";
-import { setUserData, setWishlist, setLoginForm, setCart ,setCheckout} from "../../../../Redux";
+import { setUserData, setWishlist, setLoginForm, setCart, setCheckout } from "../../../../Redux";
 import { useNavigate } from "react-router-dom";
 
 const ButtonConfig = (props) => {
-     const navigate = useNavigate()
+     const navigate = useNavigate();
      const dispatch = useDispatch();
-     const user=useSelector((state) => state.user_state.value);
+     const user = localStorage.getItem("user");
      const count = props.count;
      const temp = props.data[0];
      const data = { ...temp, user, count };
-
 
      const AddToCart = () => {
           if (user) {
@@ -87,8 +86,7 @@ const ButtonConfig = (props) => {
           }
      };
 
-
-     const BuyNow =()=>{
+     const BuyNow = () => {
           dispatch(
                setCheckout({
                     checkout: {
@@ -102,9 +100,7 @@ const ButtonConfig = (props) => {
                })
           );
           navigate("/checkOut");
-     }
-
-     
+     };
 
      return (
           <>
@@ -121,13 +117,18 @@ const ButtonConfig = (props) => {
                     </Grid>
                     <Grid item>
                          {" "}
-                         <IconButton onClick={BuyNow} >
+                         <IconButton onClick={BuyNow}>
                               <OrangeButton title={"Buy Now"} />
                          </IconButton>
                     </Grid>
                     <Grid item>
                          <Grid item>
-                              <IconButton  onClick={()=>{Wishlist(props.data)}} color="error">
+                              <IconButton
+                                   onClick={() => {
+                                        Wishlist(props.data);
+                                   }}
+                                   color="error"
+                              >
                                    {" "}
                                    <FavoriteIcon sx={{ fontSize: "40px" }} />
                               </IconButton>
