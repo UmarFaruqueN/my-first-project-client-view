@@ -9,7 +9,7 @@ const CheckOutInCart = (props) => {
      const [err, setErr] = useState("");
      const dispatch = useDispatch();
      const shipping = props.total === 0 ? 0 : 100;
-     const discount = props.total === 0 ? 0 : 500;
+     const discount = 0
      const navigate = useNavigate();
 
      const Checkout = () => {
@@ -76,7 +76,7 @@ const CheckOutInCart = (props) => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹{shipping} /-
+                                   free
                               </Typography>
                          </Grid>
                     </Grid>
@@ -92,7 +92,7 @@ const CheckOutInCart = (props) => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   - ₹{discount} /-
+                                   - ₹ 0 /-
                               </Typography>
                          </Grid>
                     </Grid>
@@ -102,6 +102,13 @@ const CheckOutInCart = (props) => {
                               <Typography pt={2} variant="h4">
                                    {" "}
                                    Total
+                              </Typography>
+                         </Grid>
+                         <Grid item>
+                              {" "}
+                              <Typography pt={2} variant="h4">
+                                   {" "}
+                                   ₹{props.total} /-
                               </Typography>
                          </Grid>
                     </Grid>

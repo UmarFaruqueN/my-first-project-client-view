@@ -1,19 +1,16 @@
 import React from "react";
-import { Grid, Typography, } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-
-
+import Offer from "./Offer"
 
 const Details = () => {
-     const checkout = useSelector((state)=>state.checkout.value)
+     const checkout = useSelector((state) => state.checkout.value);
      console.log(checkout);
 
-  
      return (
           <>
                <Grid
                     item
-            
                     sx={{
                          backgroundColor: "secondary.light",
                          pl: 3,
@@ -26,9 +23,6 @@ const Details = () => {
                     <Grid item>
                          <Typography variant="h2"> Summary</Typography>
                     </Grid>
-
-                    
-    
 
                     <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                          <Grid item>
@@ -58,11 +52,11 @@ const Details = () => {
                               {" "}
                               <Typography pt={2} variant="h4">
                                    {" "}
-                                   ₹{checkout.shipping} /-
+                                   free/-
                               </Typography>
                          </Grid>
                     </Grid>
-                    
+
                     <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                          <Grid item>
                               {" "}
@@ -73,13 +67,17 @@ const Details = () => {
                          </Grid>
                          <Grid item>
                               {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                  - ₹{checkout.discount} /-
-                              </Typography>
+                              {checkout.discount === 0 ? (
+                                   <Offer />
+                              ) : (
+                                   <Typography pt={2} variant="h4">
+                                        {" "}
+                                        - ₹{checkout.discount} /-
+                                   </Typography>
+                              )}
                          </Grid>
                     </Grid>
-                    <Grid item sx={{ display: "flex", justifyContent: "space-between" , pb:3}}>
+                    <Grid item sx={{ display: "flex", justifyContent: "space-between", pb: 3 }}>
                          <Grid item>
                               {" "}
                               <Typography pt={2} variant="h4">
@@ -95,10 +93,9 @@ const Details = () => {
                               </Typography>
                          </Grid>
                     </Grid>
-    
                </Grid>
           </>
      );
 };
 
-export default Details
+export default Details;

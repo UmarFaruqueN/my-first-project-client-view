@@ -40,6 +40,7 @@ const CartTable = (props) => {
                     axios.post(deleCart, data, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
                               props.setCount(200)
+                              props.sum()
                               dispatch(setCart({ cart: response.data.cartData }));
                               dispatch(setUserData({ userData: response.data.userData }));
                               console.log(props.cartData);

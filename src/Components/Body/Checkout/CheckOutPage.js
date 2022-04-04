@@ -15,11 +15,31 @@ import PayPal from "./components/PayPalButton";
 import PlaceOrder from "./components/PlaceOrder";
 import RazorPayButton from "./components/RazorPayButton";
 import TitleBar from "./components/TitleBar";
-import { getAddress } from "../../../utlis/Constants";
-import { setAddress } from "../../../Redux";
+import { getAddress, getUser } from "../../../utlis/Constants";
+import { setAddress, setUserData } from "../../../Redux";
+import { setCart } from "../../../Redux";
 
 const CheckOutPage = () => {
      const dispatch = useDispatch();
+     useEffect(() => {
+          axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setUserData({ userData: response.data.userData }));
+               })
+               .catch((err) => {
+                    console.log(err);
+                    console.log(err?.response?.data?.message);
+               });
+          axios.post(getAddress, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setAddress({ address: response.data.allAddress }));
+               })
+               .catch((err) => {
+                    console.log(err);
+                    console.log(err?.response?.data?.message);
+               });
+     }, []);
+
      const user = localStorage.getItem("user");
      const addressData = useSelector((state) => state.address.value);
      const [disabled, setDisabled] = useState(false);
@@ -108,13 +128,14 @@ const CheckOutPage = () => {
                                                        <Address
                                                             selectAddress={selectAddress}
                                                             setAddress={setAddress}
+                                                            Data={addressData}
                                                        />
                                                   ) : (
                                                        ""
                                                   )}
                                                   {select ? (
                                                        <>
-                                                            <Address checked={true} Data={address} />{" "}
+                                                            <Address checked={true} Data={[address]} />{" "}
                                                             <Buttons
                                                                  disabled={disabled}
                                                                  confirmAddress={confirmAddress}

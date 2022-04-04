@@ -52,6 +52,14 @@ const PlaceOrder = (props) => {
                })
                .catch((error) => {
                     console.log(error.response.data.message);
+                    Swal.fire({
+                         position: "bottom-end",
+                         icon: "error",
+                         title: error.response.data.message,
+                         showConfirmButton: false,
+                         timer: 1500,
+                         width: "15rem",
+                    })
                });
      };
 

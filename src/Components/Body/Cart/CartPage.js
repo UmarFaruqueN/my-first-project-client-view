@@ -24,6 +24,7 @@ const CartPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
+          sum();
      }, []);
      const cartData = useSelector((state) => state.cart.value);
 
@@ -60,7 +61,7 @@ const CartPage = () => {
                               <Grid item md={12} display="flex">
                                    <Grid item md={8}>
                                         <Grid item>
-                                             <CartTable cartData={cartData} setCount={setCount} />
+                                             <CartTable sum={sum} cartData={cartData} setCount={setCount} />
                                         </Grid>
                                    </Grid>
 
