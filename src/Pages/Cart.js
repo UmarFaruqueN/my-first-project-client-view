@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setLoginForm } from "./";
 import CartPage from "../Components/Body/Cart/CartPage";
 
-const cart = () => {
+const Cart = () => {
+     const dispatch = useDispatch();
+     useEffect(() => {
+          const Token = localStorage.getItem("token");
+          if (!Token) {
+               dispatch(setLoginForm({loginForm:true}))
+          }
+     }, []);
      return (
           <div>
                <CartPage />
@@ -9,4 +18,4 @@ const cart = () => {
      );
 };
 
-export default cart;
+export default Cart;

@@ -10,15 +10,31 @@ import razorpay from "../../../../asset/razorpay.svg";
 import { useNavigate } from "react-router-dom";
 
 const RazorPayButton = (props) => {
+     const userData = useSelector((state) => state.userData.value);
      const navigate = useNavigate();
      const dispatch = useDispatch();
      const checkout = useSelector((state) => state.checkout.value);
      const address = props.userData;
 
      const Submit = () => {
-          const orderDate = new Date().toLocaleString();
+          const tempDate = new Date();
+          const orderDate = tempDate.toLocaleString();
+          const orderDay = tempDate.getDate();
+          const orderMonth = tempDate.getMonth();
+          const startDate = new Date(tempDate.getFullYear(), 0, 1);
+          const days = Math.floor((tempDate - startDate) / (24 * 60 * 60 * 1000));
+          const weekNumber = Math.ceil(( tempDate.getDay() + 1 + days) / 7);
+          console.log(weekNumber);
           console.log(orderDate);
-          const data = { ...checkout, address, paymentType: "RazorPay", orderTime: orderDate };
+          const data = {
+               ...checkout,
+               address,
+               paymentType: "RazorPay",
+               orderTime: orderDate,
+               orderDay,
+               orderMonth,
+               weekNumber,
+          };
           console.log();
           console.log(data);
           axios.post(addOrder, data, { headers: { "Content-Type": "application/json" } })
@@ -71,20 +87,20 @@ const RazorPayButton = (props) => {
                          key: razorpaykey,
                          amount: amount.toString(),
                          currency: currency,
-                         name: "example",
-                         description: "testetfdgj",
+                         name: userData.name,
+                         description: "payment",
                          order_id: order_id,
                          handler: async (response) => {
                               Submit();
                          },
 
                          prefill: {
-                              name: "prefill test name",
-                              email: "testt@test.com",
-                              contact: "1111",
+                              name: userData.name,
+                              email: userData.email,
+                              contact:userData.phone,
                          },
                          notes: {
-                              address: "jgufigi",
+                              address: "this is for address",
                          },
                          theme: { color: "#80c070" },
                     };

@@ -21,9 +21,10 @@ const PlaceOrder = (props) => {
      const address = props.userData;
 
      const Submit = () => {
-          const orderDate = new Date().toLocaleString();
-          const orderDay=orderDate.getDate();
-          const orderMonth=orderDate.getMonth();
+          const tempDate =new Date()
+          const orderDate = tempDate.toLocaleString();
+          const orderDay=tempDate.getDate();
+          const orderMonth=tempDate.getMonth();
 
           console.log(orderDate);
           const data = { ...checkout, address, paymentType: "COD", orderTime: orderDate,orderDay, orderMonth};

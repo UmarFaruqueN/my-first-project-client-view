@@ -11,7 +11,7 @@ const CartPage = () => {
      const [count, setCount]=useState(1);
      const [total, setTotal] = useState(0);
      const cartData = useSelector((state) => state.cart.value);
-     const user = useSelector((state) => state.user_state.value);
+     const user =localStorage.getItem("user");;
      const sum = () => {
           let subTotal=0;
           cartData.forEach((element) => {

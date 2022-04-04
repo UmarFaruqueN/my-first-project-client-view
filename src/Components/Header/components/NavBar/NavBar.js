@@ -20,6 +20,7 @@ import { setCart, setLoginForm } from "../../../../Redux";
 import LoginAndSignUp from "../../../LoginAndSignUp/LoginAndSignUp";
 
 const NavBar = () => {
+     let Token = localStorage.getItem("token");
      const dispatch = useDispatch();
      const navigate = useNavigate();
      // login state management
@@ -37,6 +38,7 @@ const NavBar = () => {
      };
 
      useEffect(() => {
+          Token = localStorage.getItem("token");
           axios.post(getCartCount, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     dispatch(setCart({ cart: response.data.cartData[0].productDetail }));
@@ -187,13 +189,13 @@ const NavBar = () => {
                                              justifyContent: "flex-end",
                                         }}
                                    >
-                                        <IconButton>
+                                        <IconButton onClick={()=>navigate("/search")}>
                                              <SearchOutlinedIcon sx={{ color: "text.primary", fontSize: "25", ml: "2" }} />
                                         </IconButton>
                                         <IconButton
                                              onClick={() => {
                                                   {
-                                                       user
+                                                       Token
                                                             ? navigate("/cart")
                                                             : dispatch(setLoginForm({ loginForm: true }));
                                                   }
@@ -211,7 +213,7 @@ const NavBar = () => {
                                              <IconButton
                                                   onClick={() => {
                                                        {
-                                                            user
+                                                            Token
                                                                  ? navigate("/wishlist")
                                                                  : dispatch(setLoginForm({ loginForm: true }));
                                                        }
@@ -223,7 +225,7 @@ const NavBar = () => {
                                              </IconButton>
                                         </Box>
 
-                                        {user ? <UserButton /> : <LoginAndSignUp />}
+                                        {Token ? <UserButton /> : <LoginAndSignUp />}
                                    </Box>
                               </Toolbar>
                          </Container>

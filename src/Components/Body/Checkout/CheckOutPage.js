@@ -30,6 +30,7 @@ const CheckOutPage = () => {
           _id: "",
           name: "",
           phone: "",
+          email:"",
           address: [
                {
                     address: "",

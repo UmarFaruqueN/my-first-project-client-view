@@ -14,7 +14,11 @@ export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as Terms } from "./Terms";
 export { default as Wishlist } from "./Wishlist";
 export { default as CheckOut } from "./Checkout";
+export { default as Search } from "./Search";
 
 //components
 export { Footer } from "../Components";
 export { default as Header } from "../Components/Header/Header";
+
+//Redux
+export {setLoginForm} from "../Redux"

@@ -1,8 +1,10 @@
-import { Container, Divider, Grid, Typography } from "@mui/material";
+import { Button, Container, Divider, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import Details from "../../Checkout/components/Details";
 import LeftBox from "../Components/LeftBox";
 import Title from "../Components/Title";
+import UserDetails from "./components/UserDetails";
 
 const UserPage = () => {
      return (
@@ -13,14 +15,7 @@ const UserPage = () => {
 
                          <Grid container spacing={4} pt={5}>
                               <LeftBox account={true} />
-                              <Grid item>
-                                   
-         
-                                   
-
-
-
-                              </Grid>
+                              <UserDetails/>
                          </Grid>
                     </Container>
                </Box>

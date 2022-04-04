@@ -22,6 +22,11 @@ export const getRazorpayKey = "http://localhost:4000/getRazorpayKey";
 
 
 export const addAddress = "http://localhost:4000/addAddress";
+export const updateAddress = "http://localhost:4000/updateAddress";
+export const deleteAddress = "http://localhost:4000/deleteAddress";
+
+export const getUser = "http://localhost:4000/getUser";
+
 
 
 
@@ -34,7 +39,6 @@ export const adminSignupPost = "http://localhost:4000/admin/adminSignup";
 export const adminLoginPost = "http://localhost:4000/admin/adminLogin";
 export const logoutGet = "http://localhost:4000/userLogout";
 export const AdminLogoutGet = "http://localhost:4000/admin/adminLogout";
-export const getUser = "http://localhost:4000/getUser";
 export const updateUser = "http://localhost:4000/updateUser";
 export const deleteUser = "http://localhost:4000/deleteUser";
 export const addUserPost = "http://localhost:4000/addUserPost";

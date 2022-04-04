@@ -1,11 +1,14 @@
-import React from 'react'
-import MyOrderPage from "../Components/Body/User/MyOrder/MyOrderPage"
+import React, { useEffect } from "react";
 
-const MyOrder=()=> {
-  return (
-    <>
-    <MyOrderPage/>    </>
-  )
-}
 
-export default MyOrder
+import MyOrderPage from "../Components/Body/User/MyOrder/MyOrderPage";
+
+const MyOrder = () => {
+     return (
+          <>
+               <MyOrderPage />{" "}
+          </>
+     );
+};
+
+export default MyOrder;

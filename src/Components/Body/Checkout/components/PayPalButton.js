@@ -16,9 +16,13 @@ const PayPalButton = (props) => {
      // const price = (props.checkout.total/75.71)
 
      const Submit = () => {
-          const orderDate = new Date().toLocaleString();
+          
+          const tempDate =new Date()
+          const orderDate = tempDate.toLocaleString();
+          const orderDay=tempDate.getDate();
+          const orderMonth=tempDate.getMonth();
           console.log(orderDate);
-          const data = { ...checkout, address, paymentType: "PayPal", orderTime: orderDate };
+          const data = { ...checkout, address, paymentType: "PayPal", orderTime: orderDate,orderDay, orderMonth };
           console.log();
           console.log(data);
           axios.post(addOrder, data, { headers: { "Content-Type": "application/json" } })

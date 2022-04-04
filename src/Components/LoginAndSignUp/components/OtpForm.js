@@ -76,8 +76,8 @@ const OtpForm = (props) => {
                     });
                     dispatch(setUserData({ userData: response.data.user }));
                     dispatch(change_login_state({ login_state: true }));
-                    dispatch(change_user_state({ user_state: response.data.userId }));
                     localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("user", response.data.userId);
                     dispatch(setLoginForm({ loginForm: false }));
                     setOpen(false);
                     navigate("/");

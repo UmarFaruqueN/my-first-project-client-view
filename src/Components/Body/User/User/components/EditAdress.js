@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import TitleBar from "./TitleBar";
-import { TextField, Typography, Button, Grid } from "@mui/material";
+import TitleBar from "../../../Checkout/components/TitleBar";
+import { TextField, Typography, Button, Grid, Dialog ,IconButton} from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector ,useDispatch} from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
+import EditIcon from '@mui/icons-material/Edit';
 
-import { addAddress } from "../../../../utlis/Constants";
-import {setUserData} from "../../../../Redux"
+import { updateAddress } from "../../../../../utlis/Constants";
+import {setUserData} from "../../../../../Redux"
 
-function AddAddress(props) {
+function EditAddress(props) {
+    const [open , setOpen]=useState(false)
     const dispatch = useDispatch()
-     const user = localStorage.getItem("user");;
+     const user = localStorage.getItem("user");
      const [er, setEr] = useState(null);
 
      //form validation
@@ -34,13 +36,23 @@ function AddAddress(props) {
      } = useForm({
           mode: "onTouched",
           resolver: yupResolver(formSchema),
+          defaultValues:{
+            address: props.data?.address,
+            street:props.data?.street,
+            city: props.data?.city,
+            pin: props.data?.pin,
+            distric:props.data?.distric,
+            state: props.data?.state,
+            date: props.data?.date,
+            
+          }
      });
 
      const Submit = handleSubmit((data) => {
           console.log(data);
           const addData = { ...data, user };
           console.log(addData);
-          axios.post(addAddress, addData, { headers: { "Content-Type": "application/json" } })
+          axios.post(updateAddress, addData, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log(response);
                     setEr(null);
@@ -62,10 +74,13 @@ function AddAddress(props) {
                });
      });
      //form validation ends here
-     const button_state = useSelector((state) => state.login_state.value);
 
+const handleClose =()=>{setOpen(false)}
+const handleOpen=()=>{setOpen(true)}
      return (
           <>
+          <IconButton onClick={handleOpen}><EditIcon color="success"/></IconButton>
+          <Dialog open={open} onClose={handleClose}>
                <TitleBar title={"ADD ADDRESS"} />
                <Grid container sx={{ display: "flex", flexDirection: "column", pl: 20, pr: 20, pt: 2 }}>
                     <Typography variant="h4" color="error">
@@ -142,7 +157,7 @@ function AddAddress(props) {
                     <Typography color="error">{errors.state?.message}</Typography>
 
                     <Grid item sx={{ display: "flex", justifyContent: "center", justifyContent: "space-around", pt: 2 }}>
-                         <Button sx={{mr:2}} onClick={props.addedAddress} variant="contained" color="error">
+                         <Button sx={{mr:2}} onClick={handleClose} variant="contained" color="error">
                               Cancel
                          </Button>
                          <Button color="secondary" variant="contained" onClick={Submit}>
@@ -151,8 +166,9 @@ function AddAddress(props) {
                     </Grid>
                </Grid>
                <Grid sx={{pb:2}}></Grid>
+               </Dialog>
           </>
      );
 }
 
-export default AddAddress;
+export default EditAddress;

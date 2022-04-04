@@ -18,7 +18,7 @@ import { setUserData, setWishlist, setLoginForm, setCart,setCheckout } from "../
 const ProductListing = (props) => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     const user = useSelector((state) => state.user_state.value);
+     const user =localStorage.getItem("user");
      const allProducts = useSelector((state) => state.products.value);
      const allSubCat = useSelector((state) => state.subCategory.value);
      const [filterData, setFilterData] = useState("");

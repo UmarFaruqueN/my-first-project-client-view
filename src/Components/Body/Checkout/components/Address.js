@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Grid, Typography, Radio, Divider, Select } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Grid, Typography, Radio, Divider,  } from "@mui/material";
+
 
 const Address = (props) => {
      const SelectAddress = (obj) => {
@@ -8,6 +8,7 @@ const Address = (props) => {
                _id: props.userData._id,
                name: props.userData.name,
                phone: props.userData.phone,
+               email:props.userData.email,
                address: [
                     {
                          address: obj.address,

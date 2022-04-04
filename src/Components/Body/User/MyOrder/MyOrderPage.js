@@ -25,7 +25,7 @@ import { getOrder, cancelOrder } from "../../../../utlis/Constants";
 const MyOrderPage = () => {
      const [rend, setRend] = useState(25);
      const dispatch = useDispatch();
-     const user = useSelector((state) => state.user_state.value);
+     const user = localStorage.getItem("user");;
      const orders = useSelector((state) => state.order.value);
 
      useEffect(() => {

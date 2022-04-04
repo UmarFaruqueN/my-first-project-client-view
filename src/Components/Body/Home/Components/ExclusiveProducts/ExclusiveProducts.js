@@ -18,7 +18,7 @@ const ExclusiveProducts = () => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
-     const user = useSelector((state) => state.user_state.value);
+     const user = localStorage.getItem("user");
 
      const Submit = (obj) => {
           if (user) {
