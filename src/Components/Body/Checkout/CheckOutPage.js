@@ -1,7 +1,8 @@
 import { Button, Container, Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import React, { useDebugValue, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Title from "../User/Components/Title";
 
 import AddAddress from "./components/AddAddress";
@@ -14,8 +15,13 @@ import PayPal from "./components/PayPalButton";
 import PlaceOrder from "./components/PlaceOrder";
 import RazorPayButton from "./components/RazorPayButton";
 import TitleBar from "./components/TitleBar";
+import { getAddress } from "../../../utlis/Constants";
+import { setAddress } from "../../../Redux";
 
 const CheckOutPage = () => {
+     const dispatch = useDispatch();
+     const user = localStorage.getItem("user");
+     const addressData = useSelector((state) => state.address.value);
      const [disabled, setDisabled] = useState(false);
      const userData = useSelector((state) => state.userData.value);
      const cartData = useSelector((state) => state.cart.value);
@@ -28,22 +34,17 @@ const CheckOutPage = () => {
      const [order, setOrder] = useState(false);
      const [address, setAddress] = useState({
           _id: "",
+          user: "",
           name: "",
           phone: "",
-          email:"",
-          address: [
-               {
-                    address: "",
-                    street: "",
-                    city: "",
-                    pin: "",
-                    distric: "",
-                    state: "",
-                    date: "",
-               },
-          ],
+          email: "",
+          address: "",
+          street: "",
+          city: "",
+          pin: "",
+          distric: "",
+          state: "",
      });
-
 
      const addAddress = () => {
           setAdd(true);
@@ -86,7 +87,7 @@ const CheckOutPage = () => {
           <>
                <Box pt={13}>
                     <Container>
-                         <Title title={viewPayPal||viewRazorPay?"Payment":"CheckOut"} />
+                         <Title title={viewPayPal || viewRazorPay ? "Payment" : "CheckOut"} />
                          <Grid container pt={3} spacing={5}>
                               <Grid md={7} item sx={{ display: "flex", flexDirection: "column" }}>
                                    {viewAll ? (
@@ -107,19 +108,18 @@ const CheckOutPage = () => {
                                                        <Address
                                                             selectAddress={selectAddress}
                                                             setAddress={setAddress}
-                                                            userData={userData}
                                                        />
                                                   ) : (
                                                        ""
                                                   )}
                                                   {select ? (
                                                        <>
-                                                            <Address checked={true} userData={address} />{" "}
+                                                            <Address checked={true} Data={address} />{" "}
                                                             <Buttons
                                                                  disabled={disabled}
                                                                  confirmAddress={confirmAddress}
                                                                  changeAddress={changeAddress}
-                                                                 userData={address}
+                                                                 Data={address}
                                                             />
                                                        </>
                                                   ) : (
@@ -144,7 +144,7 @@ const CheckOutPage = () => {
                                    )}
 
                                    {viewPayPal ? <PayPalButton userData={address} /> : ""}
-                                   {viewRazorPay ? <RazorPayButton userData={address}  /> : ""}
+                                   {viewRazorPay ? <RazorPayButton userData={address} /> : ""}
                                    {viewAll ? (
                                         ""
                                    ) : (

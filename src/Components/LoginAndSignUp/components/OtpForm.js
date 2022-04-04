@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { loginPost, verifyPost } from "../../../utlis/Constants";
 import { change_login_state } from "../../../Redux/login/login";
-import { change_user_state } from "../../../Redux/user/user";
 import { setUserData } from "../../../Redux/userData/userData";
 import { setLoginForm } from "../../../Redux/loginForm/loginForm";
 

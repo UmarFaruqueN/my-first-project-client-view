@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TitleBar from "./TitleBar";
 import { TextField, Typography, Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector ,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { addAddress } from "../../../../utlis/Constants";
-import {setUserData} from "../../../../Redux"
+import { addAddress, getUser } from "../../../../utlis/Constants";
+import { setAddress } from "../../../../Redux";
 
 function AddAddress(props) {
-    const dispatch = useDispatch()
-     const user = localStorage.getItem("user");;
+     const dispatch = useDispatch();
+     const user = localStorage.getItem("user");
+
+     const userData = useSelector((state) => state.userData.value);
      const [er, setEr] = useState(null);
 
      //form validation
@@ -23,7 +25,7 @@ function AddAddress(props) {
           street: Yup.string().required("Street Required"),
           city: Yup.string().required("City Required"),
           pin: Yup.string().required("PIN Required").min(6, "Minimum 6 numbers").max(6, "Maximum 6 numbers"),
-          distric: Yup.string().required("Distric Required"),
+          district: Yup.string().required("District Required"),
           state: Yup.string().required("State Required"),
      });
 
@@ -34,17 +36,22 @@ function AddAddress(props) {
      } = useForm({
           mode: "onTouched",
           resolver: yupResolver(formSchema),
+          defaultValues: {
+               user: userData?._id,
+               name: userData?.name,
+               phone: userData?.phone,
+               email: userData?.email,
+          },
      });
 
      const Submit = handleSubmit((data) => {
           console.log(data);
-          const addData = { ...data, user };
-          console.log(addData);
-          axios.post(addAddress, addData, { headers: { "Content-Type": "application/json" } })
+
+          axios.post(addAddress, data, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     console.log(response);
                     setEr(null);
-                    dispatch(setUserData({ userData: response.data.userData }));
+                    dispatch(setAddress({ address: response.data.allAddress }));
                     Swal.fire({
                          position: "bottom-end",
                          icon: "success",
@@ -53,16 +60,14 @@ function AddAddress(props) {
                          timer: 1500,
                          width: "15rem",
                     });
-                   props.addedAddress()
+                    props.addedAddress();
                })
                .catch((err) => {
                     console.log(err.response.data.message);
                     setEr(err.response.data.message);
-                   
                });
      });
      //form validation ends here
-     const button_state = useSelector((state) => state.login_state.value);
 
      return (
           <>
@@ -117,17 +122,17 @@ function AddAddress(props) {
                     />
                     <Typography color="error">{errors.pin?.message}</Typography>
 
-                    <Typography color="secondary">Distric</Typography>
+                    <Typography color="secondary">District</Typography>
 
                     <TextField
                          color="secondary"
                          size="small"
                          variant="outlined"
                          className="form-control"
-                         {...register("distric")}
+                         {...register("district")}
                     />
 
-                    <Typography color="error">{errors.distric?.message}</Typography>
+                    <Typography color="error">{errors.district?.message}</Typography>
 
                     <Typography color="secondary">State</Typography>
 
@@ -142,7 +147,7 @@ function AddAddress(props) {
                     <Typography color="error">{errors.state?.message}</Typography>
 
                     <Grid item sx={{ display: "flex", justifyContent: "center", justifyContent: "space-around", pt: 2 }}>
-                         <Button sx={{mr:2}} onClick={props.addedAddress} variant="contained" color="error">
+                         <Button sx={{ mr: 2 }} onClick={props.addedAddress} variant="contained" color="error">
                               Cancel
                          </Button>
                          <Button color="secondary" variant="contained" onClick={Submit}>
@@ -150,7 +155,7 @@ function AddAddress(props) {
                          </Button>
                     </Grid>
                </Grid>
-               <Grid sx={{pb:2}}></Grid>
+               <Grid sx={{ pb: 2 }}></Grid>
           </>
      );
 }

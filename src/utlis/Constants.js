@@ -20,19 +20,17 @@ export const cancelOrder = "http://localhost:4000/cancelOrder";
 export const addOrderRazorpay = "http://localhost:4000/addOrderRazorpay";
 export const getRazorpayKey = "http://localhost:4000/getRazorpayKey";
 
-
 export const addAddress = "http://localhost:4000/addAddress";
 export const updateAddress = "http://localhost:4000/updateAddress";
+export const getAddress = "http://localhost:4000/getAddress";
 export const deleteAddress = "http://localhost:4000/deleteAddress";
 
+export const editName = "http://localhost:4000/editName";
+export const editPhone = "http://localhost:4000/editPhone";
+export const editEmail = "http://localhost:4000/editEmail";
+export const editPassword = "http://localhost:4000/editPassword";
+
 export const getUser = "http://localhost:4000/getUser";
-
-
-
-
-
-
-
 
 export const adminSignupPost = "http://localhost:4000/admin/adminSignup";
 

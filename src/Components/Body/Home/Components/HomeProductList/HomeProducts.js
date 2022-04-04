@@ -42,11 +42,9 @@ const HomeProducts = (props) => {
                     </Box>
                     <Box sx={{ flexGrow: 8 }} />
                     <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-                         <IconButton onClick={props.nav}>
-                              <Button variant="contained" color="secondary">
-                                   Show More
-                              </Button>
-                         </IconButton>
+                         <Button onClick={props.nav} variant="contained" color="secondary">
+                              Show More
+                         </Button>
                     </Box>
                     <Box sx={{ flexGrow: 1 }} />
                </Box>

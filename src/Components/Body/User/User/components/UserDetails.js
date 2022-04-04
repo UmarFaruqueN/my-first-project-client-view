@@ -5,15 +5,18 @@ import AddAddress from "../../../Checkout/components/AddAddress";
 import TitleBar from "../../../Checkout/components/TitleBar";
 import Title from "../../Components/Title";
 import AddressManagement from "./AddressManagement";
+import EditUserDetail from "./EditUserDetail";
 
-const UserDetails = () => {
+const UserDetails = (props) => {
      const [add, setAdd] = useState(false);
 
      const addAddress = () => {
        setAdd(true)
+       props.setUp(5)
      };
      const addedAddress = () => {
        setAdd(false)
+       props.setUp(10)
      };
      
      return (
@@ -21,101 +24,18 @@ const UserDetails = () => {
                <Grid item xs={12} pb={3}>
                     <Title title="Profile." />
                </Grid>
-               <Grid items sx={{ display: "flex" }}>
+               <Grid item sx={{ display: "flex" }}>
                     {" "}
-                    <Grid items md={5}>
-                         <Grid item sx={{ display: "flex", flexDirection: "column" }}>
-                              <Grid
-                                   item
-                                   sx={{ display: "flex", alignItems: "baseline", pb: 2, justifyContent: "space-between" }}
-                              >
-                                   <Grid item>
-                                        <Grid item pb={2}>
-                                             <Typography color="text.disabled" variant="h4">
-                                                  Name
-                                             </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                             <Typography variant="h4">UMAR Faruque N</Typography>
-                                        </Grid>
-                                   </Grid>
-                                   <Grid item>
-                                        <Button size="small" color="secondary">
-                                             edit
-                                        </Button>
-                                   </Grid>
-                              </Grid>
-                              <Divider />
-                              <Grid
-                                   item
-                                   sx={{ display: "flex", alignItems: "baseline", pb: 2, justifyContent: "space-between" }}
-                              >
-                                   <Grid item>
-                                        <Grid item pb={2}>
-                                             <Typography color="text.disabled" variant="h4">
-                                                  Phone
-                                             </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                             <Typography variant="h4">7012463321</Typography>
-                                        </Grid>
-                                   </Grid>
-                                   <Grid item>
-                                        <Button size="small" color="secondary">
-                                             edit
-                                        </Button>
-                                   </Grid>
-                              </Grid>
-                              <Divider />
-                              <Grid
-                                   item
-                                   sx={{ display: "flex", alignItems: "baseline", pb: 2, justifyContent: "space-between" }}
-                              >
-                                   <Grid item>
-                                        <Grid item pb={2}>
-                                             <Typography color="text.disabled" variant="h4">
-                                                  Email
-                                             </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                             <Typography variant="h4">umarfaruq@gmail.com</Typography>
-                                        </Grid>
-                                   </Grid>
-                                   <Grid item>
-                                        <Button size="small" color="secondary">
-                                             edit
-                                        </Button>
-                                   </Grid>
-                              </Grid>
-                              <Divider />
-                              <Grid
-                                   item
-                                   sx={{ display: "flex", alignItems: "baseline", pb: 2, justifyContent: "space-between" }}
-                              >
-                                   <Grid item>
-                                        <Grid item pb={2}>
-                                             <Typography color="text.disabled" variant="h4">
-                                                  Password
-                                             </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                             <Typography variant="h4">****</Typography>
-                                        </Grid>
-                                   </Grid>
-                                   <Grid item>
-                                        <Button size="small" color="secondary">
-                                             edit
-                                        </Button>
-                                   </Grid>
-                              </Grid>
-                              <Divider />
-                         </Grid>
+                    <Grid item md={5}>
+                         
+
+                         <EditUserDetail setUp={props.setUp}/>
                     </Grid>
                     <Grid md={7} ml={1} item>
                          <Grid item>
                               {" "}
                               {add ? (
-                                   <AddAddress addedAddress={addedAddress} />
+                                   <AddAddress setUp={props.setUp} addedAddress={addedAddress} />
                               ) : (
                                    <>
                                         <TitleBar addAddress={addAddress} title={"Address"} btn={true} />{" "}

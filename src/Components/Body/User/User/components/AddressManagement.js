@@ -6,18 +6,27 @@ import Swal from "sweetalert2";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditAddress from "./EditAdress";
-import { deleteAddress } from "../../../../../utlis/Constants";
-import { setUserData } from "../../../../../Redux";
+import { deleteAddress, getAddress } from "../../../../../utlis/Constants";
+import { setAddress } from "../../../../../Redux";
 
 const AddressManagement = () => {
+     useEffect(() => {
+          axios.post(getAddress, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setAddress({ address: response.data.allAddress }));
+               })
+               .catch((err) => {
+                    console.log(err);
+                    console.log(err?.response?.data?.message);
+               });
+     }, []);
      const dispatch = useDispatch();
-     
-     const user = localStorage.getItem("user");
-     const userData = useSelector((state) => state.userData.value);
 
-     const Delete = (obj) => {
-          const data = { ...obj, user };
-          Swal.fire({
+     const user = localStorage.getItem("user");
+     const addressData = useSelector((state) => state.address.value);
+
+     const Delete = (data) => {
+          Swal.fire({    
                title: "Are You Sure?",
                text: "Do You Want To  Remove This Address !",
                icon: "warning",
@@ -30,7 +39,7 @@ const AddressManagement = () => {
                     console.log(data);
                     axios.post(deleteAddress, data, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
-                              dispatch(setUserData({ userData: response.data.userData }));
+                              dispatch(setAddress({ address: response.data.allAddress }));
                               Swal.fire({
                                    position: "bottom-end",
                                    icon: "success",
@@ -57,7 +66,7 @@ const AddressManagement = () => {
 
      return (
           <>
-               {userData.address?.map((obj) => (
+               {addressData?.map((obj) => (
                     <>
                          <Grid
                               sx={{
@@ -104,7 +113,7 @@ const AddressManagement = () => {
                                         <Grid item>
                                              <Typography pl={1} fontWeight="400" variant="h4">
                                                   {" "}
-                                                  {obj.distric},
+                                                  {obj.district},
                                              </Typography>{" "}
                                         </Grid>
 
