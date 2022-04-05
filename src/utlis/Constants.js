@@ -5,6 +5,8 @@ export const verifyPost = "http://localhost:4000/otp";
 export const userLoginPost = "http://localhost:4000/login";
 export const getProduct = "http://localhost:4000/product/getAll";
 export const getOneProduct = "http://localhost:4000/product/getOneProduct";
+export const getCatProducts = "http://localhost:4000/product/getCatProducts";
+export const getSubCatProducts = "http://localhost:4000/product/getSubCatProducts";
 export const addToCart = "http://localhost:4000/addToCart";
 export const getCart = "http://localhost:4000/getCart";
 export const getCartCount = "http://localhost:4000/getCartCount";
@@ -42,6 +44,3 @@ export const AdminLogoutGet = "http://localhost:4000/admin/adminLogout";
 export const updateUser = "http://localhost:4000/updateUser";
 export const deleteUser = "http://localhost:4000/deleteUser";
 export const addUserPost = "http://localhost:4000/addUserPost";
-
-
-

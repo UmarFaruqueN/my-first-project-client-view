@@ -25,8 +25,7 @@ const Newsletter = () => {
                          <TextField
                          sx={{backgroundColor:"#acacac"}}
                               size="small"
-                              id="outlined-basic"
-                              label="Email"
+                              placeholder="Email"
                               variant="outlined"
                               border="secondary"
                               type="email"

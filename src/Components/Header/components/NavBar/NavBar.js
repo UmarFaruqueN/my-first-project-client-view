@@ -80,7 +80,7 @@ const NavBar = () => {
                               >
                                    <Typography component="span" color="text.disabled">
                                         Visit our showroom in Amala Building, Palarivattom, Kochi
-                                        <Link
+                                        {/* <Link
                                              onClick={() => {
                                                   navigate("/contactUs");
                                              }}
@@ -88,7 +88,7 @@ const NavBar = () => {
                                              sx={{ cursor: "pointer", ml: 1 }}
                                         >
                                              Contact Us
-                                        </Link>
+                                        </Link> */}
                                    </Typography>
                               </Box>
 

@@ -22,6 +22,7 @@ import {
      CheckOut,
      Search,
 } from "./Pages";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
      return (
@@ -50,9 +51,7 @@ function App() {
                               <Route
                                    path="*"
                                    element={
-                                        <main style={{ padding: "1rem" }}>
-                                             <p>There's nothing here!</p>
-                                        </main>
+                                        <ErrorPage/>
                                    }
                               />
                          </Routes>

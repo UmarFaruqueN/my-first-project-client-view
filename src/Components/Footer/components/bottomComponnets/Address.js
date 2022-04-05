@@ -13,7 +13,7 @@ const Address = () => {
                          </Typography>
                     </Grid>{" "}
                     <Grid item pt={2} sx={{ display: "flex", flexDirection: "column" }}>
-                         <Link
+                         {/* <Link
                          onClick={() => navigate('/aboutUs')}
                               pb={0.5}
                               variant="h5"
@@ -23,32 +23,32 @@ const Address = () => {
                          >
                               {" "}
                               About Us
-                         </Link>
-                         <Link 
+                         </Link> */}
+                         {/* <Link 
                          onClick={() => navigate('/privacyPolicy')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Privacy Policy
-                         </Link>
-                         <Link
+                         </Link> */}
+                         <Link onClick={() => navigate('/search')}
                           pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Search
                          </Link>
-                         <Link
+                         {/* <Link
                          onClick={() => navigate('/terms')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Terms
-                         </Link>
+                         </Link> */}
                          <Link
-                         onClick={() => navigate('/ordersAndReturns')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
+                         onClick={() => navigate('/myOrders')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
-                              Orders And Returns
+                            Orders
                          </Link>
-                         <Link
+                         {/* <Link
                          onClick={() => navigate('/contactUs')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}
                               Contact Us
-                         </Link>
+                         </Link> */}
                          <Link
                          onClick={() => navigate('/internetProtocolDevices')} pb={0.5} variant="h5" href="#" underline="hover" sx={{ cursor: "pointer" }}>
                               {" "}

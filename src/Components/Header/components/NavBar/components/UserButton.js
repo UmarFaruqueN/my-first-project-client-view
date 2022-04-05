@@ -21,6 +21,7 @@ const UserButton = () => {
 
      const handleClickLogout = () => {
           localStorage.removeItem("token");
+          localStorage.removeItem("user");
           dispatch(change_login_state({ login_state: false }));
           setAnchorElUser(null);
           navigate("/");
