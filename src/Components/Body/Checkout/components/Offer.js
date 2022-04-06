@@ -4,12 +4,13 @@ import { Box } from "@mui/system";
 import { Close } from "@mui/icons-material";
 import { applyCoupon } from "../../../../utlis/Constants";
 import axios from "axios";
-import { useSelector,useDispatch } from "react-redux";
-import {setCheckout} from "../../../../Redux"
+import { useSelector, useDispatch } from "react-redux";
+import { setCheckout } from "../../../../Redux";
 
 const Offer = () => {
-     const dispatch = useDispatch()
+     const dispatch = useDispatch();
      const checkoutData = useSelector((state) => state.checkout.value);
+     console.log(checkoutData);
      const [open, setOpen] = useState(false);
      const [data, setData] = useState(null);
      const [su, setSu] = useState(null);
@@ -23,19 +24,20 @@ const Offer = () => {
      };
 
      const Submit = () => {
-          const allData ={...checkoutData,data}
+          const allData = { ...checkoutData, data };
+          console.log(allData);
           axios.post(applyCoupon, allData, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     dispatch(
                          setCheckout({
                               checkout: {
-                                   products: allData.cartData,
-                                   subtotal: allData.total,
+                                   products: checkoutData.products,
+                                   subtotal: checkoutData.total,
                                    shipping: 0,
-                                   type:allData.type,
-                                   discount: response.data.CouponCode,
-                                   total: allData.total,
-                                   address: allData.address,
+                                   type: checkoutData.type,
+                                   discount: response.data.CouponCode.offerAmount,
+                                   total: allData.total - response.data.CouponCode.offerAmount,
+                                   address: checkoutData.address,
                               },
                          })
                     );
@@ -43,12 +45,13 @@ const Offer = () => {
                     setSu(response.data.message);
                     setTimeout(() => {
                          setSu(null);
+                         setOpen(false);
                     }, 1000);
                     setEr(null);
                })
                .catch((err) => {
                     setSu(null);
-                    console.log(err.response.data.message);
+                    console.log(err?.response?.data?.message);
                     setEr(err?.response?.data?.message);
                });
      };
@@ -63,7 +66,7 @@ const Offer = () => {
                          <Grid container sx={{ pb: 5, display: "flex" }} spacing={1}>
                               <Grid item sx={{ ml: 5, mt: 5 }}>
                                    <Grid>
-                                        <Typography color="success">{su}</Typography>
+                                        <Typography color="rgba(76,228,83,0.89)">{su}</Typography>
                                    </Grid>
                                    <Grid item>
                                         {" "}

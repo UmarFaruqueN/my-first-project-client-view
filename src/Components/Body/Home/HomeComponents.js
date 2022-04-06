@@ -11,6 +11,9 @@ import { setSubCategory } from "../../../Redux/subCategory/subCategory";
 import { setBanners } from "../../../Redux/banners/banners";
 import { useNavigate } from "react-router-dom";
 import { setCart } from "../../../Redux/cart/cart";
+import turbo from "../../../asset/turbo.png"
+import ip from "../../../asset/ip.png"
+import nvr from "../../../asset/nvr.png"
 
 const HomeComponents = () => {
      const navigate = useNavigate();
@@ -45,10 +48,10 @@ const HomeComponents = () => {
                <Container sx={{ paddingTop: "100px" }}>
                     <Poster />
                     <ExclusiveProducts />
-                    <HomeProducts nav={Turbo} title={"Turbo HD Camera"} />
-                    <HomeProducts nav={Turbo} title={"DVR"} />
-                    <HomeProducts nav={Network} title={"IP Camera"} />
-                    <HomeProducts nav={Network} title={"NVR"} />
+                    <HomeProducts pic={turbo} nav={Turbo} title={"Turbo HD Camera"} />
+                    <HomeProducts pic={ip} nav={Network} title={"IP Camera"} />
+                    <HomeProducts pic={nvr} nav={Network} title={"NVR"} />
+                    <HomeProducts pic={turbo} nav={Turbo} title={"DVR"} />
                </Container>
           </>
      );

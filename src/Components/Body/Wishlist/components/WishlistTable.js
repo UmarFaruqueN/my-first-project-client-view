@@ -1,5 +1,5 @@
-import  React,{useEffect} from "react";
-import {Table , IconButton,Typography} from "@mui/material";
+import React, { useEffect } from "react";
+import { Table, IconButton, Typography } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,67 +8,80 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableRowsRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import CartImage from "../../Cart/components/CartTable/components/CartImage"
+import CartImage from "../../Cart/components/CartTable/components/CartImage";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {getWishlist,deleWishlist} from "../../../../utlis/Constants"
-import { setWishlist,setUserData } from "../../../../Redux";
+import { getWishlist, deleWishlist } from "../../../../utlis/Constants";
+import { setWishlist, setUserData } from "../../../../Redux";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Title from "../../User/Components/Title";
 
 function createData(name, calories, fat, carbs, protein) {
      return { name, calories, fat, carbs, protein };
 }
 
-
 const WishlistTable = () => {
-
      const dispatch = useDispatch();
-     const user = useSelector((state) => state.userData.value);
+     const user = localStorage.getItem("user");
 
-     const wishlist = useSelector((state)=>state.wishlist.value)
-     console.log(wishlist+"wislist");
+     const wishlist = useSelector((state) => state.wishlist.value);
+     console.log(wishlist + "wislist");
 
-       useEffect(() => {
+     useEffect(() => {
+          axios.post(getWishlist, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    dispatch(setWishlist({ wishlist: response.data.wishlistData }));
+                    dispatch(setUserData({ userData: response.data.userData }));
+               })
+               .catch((error) => {
+                    console.log(error);
+               });
+     }, []);
 
-              axios.post(getWishlist, user , { headers: { "Content-Type": "application/json" } })
-                    .then((response) => {
-                          dispatch(setWishlist({ wishlist: response.data.wishlistData }));
-                          dispatch(setUserData({ userData: response.data.userData }));    
-                    })
-                    .catch((error) => {
-                         console.log(error);
-                    });
-      }, []);
-
-         const Delete = (obj) => {
-              const productId =obj;
-               const data ={...user,productId}
-               console.log(data);
-               axios.post(deleWishlist, data, { headers: { "Content-Type": "application/json" } })
-                     .then((response) => {
-                         dispatch(setWishlist({ wishlist: response.data.wishlistData }));
-                         dispatch(setUserData({ userData: response.data.userData })); 
-                         Swal.fire({
-                              position: "bottom-end",
-                              icon: "success",
-                              title: response.data.message,
-                              showConfirmButton: false,
-                              timer: 1500,
-                              height: "5rem",
-                              width: "15rem",
+     const Delete = (obj) => {
+          Swal.fire({
+               title: "Are You Sure?",
+               text: "Do You Want To  Remove This Item From WishList !",
+               icon: "warning",
+               showCancelButton: true,
+               confirmButtonColor: "#3085d6",
+               cancelButtonColor: "#d33",
+               confirmButtonText: "Yes, Remove!",
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    const productId = obj;
+                    const data = { user, productId };
+                    console.log(data);
+                    axios.post(deleWishlist, data, { headers: { "Content-Type": "application/json" } })
+                         .then((response) => {
+                              dispatch(setWishlist({ wishlist: response.data.wishlistData }));
+                              dispatch(setUserData({ userData: response.data.userData }));
+                              Swal.fire({
+                                   position: "bottom-end",
+                                   icon: "success",
+                                   title: response.data.message,
+                                   showConfirmButton: false,
+                                   timer: 1500,
+                                   height: "5rem",
+                                   width: "15rem",
+                              });
+                         })
+                         .catch((error) => {
+                              console.log(error);
                          });
-                     })
-                .catch((error) => {
-                          console.log(error);
-                    });
-           };
+               }
+          });
+     };
 
-
-     
      return (
-          <TableContainer component={Paper}>
+
+         
+          <>
+          <Title title={"Wishlist"}/>
+           {wishlist.length>0?
+          <TableContainer  component={Paper}>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-               <TableHead>
+                    <TableHead>
                          <TableRow>
                               <TableCell>Item</TableCell>
                               <TableCell align="right"></TableCell>
@@ -79,8 +92,8 @@ const WishlistTable = () => {
                          </TableRow>
                     </TableHead>
                     <TableBody>
-                      
-                              {wishlist?.map((obj)=>( <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                         {wishlist?.map((obj) => (
+                              <TableRow key={obj._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                    <TableCell component="th" scope="obj">
                                         <CartImage image={obj.Image1} />
                                    </TableCell>
@@ -101,11 +114,12 @@ const WishlistTable = () => {
                                              <DeleteIcon />
                                         </IconButton>{" "}
                                    </TableCell>
-                              </TableRow> 
-                               ) )}
+                              </TableRow>
+                         ))}
                     </TableBody>
                </Table>
-          </TableContainer>
+          </TableContainer>:<Typography variant="h2">No Products In Wishlist</Typography>}
+          </>
      );
 };
 export default WishlistTable;

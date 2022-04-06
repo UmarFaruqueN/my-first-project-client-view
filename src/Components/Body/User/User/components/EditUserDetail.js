@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Grid, Typography, Button, Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import EditDetails from "./EditDetails";
-import { editName, editEmail,getUser} from "../../../../../utlis/Constants";
+import { editName, editEmail,getUser,editPhone} from "../../../../../utlis/Constants";
 import axios from "axios";
+import EditPassword from "./EditPassword";
 
 const EditUserDetail = (props) => {
     useEffect(()=>{
@@ -80,13 +81,15 @@ const EditUserDetail = (props) => {
                                    </Typography>
                               </Grid>
                               <Grid item>
-                                   <Typography variant="h4">{userData?.phone}</Typography>
+                              {userPhone?<EditDetails data={userData?.phone} route={editPhone} Cancel={Cancel} type={"number"} />:
+                                   <Typography variant="h4">{userData?.phone}</Typography>}
                               </Grid>
                          </Grid>
                          <Grid item>
-                              <Button size="small" color="secondary">
+                         {userPhone?"":
+                              <Button onClick={Phone} size="small" color="secondary">
                                    edit
-                              </Button>
+                              </Button>}
                          </Grid>
                     </Grid>
                     <Divider />
@@ -118,13 +121,16 @@ const EditUserDetail = (props) => {
                                    </Typography>
                               </Grid>
                               <Grid item>
-                                   <Typography variant="h4">****</Typography>
+                                   {userPassword?
+                                   <EditPassword Cancel={Cancel}/>:
+                                   <Typography variant="h4">****</Typography>}
                               </Grid>
                          </Grid>
                          <Grid item>
-                              <Button size="small" color="secondary">
+                         {userPassword?"":
+                              <Button onClick={Password} size="small" color="secondary">
                                    edit
-                              </Button>
+                              </Button>}
                          </Grid>
                     </Grid>
                     <Divider />

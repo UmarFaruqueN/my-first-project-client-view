@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import BlueButton from "../../../../Common/BlueButton";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
-import hdd from "../../../../../asset/dummy/hdd.png";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,7 +54,7 @@ const HomeProducts = (props) => {
                     <Grid container columnSpacing={2} wrap="nowrap" sx={{ overflow: "auto" }}>
                          <Grid item>
                               <Box sx={{ flexGrow: 1 }}>
-                                   <img src={hdd} width="192px" height="360px" alt="productImage" />{" "}
+                                   <img src={props.pic} width="192px" height="360px" alt="productImage" />{" "}
                               </Box>
                          </Grid>
                          <ProductCard data={tempData} />

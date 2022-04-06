@@ -5,7 +5,7 @@ import Offer from "./Offer";
 
 const Details = () => {
      const checkout = useSelector((state) => state.checkout.value);
-     console.log(checkout);
+     console.log(checkout+"livan");
 
      return (
           <>

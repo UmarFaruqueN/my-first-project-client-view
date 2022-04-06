@@ -73,7 +73,7 @@ const SignUpForm = (props) => {
                });
      });
      //form validation ends here
-     const button_state = useSelector((state) => state.login_state.value);
+   ;
 
      return (
           <>
