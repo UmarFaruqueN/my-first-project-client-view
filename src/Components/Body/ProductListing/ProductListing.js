@@ -29,18 +29,18 @@ const ProductListing = (props) => {
      console.log(subCat);
 
      const Filter = (filterSubCat) => {
-          setData(allProducts.filter((product) => product.SubCategory.indexOf(filterSubCat) >= 0));
+          setData(props.Data.filter((product) => product.SubCategory.indexOf(filterSubCat) >= 0));
           setFilterData(filterSubCat);
      };
 
      const ClearFilter = () => {
-          setData(allProducts.filter((product) => product.SubCategory.indexOf("") >= 0));
+          setData(props.Data);
           setFilterData("");
      };
 
      const Sort = (sortBy) => {
           setData(
-               data
+               props.Data
                     .slice()
                     .sort((a, b) =>
                          sortBy === "lowest"
@@ -62,7 +62,7 @@ const ProductListing = (props) => {
 
      useEffect(() => {
           //setSubCat(allSubCat.filter((subcategories) => subcategories.category.indexOf(props.category) >= 0))
-          setData(allProducts.filter((product) => product.Category.indexOf(props.Category) >= 0));
+          // setData(allProducts.filter((product) => product.Category.indexOf(props.Category) >= 0));
      }, []);
 
      const Submit = (obj) => {
@@ -174,7 +174,7 @@ const ProductListing = (props) => {
                               <Grid pt={1} pb={2} sx={{ display: "flex", justifyContent: "space-between" }}>
                                    <Grid>
                                         {" "}
-                                        <Typography variant="h4"> ({data.length}) Products</Typography>
+                                        <Typography variant="h4"> ({data.length||props.Data.length}) Products</Typography>
                                    </Grid>
                                    <Grid>
                                         {" "}
@@ -188,6 +188,8 @@ const ProductListing = (props) => {
                                         <Typography variant="h4"> Sort by {sortData ? sortData : "Popularity"}</Typography>
                                    </Grid>
                               </Grid>
+                              {data.length>0?
+                              <>
                               {data?.map((obj) => (
                                    <Grid container pb={3}>
                                         <Grid item backgroundColor="whitesmoke" pl={2} md={4}>
@@ -205,7 +207,25 @@ const ProductListing = (props) => {
                                         </Grid>
                                         <Stock stock={obj.Stock} />
                                    </Grid>
-                              ))}
+                              ))} </>:<>
+                              {props.Data?.map((obj) => (
+                                   <Grid container pb={3}>
+                                        <Grid item backgroundColor="whitesmoke" pl={2} md={4}>
+                                             <IconButton
+                                                  onClick={() => {
+                                                       navigate("/product/" + obj._id);
+                                                  }}
+                                             >
+                                                  <img height="250px" width="250px" src={obj.Image1} />
+                                             </IconButton>
+                                        </Grid>
+                                        <Grid item backgroundColor="secondary.light" md={6}>
+                                             <ProductDetail details={obj} />
+                                             <Buttons Wishlist={Wishlist}  data={obj} AddTocart={Submit} BuyNow={BuyNow} />
+                                        </Grid>
+                                        <Stock stock={obj.Stock} />
+                                   </Grid>
+                              ))} </>}
                          </Grid>
                     </Grid>
                </Container>

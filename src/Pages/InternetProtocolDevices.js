@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductListing from "../Components/Body/ProductListing/ProductListing";
-import { getCatProducts } from "../utlis/Constants";
+import { getProductsbyCat } from "../utlis/Constants";
 const subCa = [{ subCategory: "IP Camera" }, { subCategory: "NVR" }];
 
 const InternetProtocolDevices = () => {
      const [data, setData] = useState([]);
-     const user = localStorage.getItem("user");
      useEffect(() => {
           axios.get(getProductsbyCat,{ headers: { "Content-Type": "application/json" } })
                .then((response) => {
-                    setData(response.data.CatData);
+                    console.log(response.data.IP);
+                    setData(response.data.IP);
                })
                .catch((err) => {
                     console.log(err);
