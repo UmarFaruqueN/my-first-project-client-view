@@ -7,6 +7,7 @@ export const getProduct = "http://localhost:4000/product/getAll";
 export const getOneProduct = "http://localhost:4000/product/getOneProduct";
 export const getCatProducts = "http://localhost:4000/product/getCatProducts";
 export const getSubCatProducts = "http://localhost:4000/product/getSubCatProducts";
+export const getProductsbyCat = "http://localhost:4000/product/getProductsbyCat";
 export const addToCart = "http://localhost:4000/addToCart";
 export const getCart = "http://localhost:4000/getCart";
 export const getCartCount = "http://localhost:4000/getCartCount";
@@ -24,6 +25,7 @@ export const cancelOrder = "http://localhost:4000/cancelOrder";
 export const addOrderRazorpay = "http://localhost:4000/addOrderRazorpay";
 export const getRazorpayKey = "http://localhost:4000/getRazorpayKey";
 export const applyCoupon = "http://localhost:4000/applyCoupon";
+export const getCoupon = "http://localhost:4000/getCoupon";
 
 export const addAddress = "http://localhost:4000/addAddress";
 export const updateAddress = "http://localhost:4000/updateAddress";

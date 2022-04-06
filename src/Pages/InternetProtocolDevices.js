@@ -8,7 +8,7 @@ const InternetProtocolDevices = () => {
      const [data, setData] = useState([]);
      const user = localStorage.getItem("user");
      useEffect(() => {
-          axios.post(getCatProducts, { Category: "Analogue Devices" }, { headers: { "Content-Type": "application/json" } })
+          axios.get(getProductsbyCat,{ headers: { "Content-Type": "application/json" } })
                .then((response) => {
                     setData(response.data.CatData);
                })

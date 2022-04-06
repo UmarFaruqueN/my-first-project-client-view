@@ -1,6 +1,7 @@
 import { Divider, Grid, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CouponCode from "./CouponCode";
 
 const LeftBox = (props) => {
      const navigate = useNavigate();
@@ -59,6 +60,8 @@ const LeftBox = (props) => {
                               {" "}
                               <Divider />{" "}
                          </Grid>
+
+                         <CouponCode/>
                     </Grid>
                </Grid>
           </>
