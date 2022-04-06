@@ -38,7 +38,7 @@ const ProductDetails = () => {
 
      return (
           <>
-               <ProductHeading title={productData[0]?.ModelNumber} />
+               <ProductHeading title={productData?.ModelNumber} />
 
                <Box sx={{ backgroundColor: "secondary.light", height: "100%", width: "100%" }}>
                     <Container>

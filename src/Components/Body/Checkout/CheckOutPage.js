@@ -18,9 +18,12 @@ import TitleBar from "./components/TitleBar";
 import { getAddress, getUser } from "../../../utlis/Constants";
 import { setAddress, setUserData } from "../../../Redux";
 import { setCart } from "../../../Redux";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutPage = () => {
+     const navigate = useNavigate();
      const dispatch = useDispatch();
+     const checkoutData = useSelector((state) => state.checkout.data);
      useEffect(() => {
           axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -52,7 +55,7 @@ const CheckOutPage = () => {
      const [showAdd, setShowAdd] = useState(true);
      const [select, setSelect] = useState(false);
      const [order, setOrder] = useState(false);
-     const [address, setAddress] = useState({
+     const [localAddress, setLocalAddress] = useState({
           _id: "",
           user: "",
           name: "",
@@ -127,7 +130,7 @@ const CheckOutPage = () => {
                                                   {showAdd ? (
                                                        <Address
                                                             selectAddress={selectAddress}
-                                                            setAddress={setAddress}
+                                                            setAddress={setLocalAddress}
                                                             Data={addressData}
                                                        />
                                                   ) : (
@@ -135,12 +138,12 @@ const CheckOutPage = () => {
                                                   )}
                                                   {select ? (
                                                        <>
-                                                            <Address checked={true} Data={[address]} />{" "}
+                                                            <Address checked={true} Data={[localAddress]} />{" "}
                                                             <Buttons
                                                                  disabled={disabled}
                                                                  confirmAddress={confirmAddress}
                                                                  changeAddress={changeAddress}
-                                                                 Data={address}
+                                                                 Data={localAddress}
                                                             />
                                                        </>
                                                   ) : (
@@ -150,7 +153,7 @@ const CheckOutPage = () => {
                                                   {order ? (
                                                        <PlaceOrder
                                                             cartData={cartData}
-                                                            userData={address}
+                                                            userData={localAddress}
                                                             setViewAll={setViewAll}
                                                             setViewPayPal={setViewPayPal}
                                                             setViewRazorPay={setViewRazorPay}
@@ -164,8 +167,8 @@ const CheckOutPage = () => {
                                         ""
                                    )}
 
-                                   {viewPayPal ? <PayPalButton userData={address} /> : ""}
-                                   {viewRazorPay ? <RazorPayButton userData={address} /> : ""}
+                                   {viewPayPal ? <PayPalButton userData={localAddress} /> : ""}
+                                   {viewRazorPay ? <RazorPayButton userData={localAddress} /> : ""}
                                    {viewAll ? (
                                         ""
                                    ) : (

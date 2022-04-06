@@ -16,7 +16,7 @@ const ButtonConfig = (props) => {
      const dispatch = useDispatch();
      const user = localStorage.getItem("user");
      const count = props.count;
-     const temp = props.data[0];
+     const temp = props.data;
      const data = { ...temp, user, count };
 
      const AddToCart = () => {
@@ -91,10 +91,11 @@ const ButtonConfig = (props) => {
                setCheckout({
                     checkout: {
                          products: [data],
-                         subtotal: data.SellingPrice,
+                         subtotal: (data.SellingPrice-data.Offer)*count,
                          shipping: 100,
+                         type:"BuyNow",
                          discount: 0,
-                         total: data.SellingPrice + 100 - 0,
+                         total: (data.SellingPrice-data.Offer)*count ,
                          address: {},
                     },
                })

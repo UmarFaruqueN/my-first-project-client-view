@@ -59,7 +59,7 @@ const MyOrderPage = () => {
                     axios.post(cancelOrder, obj, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
                               setRend(1);
-                              dispatch(setOrder({ order: response.data.order }));
+                              dispatch(setOrder({ order: response.data.orderData }));
                               console.log(response.data.orderData);
                               Swal.fire({
                                    position: "bottom-end",
@@ -116,7 +116,7 @@ const MyOrderPage = () => {
                                              <Paper elevation={10} sx={{ borderRadius: 0, p: 5, width: "100%" }}>
                                                   {order?.products?.map((obj) => (
                                                        <>
-                                                            <Grid key={obj._id}>
+                                                            <Grid key={obj?._id}>
                                                                  <Grid
                                                                       item
                                                                       sx={{
@@ -129,32 +129,32 @@ const MyOrderPage = () => {
                                                                            <img
                                                                                 width="75px"
                                                                                 height="75px"
-                                                                                src={obj.Image1}
+                                                                                src={obj?.Image1}
                                                                                 alt="productImage"
                                                                            />
                                                                       </Grid>
                                                                       <Grid item>
                                                                            <Typography variant="h5">
-                                                                                {obj.ModelNumber}
+                                                                                {obj?.ModelNumber}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
                                                                            <Typography variant="h5">
-                                                                                Nos-{obj.count}
+                                                                                Nos-{obj?.count}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
                                                                            {" "}
                                                                            <Typography variant="h5">
-                                                                                ₹ {obj.count * obj.SellingPrice}
+                                                                                ₹ {obj?.count * obj?.SellingPrice}
                                                                            </Typography>
                                                                       </Grid>
                                                                       <Grid item>
                                                                            <Typography variant="h5">
                                                                                 {" "}
                                                                                 {/* {order.deliveryStatus}{" "} */}
-                                                                                {order.orderStatus} ON <br />
-                                                                                {order.statusTime}
+                                                                                {order?.orderStatus} ON <br />
+                                                                                {order?.statusTime}
                                                                            </Typography>
                                                                       </Grid>
                                                                  </Grid>
@@ -169,7 +169,7 @@ const MyOrderPage = () => {
                                                   >
                                                        <Grid item pl={4}>
                                                             {" "}
-                                                            <Typography variant="h3"> Total : ₹ {order.total}</Typography>
+                                                            <Typography variant="h3"> Total : ₹ {order?.total}</Typography>
                                                        </Grid>{" "}
                                                        <Grid item>
                                                             {" "}

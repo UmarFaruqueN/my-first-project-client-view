@@ -40,7 +40,7 @@ const CartTable = (props) => {
                     axios.post(deleCart, data, { headers: { "Content-Type": "application/json" } })
                          .then((response) => {
                               props.setCount(200)
-                              props.sum()
+                              props.setTotal(response.data.cartTotal[0].total);
                               dispatch(setCart({ cart: response.data.cartData }));
                               dispatch(setUserData({ userData: response.data.userData }));
                               console.log(props.cartData);
@@ -52,6 +52,7 @@ const CartTable = (props) => {
                                    timer: 1500,
                                    width: "15rem",
                               });
+                              props.setCount(300)
                          })
                          .catch((err) => {
                               console.log(err);
@@ -93,13 +94,13 @@ const CartTable = (props) => {
                                                   {" "}
                                                   <Typography variant="body2">{obj.Description}</Typography>{" "}
                                              </TableCell>
-                                             <TableCell align="right">{obj.SellingPrice}</TableCell>
+                                             <TableCell align="right">{obj.Price}</TableCell>
 
                                              <TableCell align="center">
                                                   <CartProdctIncrement setCount={props.setCount}  cartData={obj} />
                                              </TableCell>
 
-                                             <TableCell align="right">{obj.SellingPrice * obj.count} </TableCell>
+                                             <TableCell align="right">{obj.Price * obj.count} </TableCell>
                                              <TableCell align="right">
                                                   <IconButton
                                                        color="error"

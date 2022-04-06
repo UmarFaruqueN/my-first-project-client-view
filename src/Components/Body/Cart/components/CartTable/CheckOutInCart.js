@@ -4,26 +4,28 @@ import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCheckout } from "../../../../../Redux/checkout/checkout";
+import axios from "axios";
 
 const CheckOutInCart = (props) => {
+     const dispatch = useDispatch()
      const [err, setErr] = useState("");
-     const dispatch = useDispatch();
-     const shipping = props.total === 0 ? 0 : 100;
-     const discount = 0
      const navigate = useNavigate();
+
 
      const Checkout = () => {
           if (props.total === 0) {
                setErr("Add Products To CheckOut");
           } else {
+
                dispatch(
                     setCheckout({
                          checkout: {
                               products: props.cartData,
                               subtotal: props.total,
-                              shipping: shipping,
-                              discount: discount,
-                              total: props.total + shipping - discount,
+                              shipping: 0,
+                              type:"Cart",
+                              discount: 0,
+                              total: props.total ,
                               address: {},
                          },
                     })
@@ -32,7 +34,9 @@ const CheckOutInCart = (props) => {
           }
      };
      return (
+          
           <>
+          {props.cartData.length>0?(
                <Grid
                     item
                     sx={{
@@ -80,22 +84,7 @@ const CheckOutInCart = (props) => {
                               </Typography>
                          </Grid>
                     </Grid>
-                    <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                         <Grid item>
-                              {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                   Discount
-                              </Typography>
-                         </Grid>
-                         <Grid item>
-                              {" "}
-                              <Typography pt={2} variant="h4">
-                                   {" "}
-                                   - ₹ 0 /-
-                              </Typography>
-                         </Grid>
-                    </Grid>
+
                     <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                          <Grid item>
                               {" "}
@@ -125,6 +114,7 @@ const CheckOutInCart = (props) => {
                          </Button>
                     </Grid>
                </Grid>
+          ):""}
           </>
      );
 };

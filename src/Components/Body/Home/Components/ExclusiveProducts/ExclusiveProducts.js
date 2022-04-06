@@ -85,10 +85,12 @@ const ExclusiveProducts = () => {
                               <u> Exclusive Products</u>
                          </Typography>
                          <Box sx={{ flexGrow: 11 }} />
+                    <IconButton onClick={()=>navigate("/search")}>
                          <Typography variant="h4" sx={{ fontWeight: "600" }}>
                               {" "}
                               <u> See All Products </u>
                          </Typography>
+                         </IconButton>
                          <Box sx={{ flexGrow: 0.5 }} />
                     </Box>
 
@@ -137,17 +139,18 @@ const ExclusiveProducts = () => {
                                                             {obj.Description}
                                                        </Typography>
                                                        <Typography
-                                                            variant="h5"
-                                                            color="text.disabled"
+                                                                                                                   variant="h5"
+                                                            color="error"
                                                             component="div"
                                                             marginTop="1px"
                                                        >
                                                             {" "}
-                                                            <del>₹ {obj.SellingPrice}</del>
+                                                            {obj.Offer===0?<br/>:
+                                                            <del> Price ₹ {obj.SellingPrice}</del>}
                                                        </Typography>
 
                                                        <Typography variant="h3" marginTop="1px" component="div">
-                                                            ₹ {obj.LandingCost}
+                                                            ₹ {obj.SellingPrice-obj.Offer}
                                                        </Typography>
 
                                                        <CardActions

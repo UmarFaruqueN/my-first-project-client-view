@@ -41,7 +41,7 @@ const ProductDetail = (props) => {
                                         </Grid>
                                         <Grid>
                                              <Typography color="error" variant="h4">
-                                                  <del color="error"> {props.data?.SellingPrice * count + 1000} </del>
+                                                  <del color="error"> Price ₹ {props.data?.Offer===0?<br/>:props.data?.SellingPrice} </del>
                                              </Typography>
                                         </Grid>
                                    </Grid>
@@ -49,7 +49,7 @@ const ProductDetail = (props) => {
 
                               <Grid pl={5} spacing={4} container sx={{ alignItems: "center" }}>
                                    <Grid item md={5}>
-                                        <ProductPrice price={props.data?.SellingPrice * count} />
+                                        <ProductPrice price={(props.data?.SellingPrice-props.data?.Offer) * count} />
                                    </Grid>
                                    <Grid item md={7}>
                                         <ProductIncrement data={props.data} count={count} setCount={setCount} />

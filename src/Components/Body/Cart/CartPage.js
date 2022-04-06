@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartTable from "./components/CartTable/CartTable";
 import CheckOutInCart from "./components/CartTable/CheckOutInCart";
 import axios from "axios";
-import { getUser } from "../../../utlis/Constants";
+import { getUser, totalCart } from "../../../utlis/Constants";
 import { setCart } from "../../../Redux";
 
 const CartPage = () => {
@@ -15,6 +15,18 @@ const CartPage = () => {
      const [count, setCount] = useState(1);
      const [total, setTotal] = useState(0);
      const user = localStorage.getItem("user");
+     useEffect(() => {
+          axios.post(totalCart, { user: user }, { headers: { "Content-Type": "application/json" } })
+               .then((response) => {
+                    setTotal(response.data.cartTotal[0].total);
+               })
+               .catch((err) => {
+                    console.log(err);
+                    console.log(err?.response?.data?.message);
+               });
+     }, [count]);
+     const cartData = useSelector((state) => state.cart.value);
+
      useEffect(() => {
           axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -24,24 +36,8 @@ const CartPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-          sum();
-     }, []);
-     const cartData = useSelector((state) => state.cart.value);
-
-     const sum = () => {
-          let subTotal = 0;
-          cartData.forEach((element) => {
-               subTotal = subTotal + element.count * element.SellingPrice;
-          });
-          setTotal(subTotal);
-
-          return subTotal;
-     };
-
-     useEffect(() => {
-          sum();
      }, [count]);
-     console.log("this" + total);
+
      return (
           <>
                <Box pt={13}>
@@ -61,11 +57,12 @@ const CartPage = () => {
                               <Grid item md={12} display="flex">
                                    <Grid item md={8}>
                                         <Grid item>
-                                             <CartTable sum={sum} cartData={cartData} setCount={setCount} />
+                                             <CartTable setTotal={setTotal} cartData={cartData} setCount={setCount} />
                                         </Grid>
                                    </Grid>
 
                                    <Grid item md={4}>
+                                  
                                         <CheckOutInCart total={total} cartData={cartData} />
                                    </Grid>
                               </Grid>

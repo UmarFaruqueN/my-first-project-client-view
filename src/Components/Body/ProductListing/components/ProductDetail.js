@@ -32,12 +32,13 @@ const ProductDetail = (props) => {
                     {" "}
                     <Grid item>
                          <Typography color="error">
-                              <del> ₹{props.details.SellingPrice}</del>
+                              {props.details.Offer===0?<br/>:
+                              <del> Price ₹{props.details.SellingPrice}</del>}
                          </Typography>
                     </Grid>{" "}
                     <Grid pl={2}>
                          {" "}
-                         <Typography variant="h3"> ₹ {props.details.SellingPrice} /-</Typography>
+                         <Typography variant="h3">Price ₹ {props.details.SellingPrice-props.details.Offer} /-</Typography>
                     </Grid>
                </Grid>
           </>

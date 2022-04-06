@@ -142,14 +142,18 @@ const ProductListing = (props) => {
                setCheckout({
                     checkout: {
                          products: [data],
-                         subtotal: data.SellingPrice,
+                         subtotal: (data.SellingPrice-data.Offer)*count,
                          shipping: 100,
+                         type:"BuyNow",
                          discount: 0,
-                         total: data.SellingPrice + 100 - 0,
+                         total: (data.SellingPrice-data.Offer)*count ,
                          address: {},
                     },
                })
           );
+
+
+         
           navigate("/checkOut");
      }
 

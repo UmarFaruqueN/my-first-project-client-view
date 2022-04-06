@@ -81,13 +81,14 @@ const ProductCard = (props) => {
                                    <Typography variant="body1" color="text" component="div" marginTop="1px">
                                         {obj.Description}
                                    </Typography>
-                                   <Typography variant="h5" color="text.disabled" component="div" marginTop="1px">
+                                   <Typography variant="h5" color="error" component="div" marginTop="1px">
                                         {" "}
-                                        <del>₹ {obj.SellingPrice}</del>
+                                        {obj.Offer===0?<br/>:
+                                        <del> Price ₹ {obj.SellingPrice}</del>}
                                    </Typography>
 
                                    <Typography variant="h3" marginTop="1px" component="div">
-                                        ₹ {obj.LandingCost}
+                                       Price ₹ {obj.SellingPrice-obj.Offer}
                                    </Typography>
 
                                    <CardActions sx={{ display: "flex", marginTop: "1px", justifyContent: "center" }}>

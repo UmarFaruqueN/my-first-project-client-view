@@ -1,7 +1,7 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography,} from "@mui/material";
 import { useSelector } from "react-redux";
-import Offer from "./Offer"
+import Offer from "./Offer";
 
 const Details = () => {
      const checkout = useSelector((state) => state.checkout.value);
@@ -56,27 +56,25 @@ const Details = () => {
                               </Typography>
                          </Grid>
                     </Grid>
-
-                    <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                         <Grid item>
-                              {" "}
-                              <Typography pt={2} variant="h4">
+                    {checkout.discount === 0 ? (
+                         ""
+                    ) : (
+                         <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+                              <Grid item>
                                    {" "}
-                                   Discount
-                              </Typography>
-                         </Grid>
-                         <Grid item>
-                              {" "}
-                              {checkout.discount === 0 ? (
-                                   <Offer />
-                              ) : (
+                                   <Typography pt={2} variant="h4">
+                                        {" "}
+                                        Discount
+                                   </Typography>
+                              </Grid>
+                              <Grid item>
                                    <Typography pt={2} variant="h4">
                                         {" "}
                                         - ₹{checkout.discount} /-
                                    </Typography>
-                              )}
+                              </Grid>
                          </Grid>
-                    </Grid>
+                    )}
                     <Grid item sx={{ display: "flex", justifyContent: "space-between", pb: 3 }}>
                          <Grid item>
                               {" "}
@@ -92,6 +90,9 @@ const Details = () => {
                                    ₹{checkout.total}/-
                               </Typography>
                          </Grid>
+                    </Grid>
+                    <Grid item sx={{ display: "flex", justifyContent: "space-around", pb: 3 }}>
+                       <Offer/>
                     </Grid>
                </Grid>
           </>
