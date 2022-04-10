@@ -4,11 +4,6 @@ import {
      Divider,
      Grid,
      Paper,
-     Table,
-     TableCell,
-     TableContainer,
-     TableHead,
-     TableRow,
      Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -39,7 +34,7 @@ const MyOrderPage = () => {
                     console.log(err);
                     console.log(err.response.data.message);
                });
-     }, [rend]);
+     }, [rend,dispatch,user]);
 
      const Cancel = (data) => {
           setRend(5);
@@ -173,7 +168,7 @@ const MyOrderPage = () => {
                                                        </Grid>{" "}
                                                        <Grid item>
                                                             {" "}
-                                                            {order.orderStatus=="User Ordered"?
+                                                            {order.orderStatus==="User Ordered"?
                                                             <Button
                                                                  size="small"
                                                                  sx={{ borderRadius: "1px" }}

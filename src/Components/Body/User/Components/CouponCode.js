@@ -1,9 +1,7 @@
-import { Button, Grid, Skeleton, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import MyTimer from "./MyTimer";
 import { getCoupon } from "../../../../utlis/Constants";
 import axios from "axios";
-import { Start } from "@mui/icons-material";
 
 const CouponCode = () => {
      const [coupon, setCoupon] = useState([]);
@@ -40,7 +38,9 @@ const CouponCode = () => {
                     </Typography>
                </Grid>
                <Grid item sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Typography color="rgba(76,228,83,0.89)" sx={{ fontSize: 16,}}>{su}</Typography>
+                    <Typography color="rgba(76,228,83,0.89)" sx={{ fontSize: 16 }}>
+                         {su}
+                    </Typography>
                </Grid>
 
                {coupon?.map((obj) => (

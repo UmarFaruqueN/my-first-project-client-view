@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Typography, Button, Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import EditDetails from "./EditDetails";
-import { editName, editEmail,getUser,editPhone} from "../../../../../utlis/Constants";
+import { editName, editEmail,editPhone} from "../../../../../utlis/Constants";
 import axios from "axios";
 import EditPassword from "./EditPassword";
 

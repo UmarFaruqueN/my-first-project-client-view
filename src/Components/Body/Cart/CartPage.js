@@ -24,7 +24,7 @@ const CartPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-     }, [count]);
+     }, [count,user]);
      const cartData = useSelector((state) => state.cart.value);
 
      useEffect(() => {
@@ -36,7 +36,7 @@ const CartPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-     }, [count]);
+     }, [count,user,dispatch]);
 
      return (
           <>

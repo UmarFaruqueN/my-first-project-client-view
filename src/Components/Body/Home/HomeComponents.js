@@ -10,7 +10,6 @@ import { setProducts } from "../../../Redux/products/products";
 import { setSubCategory } from "../../../Redux/subCategory/subCategory";
 import { setBanners } from "../../../Redux/banners/banners";
 import { useNavigate } from "react-router-dom";
-import { setCart } from "../../../Redux/cart/cart";
 import turbo from "../../../asset/turbo.png"
 import ip from "../../../asset/ip.png"
 import nvr from "../../../asset/nvr.png"
@@ -33,7 +32,7 @@ const HomeComponents = () => {
                .catch((error) => {
                     console.log(error);
                });
-     }, []);
+     }, [dispatch]);
 
      const Turbo = () => {
           navigate("/turboHDDevices");

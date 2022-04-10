@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { useDispatch} from "react-redux";
 
 import { addToCart } from "../../../../../utlis/Constants";
 import { setCart } from "../../../../../Redux/cart/cart";
@@ -13,7 +13,6 @@ import { setUserData } from "../../../../../Redux/userData/userData";
 const ProductCard = (props) => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     const tempData = useSelector((state) => state.products.value);
      const user = localStorage.getItem("user");;
 
      const Submit = (obj) => {

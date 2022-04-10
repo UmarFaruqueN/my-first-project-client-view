@@ -4,18 +4,17 @@ import { TextField, Typography, Button, Grid, Dialog, IconButton } from "@mui/ma
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { updateAddress } from "../../../../../utlis/Constants";
-import { setAddress, setUserData } from "../../../../../Redux";
+import { setAddress } from "../../../../../Redux";
 
 function EditAddress(props) {
      const [open, setOpen] = useState(false);
      const dispatch = useDispatch();
-     const user = localStorage.getItem("user");
      const [er, setEr] = useState(null);
 
      //form validation
@@ -163,7 +162,7 @@ function EditAddress(props) {
 
                          <Grid
                               item
-                              sx={{ display: "flex", justifyContent: "center", justifyContent: "space-around", pt: 2 }}
+                              sx={{ display: "flex", justifyContent: "space-around", pt: 2 }}
                          >
                               <Button sx={{ mr: 2 }} onClick={handleClose} variant="contained" color="error">
                                    Cancel

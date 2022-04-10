@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, IconButton, Button } from "@mui/material";
 import { OrangeButton } from "../../../Common";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import axios from "axios";

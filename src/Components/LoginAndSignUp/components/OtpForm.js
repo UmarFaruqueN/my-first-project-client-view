@@ -12,11 +12,9 @@ import { setUserData } from "../../../Redux/userData/userData";
 import { setLoginForm } from "../../../Redux/loginForm/loginForm";
 
 const OtpForm = (props) => {
-     const user = localStorage.getItem("token");
      const dispatch = useDispatch();
      const navigate = useNavigate();
 
-     const [open, setOpen] = useState(false);
      //form validation
      const [showOtp, setShowOtp] = useState(false);
      const [showSignup, setShowSignup] = useState(false);
@@ -50,7 +48,6 @@ const OtpForm = (props) => {
                     console.log(err.response.data.message);
 
                     if (!err.response.data.userStatus) {
-                         setOpen(false);
                          setShowSignup(false);
                     } else {
                          setSendOtp(false);
@@ -78,7 +75,6 @@ const OtpForm = (props) => {
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("user", response.data.userId);
                     dispatch(setLoginForm({ loginForm: false }));
-                    setOpen(false);
                     navigate("/");
                })
                .catch((err) => {

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, Typography, Radio, Divider, IconButton } from "@mui/material";
+import { Grid, Typography,Divider, IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -10,6 +10,11 @@ import { deleteAddress, getAddress } from "../../../../../utlis/Constants";
 import { setAddress } from "../../../../../Redux";
 
 const AddressManagement = () => {
+     const dispatch = useDispatch();
+     const user = localStorage.getItem("user");
+     const addressData = useSelector((state) => state.address.value);
+
+
      useEffect(() => {
           axios.post(getAddress, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -19,12 +24,9 @@ const AddressManagement = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-     }, []);
-     const dispatch = useDispatch();
-
-     const user = localStorage.getItem("user");
-     const addressData = useSelector((state) => state.address.value);
-
+     }, [dispatch,user]);
+    
+    
      const Delete = (data) => {
           Swal.fire({    
                title: "Are You Sure?",

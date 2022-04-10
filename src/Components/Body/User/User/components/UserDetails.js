@@ -1,6 +1,5 @@
-import { Button, Divider, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import AddAddress from "../../../Checkout/components/AddAddress";
 import TitleBar from "../../../Checkout/components/TitleBar";
 import Title from "../../Components/Title";
@@ -11,14 +10,14 @@ const UserDetails = (props) => {
      const [add, setAdd] = useState(false);
 
      const addAddress = () => {
-       setAdd(true)
-       props.setUp(5)
+          setAdd(true);
+          props.setUp(5);
      };
      const addedAddress = () => {
-       setAdd(false)
-       props.setUp(10)
+          setAdd(false);
+          props.setUp(10);
      };
-     
+
      return (
           <Grid item md={8} sx={{ display: "flex", flexDirection: "column" }}>
                <Grid item xs={12} pb={3}>
@@ -27,9 +26,7 @@ const UserDetails = (props) => {
                <Grid item sx={{ display: "flex" }}>
                     {" "}
                     <Grid item md={5}>
-                         
-
-                         <EditUserDetail setUp={props.setUp}/>
+                         <EditUserDetail setUp={props.setUp} />
                     </Grid>
                     <Grid md={7} ml={1} item>
                          <Grid item>

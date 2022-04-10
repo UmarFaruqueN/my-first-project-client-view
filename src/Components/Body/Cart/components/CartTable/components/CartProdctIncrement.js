@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Grid, Typography, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
-import { incCart, decCart, getCart } from "../../../../../../utlis/Constants";
-import { useDispatch, useSelector } from "react-redux";
+import { incCart, decCart} from "../../../../../../utlis/Constants";
+import { useDispatch,} from "react-redux";
 import { setCart } from "../../../../../../Redux/cart/cart";
 import { setUserData } from "../../../../../../Redux";
 

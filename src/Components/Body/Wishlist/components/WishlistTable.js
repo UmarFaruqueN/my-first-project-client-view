@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { TableRowsRounded } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import CartImage from "../../Cart/components/CartTable/components/CartImage";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,9 +15,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Title from "../../User/Components/Title";
 
-function createData(name, calories, fat, carbs, protein) {
-     return { name, calories, fat, carbs, protein };
-}
 
 const WishlistTable = () => {
      const dispatch = useDispatch();
@@ -36,7 +32,7 @@ const WishlistTable = () => {
                .catch((error) => {
                     console.log(error);
                });
-     }, []);
+     }, [user,dispatch]);
 
      const Delete = (obj) => {
           Swal.fire({

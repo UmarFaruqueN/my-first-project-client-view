@@ -1,7 +1,7 @@
 import { Button, Container, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../User/Components/Title";
 
@@ -11,19 +11,15 @@ import Buttons from "./components/Buttons";
 import CancelCheckout from "./components/CancelCheckout";
 import Details from "./components/Details";
 import PayPalButton from "./components/PayPalButton";
-import PayPal from "./components/PayPalButton";
 import PlaceOrder from "./components/PlaceOrder";
 import RazorPayButton from "./components/RazorPayButton";
 import TitleBar from "./components/TitleBar";
 import { getAddress, getUser } from "../../../utlis/Constants";
 import { setAddress, setUserData } from "../../../Redux";
-import { setCart } from "../../../Redux";
-import { useNavigate } from "react-router-dom";
 
 const CheckOutPage = () => {
-     const navigate = useNavigate();
      const dispatch = useDispatch();
-     const checkoutData = useSelector((state) => state.checkout.data);
+     const user = localStorage.getItem("user");
      useEffect(() => {
           axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
                .then((response) => {
@@ -41,12 +37,11 @@ const CheckOutPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-     }, []);
+     }, [user,dispatch]);
 
-     const user = localStorage.getItem("user");
+
      const addressData = useSelector((state) => state.address.value);
      const [disabled, setDisabled] = useState(false);
-     const userData = useSelector((state) => state.userData.value);
      const cartData = useSelector((state) => state.cart.value);
      const [viewAll, setViewAll] = useState(true);
      const [viewPayPal, setViewPayPal] = useState(false);

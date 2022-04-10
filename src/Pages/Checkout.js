@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import CheckOutPage from "../Components/Body/Checkout/CheckOutPage";
 

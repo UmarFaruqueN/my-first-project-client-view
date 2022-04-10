@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TitleBar from "./TitleBar";
 import { TextField, Typography, Button, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -8,12 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { addAddress, getUser } from "../../../../utlis/Constants";
+import { addAddress } from "../../../../utlis/Constants";
 import { setAddress } from "../../../../Redux";
 
 function AddAddress(props) {
      const dispatch = useDispatch();
-     const user = localStorage.getItem("user");
 
      const userData = useSelector((state) => state.userData.value);
      const [er, setEr] = useState(null);
@@ -146,7 +145,7 @@ function AddAddress(props) {
 
                     <Typography color="error">{errors.state?.message}</Typography>
 
-                    <Grid item sx={{ display: "flex", justifyContent: "center", justifyContent: "space-around", pt: 2 }}>
+                    <Grid item sx={{ display: "flex", justifyContent: "space-around", pt: 2 }}>
                          <Button sx={{ mr: 2 }} onClick={props.addedAddress} variant="contained" color="error">
                               Cancel
                          </Button>

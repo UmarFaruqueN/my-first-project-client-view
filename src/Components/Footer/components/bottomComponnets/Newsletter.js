@@ -7,7 +7,7 @@ const Newsletter = () => {
      const {
           register,
           formState: { errors },
-          handleSubmit,
+          //handleSubmit,
      } = useForm();
      return (
           <Grid pt={3} container>

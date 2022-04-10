@@ -1,7 +1,6 @@
-import { Button, Container, Divider, Grid, TextField, Typography } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import Details from "../../Checkout/components/Details";
 import LeftBox from "../Components/LeftBox";
 import Title from "../Components/Title";
 import UserDetails from "./components/UserDetails";
@@ -32,7 +31,7 @@ const UserPage = () => {
                     console.log(err);
                     console.log(err?.response?.data?.message);
                });
-     }, [up]);
+     }, [up, dispatch, user]);
      return (
           <>
                <Box pt={13}>

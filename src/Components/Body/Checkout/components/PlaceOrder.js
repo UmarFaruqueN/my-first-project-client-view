@@ -16,7 +16,6 @@ const PlaceOrder = (props) => {
      const [view, setView] = useState(true);
      const navigate = useNavigate();
      const dispatch = useDispatch();
-     const [loader, setLoader] = useState(false);
      const checkout = useSelector((state) => state.checkout.value);
      const address = props.userData;
 

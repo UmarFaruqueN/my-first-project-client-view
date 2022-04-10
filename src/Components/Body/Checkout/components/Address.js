@@ -1,10 +1,7 @@
 import React from "react";
 import { Grid, Typography, Radio, Divider } from "@mui/material";
-import { useSelector } from "react-redux";
 
 const Address = (props) => {
-     const user = localStorage.getItem("user");
-     const allAddress = useSelector((state) => state.address.value);
      const SelectAddress = (obj) => {
           props.setAddress({
                _id: obj._id,

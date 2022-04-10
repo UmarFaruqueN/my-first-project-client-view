@@ -10,7 +10,7 @@ const Cart = () => {
           if (!Token) {
                dispatch(setLoginForm({loginForm:true}))
           }
-     }, []);
+     }, [dispatch]);
      return (
           <div>
                <CartPage />

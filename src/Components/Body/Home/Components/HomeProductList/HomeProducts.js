@@ -1,17 +1,13 @@
 import React from "react";
 import { Box } from "@mui/system";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
-import BlueButton from "../../../../Common/BlueButton";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
 const HomeProducts = (props) => {
-     const dispatch = useDispatch();
-     const navigate = useNavigate();
      const tempData = useSelector((state) => state.products.value);
 
      return (

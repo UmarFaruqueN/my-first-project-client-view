@@ -1,11 +1,6 @@
 import { Button, TextField, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { updateAddress } from "../../../../../utlis/Constants";
 import { setUserData } from "../../../../../Redux";
 import { useDispatch } from "react-redux";
 
@@ -19,8 +14,7 @@ const EditDetails = (props) => {
      const Submit = () => {
           const allData = {
                update: data,
-               user,
-               user,
+               user: user,
           };
           console.log(allData);
           axios.post(props.route, allData, { headers: { "Content-Type": "application/json" } })

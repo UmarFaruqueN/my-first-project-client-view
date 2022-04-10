@@ -12,7 +12,7 @@ const MyOrder = () => {
           if (!Token) {
                dispatch(setLoginForm({loginForm:true}))
           }
-     }, []);
+     }, [dispatch]);
      return (
           <>
                <MyOrderPage />{" "}

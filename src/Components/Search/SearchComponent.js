@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import { Box } from "@mui/system";
 import ProductCard from "../Body/Home/Components/HomeProductList/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +23,7 @@ const SearchComponent = () => {
                .catch((error) => {
                     console.log(error);
                });
-     }, []);
+     }, [dispatch]);
 
      const Change = (e) => {
           e.preventDefault();
