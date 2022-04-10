@@ -6,13 +6,11 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ProductHeading from "./components/ProductHeading";
 import ImageCarousel from "./components/ImageCarousel";
 import ProductDetail from "./components/ProductDetail";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getOneProduct } from "../../../utlis/Constants";
 
 const ProductDetails = () => {
-     const navigate = useNavigate();
-     const data = useSelector((state) => state.products.value);
      const { _id } = useParams();
      const [productData, setProductData] = useState({});
      // const productData = data.filter((obj) => {
@@ -23,7 +21,7 @@ const ProductDetails = () => {
 
      const bannerData = useSelector((state) => state.banners.value);
      const productBanner = bannerData.filter((obj) => {
-          return obj.for == "SubCategory";
+          return obj.for === "SubCategory";
      });
 
      useEffect(() => {
@@ -34,7 +32,7 @@ const ProductDetails = () => {
                .catch((err) => {
                     console.log(err);
                });
-     }, []);
+     }, [_id]);
 
      return (
           <>
@@ -61,7 +59,7 @@ const ProductDetails = () => {
                          </Grid>
                     </Container>
                     {productBanner?.map((obj) => (
-                         <img width={"100%"} height={"auto"} src={obj.banner} alt="" />
+                         <img width={"100%"} height={"auto"} src={obj.banner} alt="baners" />
                     ))}
                </Box>
           </>

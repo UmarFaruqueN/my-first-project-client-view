@@ -8,7 +8,7 @@ const CartImage=(props)=> {
     <>
 <Grid container>
     <Grid item sx={{backgroundColor:"whitesmoke", height:"120px", width:"150px"}}>
-        <img height="120px" width="150px" src={props.image} alt="" />
+        <img height="120px" width="150px" src={props.image} alt="cartimage" />
         
          </Grid>
     

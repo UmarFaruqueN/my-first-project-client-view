@@ -1,37 +1,10 @@
 import React from "react";
-import { Button, Grid, Typography, Link } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Button, Grid, Typography } from "@mui/material";
 
 const Option = (props) => {
-     const navigate = useNavigate();
-
      return (
           <>
                <Grid item sx={{ pb: 6, pt: 6 }}>
-                    <Grid item sx={{ display: "flex", justifyContent: "space-around", pt: 2 }}>
-                         {" "}
-                         <Typography fontSize="10px">
-                              By continuing, you agree to Zetetikoz's{" "}
-                              <Link
-                                   onClick={() => {
-                                        navigate("/terms");
-                                   }}
-                                   sx={{ color: "#0156ff", cursor: "pointer" }}
-                              >
-                                   Terms of Use
-                              </Link>{" "}
-                              and{" "}
-                              <Link
-                                   onClick={() => {
-                                        navigate("/privacyPolicy");
-                                   }}
-                                   sx={{ color: "#0156ff", cursor: "pointer" }}
-                              >
-                                   Privacy Policy
-                              </Link>
-                              .
-                         </Typography>
-                    </Grid>
                     <Grid item sx={{ display: "flex", justifyContent: "space-around", pt: 2, pr: 3, pl: 2 }}>
                          {" "}
                          <Button

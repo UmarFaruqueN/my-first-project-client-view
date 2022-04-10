@@ -14,12 +14,12 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import { userLoginPost } from "../../../utlis/Constants";
-import { setCart, setLoginForm, setUserData, change_user_state, change_login_state } from "../../../Redux";
+import { setCart, setLoginForm, setUserData, change_login_state } from "../../../Redux";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = (props) => {
@@ -82,7 +82,6 @@ const LoginForm = (props) => {
                });
      });
      //form validation ends here
-     const button_state = useSelector((state) => state.login_state.value);
 
      return (
           <>
@@ -120,7 +119,7 @@ const LoginForm = (props) => {
                               type={showPassword ? "text" : "password"}
                               {...register("password")}
                               endAdornment={
-                                   <InputAdornment>
+                                   <InputAdornment position="end">
                                         <IconButton
                                              edge="end"
                                              onClick={() => {

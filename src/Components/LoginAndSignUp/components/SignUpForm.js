@@ -14,7 +14,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector } from "react-redux";
 import axios from "axios";
 
 
@@ -155,7 +154,7 @@ const SignUpForm = (props) => {
                               type={showPassword ? "text" : "password"}
                               {...register("cpassword")}
                               endAdornment={
-                                   <InputAdornment>
+                                   <InputAdornment position="end">
                                         <IconButton
                                              edge="end"
                                              onClick={() => {

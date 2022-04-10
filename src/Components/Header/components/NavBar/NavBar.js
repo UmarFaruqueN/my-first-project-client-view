@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppBar, Container, Toolbar, Typography, IconButton, Badge, Box, Link } from "@mui/material";
+import { AppBar, Container, Toolbar, Typography, IconButton, Badge, Box,} from "@mui/material";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
@@ -20,33 +20,26 @@ import { setCart, setLoginForm } from "../../../../Redux";
 import LoginAndSignUp from "../../../LoginAndSignUp/LoginAndSignUp";
 
 const NavBar = () => {
-     let Token = localStorage.getItem("token");
+     const Token = localStorage.getItem("token");
      const dispatch = useDispatch();
      const navigate = useNavigate();
      // login state management
-     const user =localStorage.getItem("user")
+     const user = localStorage.getItem("user");
 
-     const [anchorEl, setAnchorEl] = useState(null);
-     const open = Boolean(anchorEl);
 
-     const handleClick = (event) => {
-          setAnchorEl(event.currentTarget);
-     };
-     const handleClose = () => {
-          setAnchorEl(null);
-     };
+ 
 
      useEffect(() => {
-          Token = localStorage.getItem("token");
-          axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
-               .then((response) => {
-               
-                    dispatch(setCart({ cart: response.data.userData.cartProducts }));
-               })
-               .catch((error) => {
-                    console.log(error);
-               });
-     }, []);
+          if (user) {
+               axios.post(getUser, { user: user }, { headers: { "Content-Type": "application/json" } })
+                    .then((response) => {
+                         dispatch(setCart({ cart: response.data.userData.cartProducts }));
+                    })
+                    .catch((error) => {
+                         console.log(error);
+                    });
+          }
+     }, [user,dispatch]);
      // avatar functions
      const cart = useSelector((state) => state.cart.value);
      return (
@@ -189,19 +182,19 @@ const NavBar = () => {
                                              justifyContent: "flex-end",
                                         }}
                                    >
-                                        <IconButton onClick={()=>navigate("/search")}>
+                                        <IconButton onClick={() => navigate("/search")}>
                                              <SearchOutlinedIcon sx={{ color: "text.primary", fontSize: "25", ml: "2" }} />
                                         </IconButton>
                                         <IconButton
                                              onClick={() => {
-                                                  {
+                                                  
                                                        Token
                                                             ? navigate("/cart")
                                                             : dispatch(setLoginForm({ loginForm: true }));
-                                                  }
+                                                  
                                              }}
                                         >
-                                             {cart.length >0? (
+                                             {cart.length > 0 ? (
                                                   <Badge badgeContent={"*"} color={"secondary"}>
                                                        <ShoppingCartOutlinedIcon sx={{ color: "text.primary", ml: "2" }} />
                                                   </Badge>
@@ -212,11 +205,11 @@ const NavBar = () => {
                                         <Box>
                                              <IconButton
                                                   onClick={() => {
-                                                       {
+                                                       
                                                             Token
                                                                  ? navigate("/wishlist")
                                                                  : dispatch(setLoginForm({ loginForm: true }));
-                                                       }
+                                                       
                                                   }}
                                                   color="error"
                                              >

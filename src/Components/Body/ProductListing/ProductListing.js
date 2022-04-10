@@ -5,7 +5,7 @@ import Banner from "../Home/Components/Banner/Banner";
 import Swal from "sweetalert2";
 
 import axios from "axios";
-import { addToCart, addWishlist, getSub } from "../../../utlis/Constants";
+import { addToCart, addWishlist, } from "../../../utlis/Constants";
 import { useDispatch, useSelector } from "react-redux";
 
 import Stock from "./components/Stock";
@@ -19,14 +19,13 @@ const ProductListing = (props) => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
      const user =localStorage.getItem("user");
-     const allProducts = useSelector((state) => state.products.value);
+    // const allProducts = useSelector((state) => state.products.value);
      const allSubCat = useSelector((state) => state.subCategory.value);
      const [filterData, setFilterData] = useState("");
      console.log(allSubCat);
      const [data, setData] = useState([]);
-     const [subCat, setSubCat] = useState();
      const [sortData, setSortData] = useState("");
-     console.log(subCat);
+
 
      const Filter = (filterSubCat) => {
           setData(props.Data.filter((product) => product.SubCategory.indexOf(filterSubCat) >= 0));
@@ -170,7 +169,7 @@ const ProductListing = (props) => {
                               <FilterAndSort Sort={Sort} ClearFilter={ClearFilter} Filter={Filter} subCat={props.subCa} />
                          </Grid>
 
-                         <Grid Item pl={2} sm={9}>
+                         <Grid item pl={2} sm={9}>
                               <Grid pt={1} pb={2} sx={{ display: "flex", justifyContent: "space-between" }}>
                                    <Grid>
                                         {" "}
@@ -198,7 +197,7 @@ const ProductListing = (props) => {
                                                        navigate("/product/" + obj._id);
                                                   }}
                                              >
-                                                  <img height="250px" width="250px" src={obj.Image1} />
+                                                  <img height="250px" width="250px" src={obj.Image1} alt="product-img1" />
                                              </IconButton>
                                         </Grid>
                                         <Grid item backgroundColor="secondary.light" md={6}>
@@ -216,7 +215,7 @@ const ProductListing = (props) => {
                                                        navigate("/product/" + obj._id);
                                                   }}
                                              >
-                                                  <img height="250px" width="250px" src={obj.Image1} />
+                                                  <img height="250px" width="250px" src={obj.Image1}  alt="productImage2"/>
                                              </IconButton>
                                         </Grid>
                                         <Grid item backgroundColor="secondary.light" md={6}>
