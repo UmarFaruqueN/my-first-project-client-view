@@ -52,7 +52,7 @@ const CouponCode = () => {
                          {" "}
                          <Typography>
                               {" "}
-                              Buy {obj.minimumPurchase} $ Get {obj.offerAmount}${" "}
+                              Buy {obj.minimumPurchase} ₹ Get {obj.offerAmount} ₹{" "}
                          </Typography>
                          <Button onClick={() => copy(obj._id)} color="success" sx={{ fontSize: 14 }}>
                               Code
