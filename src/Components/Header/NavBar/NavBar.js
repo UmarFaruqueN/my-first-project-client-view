@@ -13,7 +13,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { TurboMenu, NetworkMenu, getUser, setCart, setLoginForm, LoginAndSignUp } from "../";
-import UserButton from "./components/UserButton"
+import UserButton from "./components/UserButton";
 
 const NavBar = () => {
      const Token = localStorage.getItem("token");
@@ -120,6 +120,17 @@ const NavBar = () => {
                     <AppBar position="static" color="primary">
                          <Container maxWidth="xl">
                               <Toolbar>
+                                   <Box sx={{ display: { md: "none" } }}>
+                         
+                                        {/* <IconButton
+                                             size="large"
+                                             aria-label="account of current user"
+                                             aria-controls="menu-appbar"
+                                             aria-haspopup="true"
+                                        >
+                                             <MenuIcon sx={{ fontSize: 31, color: "text.hint", pr: 1 }} />
+                                        </IconButton> */}
+                                   </Box>
                                    <Box
                                         onClick={() => {
                                              navigate("/");
@@ -137,18 +148,7 @@ const NavBar = () => {
                                         </Typography>
                                    </Box>
 
-                                   <Box sx={{ flexGrow: 2,  display:{xs:"none"}}} />
-
-                                   <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                                        <IconButton
-                                             size="large"
-                                             aria-label="account of current user"
-                                             aria-controls="menu-appbar"
-                                             aria-haspopup="true"
-                                        >
-                                             <MenuIcon sx={{ fontSize: 31, color: "text.hint", pr: 1 }} />
-                                        </IconButton>
-                                   </Box>
+                                   <Box sx={{ flexGrow: 2, display: { xs: "none" } }} />
 
                                    <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, alignItems: "center" }}>
                                         {" "}
